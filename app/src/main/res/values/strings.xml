@@ -3,8 +3,8 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
-<<<<<<< Updated upstream
-=======
+
+    =======
     <string name="title_activity_login">LoginActivity</string>
     <string name="prompt_password">Password</string>
     <string name="prompt_username">Username</string>
@@ -18,5 +18,7 @@
     <string name="place_order">Place New Order</string>
     <string name="order_history">Order History</string>
     <string name="settings">Settings</string>
->>>>>>> Stashed changes
+    <string name="log_out">Log out</string>
+    <string name="back">Go back to the previous page</string>
+    >>>>>>> Stashed changes
 </resources>
