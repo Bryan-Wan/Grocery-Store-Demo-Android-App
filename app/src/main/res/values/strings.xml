@@ -3,8 +3,6 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
-
-    =======
     <string name="title_activity_login">LoginActivity</string>
     <string name="prompt_password">Password</string>
     <string name="confirm_password">Confirm Password</string>
@@ -70,7 +68,4 @@
     =========Cart=========
     <string name="cart">Cart</string>
     <string name="purchase">Purchase</string>
-
-
-    >>>>>>> Stashed changes
 </resources>
