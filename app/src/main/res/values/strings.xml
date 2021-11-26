@@ -3,4 +3,20 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+<<<<<<< Updated upstream
+=======
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="prompt_password">Password</string>
+    <string name="prompt_username">Username</string>
+    <string name="action_sign_in">Log in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="register">"Don't have an account? Register now"</string>
+    <string name="welcome_user">Welcome User</string>
+    <string name="place_order">Place New Order</string>
+    <string name="order_history">Order History</string>
+    <string name="settings">Settings</string>
+>>>>>>> Stashed changes
 </resources>
