@@ -10,10 +10,34 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GroceryStoreDemoApp">
         <activity
-            android:name=".AdminAddNewItem"
+            android:name=".ui.User.UserProductPage"
+            android:exported="false" />
+        <activity
+            android:name=".ui.User.UserCart"
+            android:exported="false" />
+        <activity
+            android:name=".ui.User.userOrderThankYouPage"
+            android:exported="false" />
+        <activity
+            android:name=".ui.User.UserConfirmationPage"
+            android:exported="false" />
+        <activity
+            android:name=".ui.User.UserHistory"
+            android:exported="false" />
+        <activity
+            android:name=".ui.Admin.AdminOrdersPage"
+            android:exported="false" />
+        <activity
+            android:name=".ui.Admin.AdminStoreInfo"
+            android:exported="false" />
+        <activity
+            android:name=".ui.Admin.AdminHome"
+            android:exported="false" />
+        <activity
+            android:name=".ui.Admin.AdminAddNewItem"
             android:exported="true" />
         <activity
-            android:name=".AdminMyProducts"
+            android:name=".ui.Admin.AdminMyProducts"
             android:exported="true" />
         <activity
             android:name=".ui.login.LoginRegister"

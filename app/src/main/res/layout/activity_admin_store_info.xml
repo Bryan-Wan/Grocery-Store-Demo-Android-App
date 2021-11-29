@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/storeName"
+        android:layout_width="144dp"
+        android:layout_height="27dp"
+        android:layout_marginStart="71dp"
+        android:layout_marginTop="41dp"
+        android:layout_marginEnd="196dp"
+        android:layout_marginBottom="7dp"
+        android:text="@string/store_address"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/StoreAddressUpdate"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/StoreNameUpdate" />
+
+    <TextView
+        android:id="@+id/storeInfo"
+        android:layout_width="258dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="40dp"
+        android:text="@string/store_info"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.464"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/StoreNameUpdate"
+        android:layout_width="258dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="20dp"
+        android:background="#B5ADAD"
+        android:shadowColor="#FFFFFF"
+        android:text="@string/store_name_update"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="#615B5B"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.451"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/StoreName" />
+
+    <TextView
+        android:id="@+id/StoreAddressUpdate"
+        android:layout_width="258dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="60dp"
+        android:background="#B5ADAD"
+        android:text="@string/store_address_update"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="#424242"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/saveChanges"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.451"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/saveChanges"
+        android:layout_width="258dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="304dp"
+        android:text="@string/save_store"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.398"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/StoreName"
+        android:layout_width="155dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="71dp"
+        android:layout_marginTop="39dp"
+        android:layout_marginEnd="185dp"
+        android:text="@string/store_name"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/storeInfo" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
