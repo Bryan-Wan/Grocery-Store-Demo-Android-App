@@ -7,10 +7,15 @@
     =======
     <string name="title_activity_login">LoginActivity</string>
     <string name="prompt_password">Password</string>
+    <string name="confirm_password">Confirm Password</string>
     <string name="prompt_username">Username</string>
     <string name="action_sign_in">Log in</string>
     <string name="action_register">Register</string>
     <string name="welcome">"Welcome !"</string>
+    <string name="save_store">"Save Store Info"</string>
+    <string name="store_info">"Store Info"</string>
+    <string name="store_name">"Store Name"</string>
+    <string name="store_address">"Store Address"</string>
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>

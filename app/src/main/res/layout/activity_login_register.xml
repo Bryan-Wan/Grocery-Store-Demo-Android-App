@@ -56,12 +56,12 @@
 
     <EditText
         android:id="@+id/confirm_password"
-        android:layout_width="379dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="16dp"
-        android:hint="@string/prompt_password"
+        android:hint="@string/confirm_password"
         android:imeActionLabel="@string/action_sign_in"
         android:imeOptions="actionDone"
         android:inputType="textPassword"
