@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.User.userOrderThankYouPage">
+
+    <TextView
+        android:id="@+id/OrderConfirmation"
+        android:layout_width="215dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="201dp"
+        android:layout_marginBottom="16dp"
+        android:text="@string/order_confirmation"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        app:layout_constraintBottom_toTopOf="@+id/tempItem"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/Total"
+        android:layout_width="156dp"
+        android:layout_height="16dp"
+        android:layout_marginTop="271dp"
+        android:text="@string/total"
+        android:textColor="#000000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.874"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tempItem" />
+
+    <Button
+        android:id="@+id/ConfirmPlaceOrder"
+        android:layout_width="215dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="12dp"
+        android:text="@string/place_order_confirm"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Total" />
+
+    <Button
+        android:id="@+id/BackToCart"
+        android:layout_width="203dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="178dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="25dp"
+        android:text="@string/back_to_cart"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ConfirmPlaceOrder"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/tempItem"
+        android:layout_width="237dp"
+        android:layout_height="58dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/item_1"
+        android:textColor="#000000"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/OrderConfirmation" />
+</androidx.constraintlayout.widget.ConstraintLayout>

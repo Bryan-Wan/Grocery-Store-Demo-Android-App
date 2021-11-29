@@ -1,8 +1,10 @@
-package com.example.grocerystoredemoapp;
+package com.example.grocerystoredemoapp.ui.Admin;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.grocerystoredemoapp.R;
 
 public class AdminMyProducts extends AppCompatActivity {
 
