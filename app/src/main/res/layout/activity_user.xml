@@ -7,14 +7,14 @@
     android:layout_height="match_parent">
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/orderHistory"
         android:layout_width="200dp"
         android:layout_height="0dp"
         android:layout_marginTop="32dp"
         android:text="@string/order_history"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button2" />
+        app:layout_constraintTop_toBottomOf="@+id/placeOrder" />
 
     <Button
         android:id="@+id/button5"
@@ -25,7 +25,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button2" />
+        app:layout_constraintTop_toBottomOf="@+id/placeOrder" />
 
     <TextView
         android:id="@+id/textView2"
@@ -40,7 +40,7 @@
         tools:text="@string/welcome_user" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/placeOrder"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="130dp"
