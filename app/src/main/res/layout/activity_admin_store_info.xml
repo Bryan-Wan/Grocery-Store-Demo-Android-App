@@ -6,93 +6,96 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/storeName"
+        android:id="@+id/adminStoreAddressTitle"
         android:layout_width="144dp"
         android:layout_height="27dp"
-        android:layout_marginStart="71dp"
-        android:layout_marginTop="41dp"
+        android:layout_marginStart="24dp"
         android:layout_marginEnd="196dp"
-        android:layout_marginBottom="7dp"
+        android:layout_marginBottom="8dp"
         android:text="@string/store_address"
         android:textColor="#000000"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/StoreAddressUpdate"
+        app:layout_constraintBottom_toTopOf="@+id/adminStoreAddress"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.851"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/StoreNameUpdate" />
+        app:layout_constraintTop_toBottomOf="@+id/adminStoreName"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
-        android:id="@+id/storeInfo"
+        android:id="@+id/storeInfoTitle"
         android:layout_width="258dp"
         android:layout_height="45dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="48dp"
         android:text="@string/store_info"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.464"
+        app:layout_constraintHorizontal_bias="0.418"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/StoreNameUpdate"
-        android:layout_width="258dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="15dp"
+        android:id="@+id/adminStoreName"
+        android:layout_width="283sp"
+        android:layout_height="44dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="20dp"
         android:background="#B5ADAD"
         android:shadowColor="#FFFFFF"
         android:text="@string/store_name_update"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textColor="#615B5B"
+        android:textColor="#424242"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.451"
+        app:layout_constraintHorizontal_bias="0.476"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/StoreName" />
+        app:layout_constraintTop_toBottomOf="@+id/adminStoreNameTitle" />
 
     <TextView
-        android:id="@+id/StoreAddressUpdate"
-        android:layout_width="258dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="20dp"
+        android:id="@+id/adminStoreAddress"
+        android:layout_width="283dp"
+        android:layout_height="47dp"
+        android:layout_marginStart="24dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginBottom="60dp"
+        android:layout_marginBottom="44dp"
         android:background="#B5ADAD"
         android:text="@string/store_address_update"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="#424242"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/saveChanges"
+        app:layout_constraintBottom_toTopOf="@+id/saveChangesBtn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.451"
+        app:layout_constraintHorizontal_bias="0.476"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/saveChanges"
+        android:id="@+id/saveChangesBtn"
         android:layout_width="258dp"
         android:layout_height="54dp"
-        android:layout_marginStart="30dp"
+        android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="304dp"
         android:text="@string/save_store"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.398"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/StoreName"
+        android:id="@+id/adminStoreNameTitle"
         android:layout_width="155dp"
         android:layout_height="24dp"
-        android:layout_marginStart="71dp"
-        android:layout_marginTop="39dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="52dp"
         android:layout_marginEnd="185dp"
         android:text="@string/store_name"
         android:textColor="#000000"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.851"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/storeInfo" />
+        app:layout_constraintTop_toBottomOf="@+id/storeInfoTitle" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

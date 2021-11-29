@@ -7,7 +7,7 @@
     tools:context=".ui.User.UserProductPage">
 
     <TextView
-        android:id="@+id/Item"
+        android:id="@+id/itemName"
         android:layout_width="166dp"
         android:layout_height="32dp"
         android:layout_marginTop="124dp"
@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/addBrand"
+        android:id="@+id/itemBrand"
         android:layout_width="166dp"
         android:layout_height="21dp"
         android:text="@string/brand"
@@ -29,57 +29,64 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Item" />
+        app:layout_constraintTop_toBottomOf="@+id/itemName" />
 
     <TextView
         android:id="@+id/cost"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="38dp"
+        android:layout_height="21dp"
+        android:layout_marginTop="16dp"
         android:text="@string/cost"
+        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addBrand" />
+        app:layout_constraintTop_toBottomOf="@+id/itemBrand" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/SubtractQuantity"
+        android:id="@+id/subtractQuantityBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="112dp"
-        android:layout_marginTop="72dp"
+        android:layout_marginStart="96dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
         android:clickable="true"
         android:src="@android:drawable/button_onoff_indicator_on"
+        app:layout_constraintBottom_toTopOf="@+id/addToCartBtn"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addBrand"
+        app:layout_constraintTop_toBottomOf="@+id/cost"
         tools:ignore="ImageContrastCheck" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/addQuantity"
+        android:id="@+id/addQuantityBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="72dp"
-        android:layout_marginEnd="108dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="100dp"
+        android:layout_marginBottom="16dp"
         android:clickable="true"
         android:src="@android:drawable/ic_input_add"
+        app:layout_constraintBottom_toTopOf="@+id/addToCartBtn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addBrand"
+        app:layout_constraintTop_toBottomOf="@+id/cost"
         tools:ignore="ImageContrastCheck" />
 
     <TextView
-        android:id="@+id/Quantity"
+        android:id="@+id/quantity"
         android:layout_width="66dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="92dp"
-        android:layout_marginBottom="3dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="84dp"
+        android:layout_marginEnd="8dp"
         android:text="@string/quantity"
         android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/SubtractQuantity"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/addQuantityBtn"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/subtractQuantityBtn"
         app:layout_constraintTop_toBottomOf="@+id/cost" />
 
     <Button
-        android:id="@+id/AddToCart"
+        android:id="@+id/addToCartBtn"
         android:layout_width="180dp"
         android:layout_height="49dp"
         android:layout_marginTop="52dp"
@@ -89,7 +96,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Quantity"
+        app:layout_constraintTop_toBottomOf="@+id/quantity"
         app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

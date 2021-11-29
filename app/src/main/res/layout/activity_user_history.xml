@@ -7,20 +7,21 @@
     tools:context=".ui.User.UserHistory">
 
     <TextView
-        android:id="@+id/OrderHistory"
+        android:id="@+id/orderHistoryTitle"
         android:layout_width="162dp"
         android:layout_height="46dp"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
         android:layout_marginBottom="18dp"
         android:text="@string/order_history"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        app:layout_constraintBottom_toTopOf="@+id/NoOrders"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/noOrdersYet"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/NoOrders"
+        android:id="@+id/noOrdersYet"
         android:layout_width="318dp"
         android:layout_height="67dp"
         android:layout_marginStart="48dp"

@@ -19,13 +19,10 @@ import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.grocerystoredemoapp.R;
-import com.example.grocerystoredemoapp.ui.login.LoginViewModel;
-import com.example.grocerystoredemoapp.ui.login.LoginViewModelFactory;
 import com.example.grocerystoredemoapp.databinding.ActivityLoginBinding;
 
 public class LoginActivity extends AppCompatActivity {
@@ -47,7 +44,7 @@ public class LoginActivity extends AppCompatActivity {
 
         final EditText usernameEditText = binding.username;
         final EditText passwordEditText = binding.password;
-        final Button loginButton = binding.login;
+        final Button loginButton = binding.loginBtn;
 
         loginViewModel.getLoginFormState().observe(this, new Observer<LoginFormState>() {
             @Override
@@ -125,7 +122,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        Button yourButton = (Button) findViewById(R.id.no_account_register);
+        Button yourButton = (Button) findViewById(R.id.noAccountRegisterBtn);
 
         yourButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){

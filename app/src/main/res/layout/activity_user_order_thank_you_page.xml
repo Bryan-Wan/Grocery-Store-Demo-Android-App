@@ -7,37 +7,43 @@
     tools:context=".ui.User.userOrderThankYouPage">
 
     <TextView
-        android:id="@+id/OrderConfirmation"
+        android:id="@+id/thankYouMsg"
         android:layout_width="162dp"
         android:layout_height="46dp"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="201dp"
         android:layout_marginBottom="211dp"
         android:text="@string/thank_you"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        app:layout_constraintBottom_toTopOf="@+id/Total"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/confirmationMsg"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/Total"
-        android:layout_width="215dp"
-        android:layout_height="21dp"
-        android:layout_marginBottom="13dp"
-        android:text="@string/ty_message"
-        app:layout_constraintBottom_toTopOf="@+id/ConfirmPlaceOrder"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
-        android:id="@+id/ConfirmPlaceOrder"
+        android:id="@+id/backToHomeBtn"
         android:layout_width="215dp"
         android:layout_height="48dp"
-        android:layout_marginBottom="372dp"
+        android:layout_marginBottom="328dp"
         android:text="@string/back_to_home"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/confirmationMsg"
+        android:layout_width="215dp"
+        android:layout_height="21dp"
+        android:layout_marginBottom="16dp"
+        android:text="@string/ty_message"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/backToHomeBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
