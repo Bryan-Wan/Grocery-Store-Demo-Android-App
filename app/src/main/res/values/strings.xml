@@ -7,18 +7,65 @@
     =======
     <string name="title_activity_login">LoginActivity</string>
     <string name="prompt_password">Password</string>
+    <string name="confirm_password">Confirm Password</string>
     <string name="prompt_username">Username</string>
     <string name="action_sign_in">Log in</string>
+    <string name="action_register">Register</string>
     <string name="welcome">"Welcome !"</string>
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
     <string name="register">"Don't have an account? Register now"</string>
+    ==========User Welcome=======
     <string name="welcome_user">Welcome User</string>
     <string name="place_order">Place New Order</string>
     <string name="order_history">Order History</string>
+    ==========User Settings=======
     <string name="settings">Settings</string>
     <string name="log_out">Log out</string>
     <string name="back">Go back to the previous page</string>
+    ==========User Order History=======
+    Order History from User Welcome Page
+    <string name="no_orders">No Orders Yet</string>
+    ==========User Product Page=======
+    <string name="item">Item</string>
+    <string name="brand">Brand</string>
+    <string name="cost">$</string>
+    <string name="quantity">1</string>
+    <string name="add_to_cart">Add to Cart</string>
+    ==========User Confirmation=======
+    <string name="order_confirmation">Order Confirmation</string>
+    <string name="item_1">Item</string>
+    <string name="total">Total: </string>
+    <string name="place_order_confirm">Place Order</string>
+    <string name="back_to_cart">Back to Cart</string>
+    ==========User Thank You=======
+    <string name="thank_you">Thank You</string>
+    <string name="ty_message">Your order has been placed</string>
+    <string name="back_to_home">Back To Home</string>
+    ========
+    <string name="view_orders">View Orders</string>
+    <string name="edit_products">Edit Products</string>
+    <string name="edit_store">Edit Store</string>
+    <string name="welcome_admin">Welcome Admin</string>
+    <string name="my_products">My Products</string>
+    <string name="add_new_item">Add New Item</string>
+    <string name="product_name">Product Name</string>
+    <string name="product_brand">Product Brand</string>
+    <string name="product_price">Product Price</string>
+    <string name="add_item">Add Item</string>
+    ==========Admin Store Info Strings=======
+    <string name="save_store">Save Store Info</string>
+    <string name="store_info">Store Info</string>
+    <string name="store_name_update">Store Name</string>
+    <string name="store_address_update">Store Address</string>
+    <string name="store_name">Store Name:</string>
+    <string name="store_address">Store Address:</string>
+    ==========Admin Order Strings=======
+    <string name="store_orders">Orders</string>
+    <string name="store_new_orders">New Orders</string>
+    <string name="store_fulfilled_orders">Fulfilled Orders</string>
+    <string name="store_no_orders">No Orders</string>
+
     >>>>>>> Stashed changes
 </resources>
