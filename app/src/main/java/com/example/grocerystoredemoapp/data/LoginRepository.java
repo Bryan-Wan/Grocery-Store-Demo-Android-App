@@ -54,7 +54,7 @@ public class LoginRepository {
         // @see https://developer.android.com/training/articles/keystore
     }
 
-    public Result<LoggedInUser> login(String username, String password, FirebaseAuth mAuth) {
+    public Result<LoggedInUser> login(String username, String password) {
         // handle login
         // Authenticate using Firebase Auth
         try {

@@ -38,9 +38,6 @@ public class LoginActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Initialize Firebase Auth
-        mAuth = FirebaseAuth.getInstance();
-
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
@@ -116,8 +113,7 @@ public class LoginActivity extends AppCompatActivity {
                 // Login when user presses "done" or "enter"
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
                     loginViewModel.login(usernameEditText.getText().toString(),
-                            passwordEditText.getText().toString(),
-                            mAuth);
+                            passwordEditText.getText().toString());
                 }
                 return false;
             }
@@ -128,8 +124,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // Login when user presses login button
                 loginViewModel.login(usernameEditText.getText().toString(),
-                        passwordEditText.getText().toString(),
-                        mAuth);
+                        passwordEditText.getText().toString());
             }
         });
 
