@@ -28,9 +28,6 @@
             android:name=".ui.User.UserConfirmationPage"
             android:exported="false" />
         <activity
-            android:name=".ui.User.UserHistory"
-            android:exported="false" />
-        <activity
             android:name=".ui.Admin.AdminOrdersPage"
             android:exported="false" />
         <activity
