@@ -7,13 +7,6 @@
     tools:context=".ui.User.UserHistory">
 
     <TextView
-        android:id="@+id/OrderHistory"
-        android:layout_width="0dp"
-        android:layout_height="534dp"
-        android:text="@string/order_history"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         android:id="@+id/orderHistoryTitle"
         android:layout_width="162dp"
         android:layout_height="46dp"
@@ -25,15 +18,20 @@
         android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/noOrdersYet"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="-83dp" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/noOrdersYet"
         android:layout_width="318dp"
         android:layout_height="67dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginEnd="48dp"
+        android:layout_marginBottom="576dp"
         android:background="#E7DA66"
         android:text="@string/no_orders"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        tools:layout_editor_absoluteX="48dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
