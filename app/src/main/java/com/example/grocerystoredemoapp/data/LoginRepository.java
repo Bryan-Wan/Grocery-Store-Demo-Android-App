@@ -1,7 +1,17 @@
 package com.example.grocerystoredemoapp.data;
 
+import android.util.Log;
+
+import androidx.annotation.NonNull;
+
 import com.example.grocerystoredemoapp.data.model.LoggedInUser;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
+import java.io.IOException;
 
 /**
  * Class that requests authentication and user information from the remote data source and
@@ -35,7 +45,7 @@ public class LoginRepository {
 
     public void logout() {
         user = null;
-        dataSource.logout();
+        FirebaseAuth.getInstance().signOut();
     }
 
     private void setLoggedInUser(LoggedInUser user) {
@@ -46,10 +56,32 @@ public class LoginRepository {
 
     public Result<LoggedInUser> login(String username, String password, FirebaseAuth mAuth) {
         // handle login
-        Result<LoggedInUser> result = dataSource.login(username, password, mAuth);
-        if (result instanceof Result.Success) {
-            setLoggedInUser(((Result.Success<LoggedInUser>) result).getData());
+        // Authenticate using Firebase Auth
+        try {
+            // Sign in using email and password
+            mAuth.signInWithEmailAndPassword(username, password)
+                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            final String loginActivityTag = "Login";
+                            if (task.isSuccessful()) {
+                                // Sign in success, set the user with the signed-in user's information
+                                Log.d(loginActivityTag, "signInWithEmail:success");
+                                FirebaseUser firebaseUser = mAuth.getCurrentUser();
+                                setLoggedInUser(new LoggedInUser(
+                                        firebaseUser.getUid(),
+                                        firebaseUser.getDisplayName()
+                                ));
+                            } else {
+                                // On sign in failure, log it
+                                Log.w(loginActivityTag, "signInWithEmail:failure", task.getException());
+                                //Toast.makeText(LoginActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+            return new Result.Success<LoggedInUser>(user);
+        } catch (Exception e) {
+            return new Result.Error(new IOException("Error logging in", e));
         }
-        return result;
     }
 }

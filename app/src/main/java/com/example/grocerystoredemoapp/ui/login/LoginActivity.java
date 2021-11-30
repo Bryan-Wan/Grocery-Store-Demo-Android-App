@@ -77,7 +77,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
 
                 if (loginResult.getError() != null) {
-                    showLoginFailed(loginResult.getError());
+                        showLoginFailed(loginResult.getError());
                 }
                 if (loginResult.getSuccess() != null) {
                     updateUiWithUser(loginResult.getSuccess());
@@ -149,7 +149,7 @@ public class LoginActivity extends AppCompatActivity {
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser != null){
-            reload();
+            // TODO
         }
     }
 
