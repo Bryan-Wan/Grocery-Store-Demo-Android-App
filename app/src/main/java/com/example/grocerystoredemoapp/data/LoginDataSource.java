@@ -1,6 +1,7 @@
 package com.example.grocerystoredemoapp.data;
 
 import com.example.grocerystoredemoapp.data.model.LoggedInUser;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.io.IOException;
 
@@ -9,10 +10,10 @@ import java.io.IOException;
  */
 public class LoginDataSource {
 
-    public Result<LoggedInUser> login(String username, String password) {
+    public Result<LoggedInUser> login(String username, String password, FirebaseAuth mAuth) {
 
         try {
-            // TODO: handle loggedInUser authentication
+            // TODO: handle loggedInUser authentication 
             LoggedInUser fakeUser =
                     new LoggedInUser(
                             java.util.UUID.randomUUID().toString(),

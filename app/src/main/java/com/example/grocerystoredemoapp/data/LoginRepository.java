@@ -1,6 +1,7 @@
 package com.example.grocerystoredemoapp.data;
 
 import com.example.grocerystoredemoapp.data.model.LoggedInUser;
+import com.google.firebase.auth.FirebaseAuth;
 
 /**
  * Class that requests authentication and user information from the remote data source and
@@ -43,9 +44,9 @@ public class LoginRepository {
         // @see https://developer.android.com/training/articles/keystore
     }
 
-    public Result<LoggedInUser> login(String username, String password) {
+    public Result<LoggedInUser> login(String username, String password, FirebaseAuth mAuth) {
         // handle login
-        Result<LoggedInUser> result = dataSource.login(username, password);
+        Result<LoggedInUser> result = dataSource.login(username, password, mAuth);
         if (result instanceof Result.Success) {
             setLoggedInUser(((Result.Success<LoggedInUser>) result).getData());
         }

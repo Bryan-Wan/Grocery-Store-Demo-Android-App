@@ -116,7 +116,8 @@ public class LoginActivity extends AppCompatActivity {
                 // Login when user presses "done" or "enter"
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
                     loginViewModel.login(usernameEditText.getText().toString(),
-                            passwordEditText.getText().toString());
+                            passwordEditText.getText().toString(),
+                            mAuth);
                 }
                 return false;
             }
@@ -127,7 +128,8 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // Login when user presses login button
                 loginViewModel.login(usernameEditText.getText().toString(),
-                        passwordEditText.getText().toString());
+                        passwordEditText.getText().toString(),
+                        mAuth);
             }
         });
 
