@@ -12,9 +12,15 @@ import com.example.grocerystoredemoapp.R;
 public class UserWelcomePage extends AppCompatActivity {
     Button placeNewOrder;
     Button orderHistory;
+    UserCart userCart;
+    static Integer userCartCreated;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if(userCartCreated == 0){
+            userCart = new UserCart();
+            userCartCreated = 1;
+        }
         super.onCreate(savedInstanceState);setContentView(R.layout.activity_user);
 
         placeNewOrder = findViewById(R.id.userNewOrderBtn);

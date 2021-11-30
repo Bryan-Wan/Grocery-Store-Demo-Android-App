@@ -24,6 +24,9 @@ import android.widget.Toast;
 
 import com.example.grocerystoredemoapp.R;
 import com.example.grocerystoredemoapp.databinding.ActivityLoginBinding;
+import com.example.grocerystoredemoapp.ui.User.UserNewOrderPage;
+import com.example.grocerystoredemoapp.ui.User.UserProductPage;
+import com.example.grocerystoredemoapp.ui.User.UserWelcomePage;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -119,6 +122,10 @@ public class LoginActivity extends AppCompatActivity {
 
                 loginViewModel.login(usernameEditText.getText().toString(),
                         passwordEditText.getText().toString());
+
+                //for test use
+                Intent i = new Intent(LoginActivity.this, UserProductPage.class);
+                startActivity(i);
             }
         });
 
