@@ -12,6 +12,9 @@ import com.example.grocerystoredemoapp.data.model.LoggedInUser;
 import com.example.grocerystoredemoapp.R;
 import com.google.firebase.auth.FirebaseAuth;
 
+/**
+ * Class handling the login view - form validation, displaying log in status
+ */
 public class LoginViewModel extends ViewModel {
 
     private MutableLiveData<LoginFormState> loginFormState = new MutableLiveData<>();
