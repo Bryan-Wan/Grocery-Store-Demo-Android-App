@@ -59,7 +59,7 @@ public class LoginRepository {
         // Authenticate using Firebase Auth
         try {
             // Sign in using email and password
-            mAuth.signInWithEmailAndPassword(username, password)
+            Task<AuthResult> authResultTask = mAuth.signInWithEmailAndPassword(username, password)
                     .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
@@ -79,6 +79,12 @@ public class LoginRepository {
                             }
                         }
                     });
+
+            // Wait until authentication is finished before returning
+            while(!authResultTask.isComplete()) {
+                wait(1000);
+            }
+
             return new Result.Success<LoggedInUser>(user);
         } catch (Exception e) {
             return new Result.Error(new IOException("Error logging in", e));
