@@ -46,6 +46,7 @@ public class LoginActivity extends AppCompatActivity {
         final EditText passwordEditText = binding.password;
         final Button loginButton = binding.loginBtn;
 
+        // Handle login input errors
         loginViewModel.getLoginFormState().observe(this, new Observer<LoginFormState>() {
             @Override
             public void onChanged(@Nullable LoginFormState loginFormState) {
@@ -62,6 +63,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        // Finish login on success
         loginViewModel.getLoginResult().observe(this, new Observer<LoginResult>() {
             @Override
             public void onChanged(@Nullable LoginResult loginResult) {
@@ -82,6 +84,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        // Check for valid login form data
         TextWatcher afterTextChangedListener = new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -105,6 +108,7 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                // Login when user presses "done" or "enter"
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
                     loginViewModel.login(usernameEditText.getText().toString(),
                             passwordEditText.getText().toString());
@@ -116,15 +120,15 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                // Login when user presses login button
                 loginViewModel.login(usernameEditText.getText().toString(),
                         passwordEditText.getText().toString());
             }
         });
 
-        Button yourButton = (Button) findViewById(R.id.noAccountRegisterBtn);
-
-        yourButton.setOnClickListener(new View.OnClickListener(){
+        // Start registration activity button
+        Button registerButton = (Button) findViewById(R.id.noAccountRegisterBtn);
+        registerButton.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 startActivity(new Intent(LoginActivity.this, LoginRegister.class));
             }
