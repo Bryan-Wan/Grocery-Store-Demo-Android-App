@@ -70,6 +70,7 @@
     =========Cart=========
     <string name="cart">Cart</string>
     <string name="purchase">Purchase</string>
+    <string name="select_store">Select a store</string>
 
 
     >>>>>>> Stashed changes

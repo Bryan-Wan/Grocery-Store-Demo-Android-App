@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GroceryStoreDemoApp">
         <activity
+            android:name=".ui.User.UserNewOrderPage"
+            android:exported="false" />
+        <activity
             android:name=".ui.User.UserProductPage"
             android:exported="false" />
         <activity
