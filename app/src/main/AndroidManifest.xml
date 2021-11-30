@@ -10,13 +10,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GroceryStoreDemoApp">
         <activity
+            android:name=".ui.Admin.AdminSettings"
+            android:exported="true" />
+        <activity
             android:name=".ui.User.UserProductPage"
             android:exported="false" />
         <activity
             android:name=".ui.User.UserCart"
             android:exported="false" />
         <activity
-            android:name=".ui.User.userOrderThankYouPage"
+            android:name=".ui.User.UserOrderThankYouPage"
             android:exported="false" />
         <activity
             android:name=".ui.User.UserConfirmationPage"
@@ -43,7 +46,7 @@
             android:name=".ui.login.LoginRegister"
             android:exported="false" />
         <activity
-            android:name=".ui.User.UserWelcomePage"
+            android:name=".ui.User.UserHome"
             android:exported="false" />
         <activity
             android:name=".ui.login.LoginActivity"
