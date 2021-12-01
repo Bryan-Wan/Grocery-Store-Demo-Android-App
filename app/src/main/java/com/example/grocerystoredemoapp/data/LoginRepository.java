@@ -12,6 +12,10 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Class that requests authentication and user information from the remote data source and
@@ -56,11 +60,15 @@ public class LoginRepository {
 
     public Result<LoggedInUser> login(String username, String password) {
         // handle login
+        final long timeout = 30;
+        final TimeUnit timeoutUnit = TimeUnit.SECONDS;
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
+
         // Authenticate using Firebase Auth
         try {
             // Sign in using email and password
             Task<AuthResult> authResultTask = mAuth.signInWithEmailAndPassword(username, password)
-                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    .addOnCompleteListener(executorService, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             final String loginActivityTag = "Login";
@@ -81,9 +89,10 @@ public class LoginRepository {
                     });
 
             // Wait until authentication is finished before returning
-            while(!authResultTask.isComplete()) {
-                wait(1000);
-            }
+            executorService.shutdown();
+            executorService.awaitTermination(timeout, timeoutUnit);
+            List<Runnable> todo = executorService.shutdownNow();
+            boolean isTerminated = executorService.isTerminated();
 
             return new Result.Success<LoggedInUser>(user);
         } catch (Exception e) {
