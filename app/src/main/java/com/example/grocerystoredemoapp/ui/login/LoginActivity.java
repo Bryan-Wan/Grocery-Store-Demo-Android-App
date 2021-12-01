@@ -24,6 +24,8 @@ import android.widget.Toast;
 
 import com.example.grocerystoredemoapp.R;
 import com.example.grocerystoredemoapp.databinding.ActivityLoginBinding;
+import com.example.grocerystoredemoapp.ui.Admin.AdminHome;
+import com.example.grocerystoredemoapp.ui.User.UserHome;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -122,11 +124,27 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        Button yourButton = (Button) findViewById(R.id.noAccountRegisterBtn);
-
-        yourButton.setOnClickListener(new View.OnClickListener(){
+        Button registerBtn = (Button) findViewById(R.id.noAccountRegisterBtn);
+        registerBtn.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 startActivity(new Intent(LoginActivity.this, LoginRegister.class));
+            }
+        });
+
+
+        // Go to Admin Home Page with TEST Button
+        Button adminTestBtn = (Button) findViewById(R.id.testLoginAsAdmin);
+        adminTestBtn.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                startActivity(new Intent(LoginActivity.this, AdminHome.class));
+            }
+        });
+
+        // Go to User Home Page with TEST Button
+        Button userTestBtn = (Button) findViewById(R.id.testLoginAsUser);
+        userTestBtn.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                startActivity(new Intent(LoginActivity.this, UserHome.class));
             }
         });
 

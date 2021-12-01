@@ -10,7 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GroceryStoreDemoApp">
         <activity
-            android:name=".ui.Admin.AdminSettings"
+            android:name=".ui.User.UserProductList"
+            android:exported="true" />
+        <activity
+            android:name=".ui.User.UserStoreSelection"
+            android:exported="true" />
+        <activity
+            android:name=".ui.Admin.Settings"
             android:exported="true" />
         <activity
             android:name=".ui.User.UserProductPage"

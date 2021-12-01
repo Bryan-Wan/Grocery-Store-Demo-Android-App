@@ -10,60 +10,40 @@
         android:id="@+id/welcomeAdminTitle"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
-        android:layout_marginStart="50dp"
+        android:layout_marginStart="84dp"
         android:layout_marginTop="24dp"
-        android:layout_marginEnd="8dp"
         android:text="@string/welcome_admin"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="30sp"
-        app:layout_constraintEnd_toStartOf="@+id/adminSettingsIcon"
-        app:layout_constraintHorizontal_bias="0.657"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="@string/welcome_admin" />
-
-    <ImageView
-        android:id="@+id/adminSettingsIcon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="8dp"
-        android:contentDescription="TODO"
-        app:layout_constraintBottom_toTopOf="@+id/viewOrdersBtn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@android:drawable/ic_menu_manage" />
 
     <Button
         android:id="@+id/editProductsBtn"
         android:layout_width="220dp"
         android:layout_height="48dp"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="30dp"
-        android:layout_marginBottom="20dp"
         android:text="@string/edit_products"
-        app:layout_constraintBottom_toTopOf="@+id/editStoreBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/viewOrdersBtn"
-        app:layout_constraintVertical_bias="0.444" />
+        app:layout_constraintTop_toBottomOf="@+id/viewOrdersBtn" />
 
     <Button
         android:id="@+id/editStoreBtn"
         android:layout_width="220dp"
         android:layout_height="48dp"
         android:layout_marginStart="30dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="30dp"
-        android:layout_marginBottom="420dp"
         android:text="@string/edit_store"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editProductsBtn" />
 
     <Button
         android:id="@+id/viewOrdersBtn"
@@ -77,5 +57,18 @@
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/welcomeAdminTitle" />
+
+    <ImageButton
+        android:id="@+id/adminSettingsBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.666"
+        app:layout_constraintStart_toEndOf="@+id/welcomeAdminTitle"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/ic_menu_manage"
+        tools:ignore="SpeakableTextPresentCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
