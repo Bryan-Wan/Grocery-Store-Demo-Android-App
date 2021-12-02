@@ -9,7 +9,6 @@ import android.widget.Button;
 import android.widget.ImageButton;
 
 import com.example.grocerystoredemoapp.R;
-import com.example.grocerystoredemoapp.data.model.UserData;
 import com.example.grocerystoredemoapp.ui.Admin.Settings;
 
 public class UserHome extends AppCompatActivity {
@@ -18,7 +17,7 @@ public class UserHome extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_home);
-        UserData userData = new UserData();
+
 
         Button newOrderBtn = (Button) findViewById(R.id.userNewOrderBtn);
         newOrderBtn.setOnClickListener(new View.OnClickListener(){
