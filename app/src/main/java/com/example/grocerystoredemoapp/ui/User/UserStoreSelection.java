@@ -50,5 +50,6 @@ public class UserStoreSelection extends AppCompatActivity {
         });
 
         scrollView.addView(view);
+        scrollView.removeView(view);
     }
 }

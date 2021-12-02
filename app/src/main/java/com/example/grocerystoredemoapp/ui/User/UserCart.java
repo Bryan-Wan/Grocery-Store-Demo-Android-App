@@ -24,7 +24,7 @@ public class UserCart extends AppCompatActivity {
         setContentView(R.layout.activity_user_cart);
 
         scrollingLayout = findViewById(R.id.userCartScrollLayout);
-        final View view = getLayoutInflater().inflate(R.layout.activity_user_product_added_view, null, false);
+        View view = getLayoutInflater().inflate(R.layout.activity_user_product_added_view, null, false);
         scrollingLayout.addView(view);
         purchase = findViewById(R.id.purchaseBtn);
         addProduct();
@@ -56,6 +56,7 @@ public class UserCart extends AppCompatActivity {
 
             scrollingLayout.addView(view);
             i++;
+            scrollingLayout.removeView(view);
         }
     }
 
