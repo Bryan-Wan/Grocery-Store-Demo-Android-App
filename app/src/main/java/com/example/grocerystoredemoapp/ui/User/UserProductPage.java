@@ -77,6 +77,8 @@ public class UserProductPage extends AppCompatActivity {
                 UserData userData = new UserData();
                 userData.productList.add(itemName);
                 userData.quantityList.add(itemQuantity);
+                userData.brandList.add(brand);
+                userData.priceList.add(price);
                 Toast itemAdded = Toast.makeText(getApplicationContext(), "item added", Toast.LENGTH_SHORT);
                 itemAdded.setMargin(50, 50);
                 itemAdded.show();
