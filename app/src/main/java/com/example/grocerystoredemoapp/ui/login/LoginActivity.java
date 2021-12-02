@@ -190,6 +190,6 @@ public class LoginActivity extends AppCompatActivity {
             // User/shopper log in
             startActivity(new Intent(LoginActivity.this, AdminHome.class));
         }
-        finish(); // Prevent going back to the login page by pressing back
+        //finish(); // Prevent going back to the login page by pressing back
     }
 }
