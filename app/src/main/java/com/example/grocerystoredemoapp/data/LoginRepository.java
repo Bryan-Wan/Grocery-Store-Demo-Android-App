@@ -64,8 +64,6 @@ public class LoginRepository {
 
     public Result<LoggedInUser> login(String username, String password) {
         // handle login
-        final long timeout = 30;
-        final TimeUnit timeoutUnit = TimeUnit.SECONDS;
         ExecutorService executorService = Executors.newSingleThreadExecutor();
 
         // Authenticate using Firebase Auth
@@ -98,13 +96,6 @@ public class LoginRepository {
             while (isAuthenticating.get()) {
                 // TODO: Put this in a separate thread and use waits. This infinite while loop is a kludge
             }
-            /*
-            executorService.shutdown();
-            executorService.awaitTermination(timeout, timeoutUnit);
-            List<Runnable> todo = executorService.shutdownNow();
-            boolean isTerminated = executorService.isTerminated();
-
-             */
 
             return new Result.Success<LoggedInUser>(user);
         } catch (Exception e) {
