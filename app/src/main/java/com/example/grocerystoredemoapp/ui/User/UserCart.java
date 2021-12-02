@@ -32,13 +32,13 @@ public class UserCart extends AppCompatActivity {
 
     }
 
-    private void addProduct(){
-        UserData userData = new UserData();
-        Integer i = 0
-        while(i < userData.productList.size()){
-
-        }
-    }
+//    private void addProduct(){
+//        UserData userData = new UserData();
+//        Integer i = 0
+//        while(i < userData.productList.size()){
+//
+//        }
+//    }
 
 
 }
