@@ -9,7 +9,6 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.grocerystoredemoapp.R;
-import com.example.grocerystoredemoapp.data.model.UserData;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class UserProductPage extends AppCompatActivity {
@@ -73,7 +72,7 @@ public class UserProductPage extends AppCompatActivity {
         addToCart.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-//                UserData userData = new UserData(itemName, itemQuantity);
+                //UserData userData = new UserData(itemName, itemQuantity);
                 startActivity(new Intent(UserProductPage.this, UserCart.class));
             }
         });
