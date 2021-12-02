@@ -127,7 +127,7 @@ public class LoginRepository {
                                 setLoggedInUser(new LoggedInUser(
                                         firebaseUser.getUid(),
                                         firebaseUser.getDisplayName(),
-                                        true // Testing, should check against database
+                                        isAdmin // Testing, should check against database
                                         // TODO: Get user type and display name from database
                                 ));
                             } else {
