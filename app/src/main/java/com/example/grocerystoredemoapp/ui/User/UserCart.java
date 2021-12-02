@@ -8,8 +8,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 
 import com.example.grocerystoredemoapp.R;
-
-import java.util.ArrayList;
+import com.example.grocerystoredemoapp.data.model.UserData;
 
 public class UserCart extends AppCompatActivity {
     LinearLayout scrollingLayout;
