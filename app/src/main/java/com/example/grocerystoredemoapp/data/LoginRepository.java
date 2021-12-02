@@ -82,7 +82,8 @@ public class LoginRepository {
                                 FirebaseUser firebaseUser = mAuth.getCurrentUser();
                                 setLoggedInUser(new LoggedInUser(
                                         firebaseUser.getUid(),
-                                        firebaseUser.getDisplayName()
+                                        firebaseUser.getDisplayName(),
+                                        true // Testing, should check against database
                                         // TODO: Get user tupe and display name from database
                                 ));
                             } else {
@@ -124,7 +125,8 @@ public class LoginRepository {
                                 FirebaseUser firebaseUser = mAuth.getCurrentUser();
                                 setLoggedInUser(new LoggedInUser(
                                         firebaseUser.getUid(),
-                                        firebaseUser.getDisplayName()
+                                        firebaseUser.getDisplayName(),
+                                        true // Testing, should check against database
                                         // TODO: Get user type and display name from database
                                 ));
                             } else {
