@@ -82,6 +82,7 @@ public class LoginRepository {
                                 setLoggedInUser(new LoggedInUser(
                                         firebaseUser.getUid(),
                                         firebaseUser.getDisplayName()
+                                        // TODO: Get user tupe and display name from database
                                 ));
                             } else {
                                 // On sign in failure, log it

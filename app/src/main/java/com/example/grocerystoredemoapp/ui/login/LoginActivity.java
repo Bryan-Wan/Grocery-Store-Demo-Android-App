@@ -89,6 +89,7 @@ public class LoginActivity extends AppCompatActivity {
                 setResult(Activity.RESULT_OK);
 
                 //Complete and destroy login activity once successful
+                // TODO: Call function that checks user type and switches to appropriate page
                 finish();
             }
         });
@@ -174,7 +175,7 @@ public class LoginActivity extends AppCompatActivity {
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser != null){
-            // TODO
+            // TODO: Call function that checks user type and switches to appropriate page
         }
     }
 
