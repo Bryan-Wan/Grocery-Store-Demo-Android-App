@@ -5,13 +5,16 @@ package com.example.grocerystoredemoapp.ui.login;
  */
 class LoggedInUserView {
     private String displayName;
-    //... other data fields that may be accessible to the UI
+    private boolean isAdmin;
 
-    LoggedInUserView(String displayName) {
+    LoggedInUserView(String displayName, boolean isAdmin) {
         this.displayName = displayName;
+        this.isAdmin = isAdmin;
     }
 
     String getDisplayName() {
         return displayName;
     }
+
+    boolean isAdmin() { return isAdmin; }
 }
