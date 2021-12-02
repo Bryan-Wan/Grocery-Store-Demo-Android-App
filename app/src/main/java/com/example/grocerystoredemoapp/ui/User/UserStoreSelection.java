@@ -10,12 +10,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.grocerystoredemoapp.R;
+import com.example.grocerystoredemoapp.ui.Admin.Settings;
 
 public class UserStoreSelection extends AppCompatActivity {
-    String storeNameText;
-    String storeAddressText;
-    Button storeNameBtn;
-    TextView storeAddressView;
+    LinearLayout scrollView;
 
 
     @Override
@@ -23,30 +21,34 @@ public class UserStoreSelection extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_store_selection);
 
+        scrollView = (LinearLayout)findViewById(R.id.storeLayout);
+
+        final View view = getLayoutInflater().inflate(R.layout.activity_user_store_selecting, null, false);
+        scrollView.addView(view);
+
+        addStore();
 
 
+    }
 
-        LinearLayout scrollingLayout;
-        scrollingLayout = findViewById(R.id.storeScrollLayout);
+    private void addStore(){
+        String name = "stc";
+        String address = "whatever";
 
-        View view = getLayoutInflater().inflate(R.layout.activity_user_store_added_view, null, false);
-        scrollingLayout.addView(view);
+        final View view = getLayoutInflater().inflate(R.layout.activity_user_store_selecting, null, false);
+        TextView storeName = (TextView)findViewById(R.id.storeName);
+        TextView storeAddress = (TextView)findViewById(R.id.storeAddress);
+        Button goToStore = (Button)findViewById(R.id.goToStore);
+        storeAddress.setText(address);
+        storeName.setText(name);
 
-        //mock data
-        storeNameText = "Tim's Shop";
-        storeAddressText = "1234 Yonge St";
-        storeNameBtn = findViewById(R.id.storeName);
-        storeAddressView = findViewById(R.id.storeAddress);
-        storeNameBtn.setText(storeNameText);
-        storeAddressView.setText(storeAddressText);
-
-        storeNameBtn.setOnClickListener(new View.OnClickListener(){
+        goToStore.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view){
-//                UserData userData = new UserData(itemName, itemQuantity);
+            public void onClick(View v) {
                 startActivity(new Intent(UserStoreSelection.this, UserProductList.class));
             }
         });
 
+        scrollView.addView(view);
     }
 }
