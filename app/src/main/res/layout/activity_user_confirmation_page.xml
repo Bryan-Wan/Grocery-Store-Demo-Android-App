@@ -8,7 +8,7 @@
 
     <TextView
         android:id="@+id/orderConfirmationTitle"
-        android:layout_width="238dp"
+        android:layout_width="wrap_content"
         android:layout_height="45dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
@@ -26,7 +26,7 @@
         android:id="@+id/total"
         android:layout_width="156dp"
         android:layout_height="16dp"
-        android:layout_marginTop="271dp"
+        android:layout_marginTop="204dp"
         android:text="@string/total"
         android:textColor="#000000"
         app:layout_constraintEnd_toEndOf="parent"
@@ -48,14 +48,11 @@
         android:id="@+id/backToCartBtn"
         android:layout_width="203dp"
         android:layout_height="48dp"
-        android:layout_marginTop="178dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="25dp"
         android:text="@string/back_to_cart"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/placeOrderBtn"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
         android:id="@+id/tempItem"
