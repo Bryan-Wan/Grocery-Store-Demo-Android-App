@@ -17,7 +17,7 @@ public class UserHome extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_home);
-        UserData userData = new UserData();
+
 
         Button newOrderBtn = (Button) findViewById(R.id.userNewOrderBtn);
         newOrderBtn.setOnClickListener(new View.OnClickListener(){

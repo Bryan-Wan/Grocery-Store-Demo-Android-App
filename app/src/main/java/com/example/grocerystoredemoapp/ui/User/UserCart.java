@@ -9,7 +9,6 @@ import android.widget.LinearLayout;
 
 import com.example.grocerystoredemoapp.R;
 
-import java.util.ArrayList;
 
 public class UserCart extends AppCompatActivity {
     LinearLayout scrollingLayout;
