@@ -12,38 +12,36 @@
         android:layout_height="46dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
-        android:layout_marginBottom="16dp"
         android:text="@string/cart"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/purchaseBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.001" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/purchaseBtn"
         android:layout_width="182dp"
         android:layout_height="48dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginBottom="76dp"
+        android:layout_marginBottom="36dp"
         android:text="@string/purchase"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userCartScrollView" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ScrollView
         android:id="@+id/userCartScrollView"
-        android:layout_width="409dp"
+        android:layout_width="0dp"
         android:layout_height="527dp"
-        android:layout_marginTop="1dp"
-        app:layout_constraintTop_toBottomOf="@+id/cartTitle"
-        tools:layout_editor_absoluteX="1dp">
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cartTitle">
 
         <LinearLayout
             android:id="@+id/userCartScrollLayout"
