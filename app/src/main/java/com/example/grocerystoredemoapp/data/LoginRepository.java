@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * Class that requests authentication and user information from the remote data source and
@@ -27,6 +28,8 @@ public class LoginRepository {
 
     private FirebaseAuth mAuth;
 
+    private AtomicBoolean isAuthenticating;
+
     // If user credentials will be cached in local storage, it is recommended it be encrypted
     // @see https://developer.android.com/training/articles/keystore
     private LoggedInUser user = null;
@@ -34,6 +37,7 @@ public class LoginRepository {
     // private constructor : singleton access
     private LoginRepository(FirebaseAuth mAuth) {
         this.mAuth = mAuth;
+        this.isAuthenticating = new AtomicBoolean(false);
     }
 
     public static LoginRepository getInstance(FirebaseAuth mAuth) {
@@ -67,6 +71,7 @@ public class LoginRepository {
         // Authenticate using Firebase Auth
         try {
             // Sign in using email and password
+            isAuthenticating.set(true);
             Task<AuthResult> authResultTask = mAuth.signInWithEmailAndPassword(username, password)
                     .addOnCompleteListener(executorService, new OnCompleteListener<AuthResult>() {
                         @Override
@@ -85,14 +90,21 @@ public class LoginRepository {
                                 Log.w(loginActivityTag, "signInWithEmail:failure", task.getException());
                                 //Toast.makeText(LoginActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
                             }
+                            isAuthenticating.set(false);
                         }
                     });
 
             // Wait until authentication is finished before returning
+            while (isAuthenticating.get()) {
+                // TODO: Put this in a separate thread and use waits. This infinite while loop is a kludge
+            }
+            /*
             executorService.shutdown();
             executorService.awaitTermination(timeout, timeoutUnit);
             List<Runnable> todo = executorService.shutdownNow();
             boolean isTerminated = executorService.isTerminated();
+
+             */
 
             return new Result.Success<LoggedInUser>(user);
         } catch (Exception e) {
