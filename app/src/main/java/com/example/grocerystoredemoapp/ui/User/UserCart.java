@@ -8,7 +8,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 
 import com.example.grocerystoredemoapp.R;
-import com.example.grocerystoredemoapp.data.model.UserData;
+
 
 public class UserCart extends AppCompatActivity {
     LinearLayout scrollingLayout;
@@ -32,13 +32,6 @@ public class UserCart extends AppCompatActivity {
 
     }
 
-    private void addProduct(){
-        UserData userData = new UserData();
-        Integer i = 0;
-        while(i < userData.productList.size()){
-
-        }
-    }
 
 
 }
