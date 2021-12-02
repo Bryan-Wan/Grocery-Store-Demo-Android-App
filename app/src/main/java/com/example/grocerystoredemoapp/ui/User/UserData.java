@@ -8,8 +8,8 @@ public class UserData {
 
     protected UserData(){
         if(productList == null && quantityList == null){
-            productList = new ArrayList<String>();
-            quantityList = new ArrayList<Integer>();
+            productList = new ArrayList<>();
+            quantityList = new ArrayList<>();
         }
     }
 

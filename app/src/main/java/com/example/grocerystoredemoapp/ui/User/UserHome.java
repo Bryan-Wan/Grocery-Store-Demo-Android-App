@@ -9,7 +9,6 @@ import android.widget.Button;
 import android.widget.ImageButton;
 
 import com.example.grocerystoredemoapp.R;
-import com.example.grocerystoredemoapp.data.model.UserData;
 import com.example.grocerystoredemoapp.ui.Admin.Settings;
 
 public class UserHome extends AppCompatActivity {

@@ -6,9 +6,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.example.grocerystoredemoapp.R;
 
+import java.util.ArrayList;
 
 public class UserCart extends AppCompatActivity {
     LinearLayout scrollingLayout;
@@ -23,6 +25,7 @@ public class UserCart extends AppCompatActivity {
         scrollingLayout = findViewById(R.id.userCartScrollLayout);
         purchase = findViewById(R.id.purchaseBtn);
         View view = getLayoutInflater().inflate(R.layout.activity_user_product_added_view, null, false);
+
         scrollingLayout.addView(view);
 
 
@@ -32,13 +35,7 @@ public class UserCart extends AppCompatActivity {
 
     }
 
-    private void addProduct(){
-        UserData userData = new UserData();
-        Integer i = 0
-        while(i < userData.productList.size()){
 
-        }
-    }
 
 
 }
