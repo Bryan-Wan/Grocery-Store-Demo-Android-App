@@ -45,7 +45,7 @@ public class UserStoreSelection extends AppCompatActivity {
         goToStore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(UserStoreSelection.this, UserProductPage.class));
+                startActivity(new Intent(UserStoreSelection.this, UserProductList.class));
             }
         });
 
