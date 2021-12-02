@@ -121,7 +121,7 @@ public class LoginRepository {
                             final String registrationContextTag = "Register";
                             if (task.isSuccessful()) {
                                 // Registration success, set the user with the signed-in user's information
-                                Log.d(registrationContextTag, "signInWithEmail:success");
+                                Log.d(registrationContextTag, "registerWithEmail:success");
                                 FirebaseUser firebaseUser = mAuth.getCurrentUser();
                                 setLoggedInUser(new LoggedInUser(
                                         firebaseUser.getUid(),
@@ -131,7 +131,7 @@ public class LoginRepository {
                                 ));
                             } else {
                                 // On registration failure, log it
-                                Log.w(registrationContextTag, "signInWithEmail:failure", task.getException());
+                                Log.w(registrationContextTag, "registerWithEmail:failure", task.getException());
                                 //Toast.makeText(LoginActivity.this, "Registration failed.", Toast.LENGTH_SHORT).show();
                             }
                             isRegistering.set(false);
@@ -145,7 +145,7 @@ public class LoginRepository {
 
             return new Result.Success<LoggedInUser>(user);
         } catch (Exception e) {
-            return new Result.Error(new IOException("Error logging in", e));
+            return new Result.Error(new IOException("Error signing up", e));
         }
     }
 }
