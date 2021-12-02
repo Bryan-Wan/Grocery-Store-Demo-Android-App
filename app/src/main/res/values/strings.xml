@@ -75,6 +75,7 @@
     =========Test=========
     <string name="test_admin">TEST LOGIN AS ADMIN</string>
     <string name="test_user">TEST LOGIN AS USER</string>
+    <string name="test_product_page">TEST PRODUCT PAGE</string>
 
 
     >>>>>>> Stashed changes

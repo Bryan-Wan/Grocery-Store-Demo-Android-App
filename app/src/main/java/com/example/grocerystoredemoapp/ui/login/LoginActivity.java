@@ -26,6 +26,7 @@ import com.example.grocerystoredemoapp.R;
 import com.example.grocerystoredemoapp.databinding.ActivityLoginBinding;
 import com.example.grocerystoredemoapp.ui.Admin.AdminHome;
 import com.example.grocerystoredemoapp.ui.User.UserHome;
+import com.example.grocerystoredemoapp.ui.User.UserProductPage;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -145,6 +146,13 @@ public class LoginActivity extends AppCompatActivity {
         userTestBtn.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 startActivity(new Intent(LoginActivity.this, UserHome.class));
+            }
+        });
+
+        Button productPageTestBtn = (Button) findViewById(R.id.testProductPage);
+        productPageTestBtn.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                startActivity(new Intent(LoginActivity.this, UserProductPage.class));
             }
         });
 
