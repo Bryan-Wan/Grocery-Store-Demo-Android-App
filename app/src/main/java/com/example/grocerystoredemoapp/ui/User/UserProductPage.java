@@ -72,7 +72,7 @@ public class UserProductPage extends AppCompatActivity {
         addToCart.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                UserCart userCart = new UserCart(brand, itemQuantity);
+                startActivity(new Intent(UserProductPage.this, UserCart.class));
             }
         });
 

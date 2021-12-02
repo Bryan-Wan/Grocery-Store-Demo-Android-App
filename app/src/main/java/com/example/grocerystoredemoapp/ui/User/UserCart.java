@@ -3,6 +3,7 @@ package com.example.grocerystoredemoapp.ui.User;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
@@ -33,8 +34,15 @@ public class UserCart extends AppCompatActivity {
 
         scrollingLayout = findViewById(R.id.userCartScrollLayout);
         purchase = findViewById(R.id.purchaseBtn);
+        View view = getLayoutInflater().inflate(R.layout.activity_user_product_added_view, null, false);
+        scrollingLayout.addView(view);
+
+
+
 
 
 
     }
+
+
 }
