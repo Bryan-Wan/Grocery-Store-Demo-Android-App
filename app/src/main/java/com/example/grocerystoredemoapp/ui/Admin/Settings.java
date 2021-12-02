@@ -1,15 +1,16 @@
-package com.example.grocerystoredemoapp.ui.User;
+package com.example.grocerystoredemoapp.ui.Admin;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class UserWelcomePage extends AppCompatActivity {
+import com.example.grocerystoredemoapp.R;
+
+public class Settings extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_settings);
     }
-
-
 }

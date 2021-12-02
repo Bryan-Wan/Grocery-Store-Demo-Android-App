@@ -3,24 +3,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".ui.Admin.AdminStoreInfo">
 
     <TextView
         android:id="@+id/adminStoreAddressTitle"
         android:layout_width="144dp"
         android:layout_height="27dp"
         android:layout_marginStart="24dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="196dp"
-        android:layout_marginBottom="8dp"
         android:text="@string/store_address"
         android:textColor="#000000"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/adminStoreAddress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.851"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/adminStoreName"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/adminStoreName" />
 
     <TextView
         android:id="@+id/storeInfoTitle"
@@ -35,53 +34,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/adminStoreName"
-        android:layout_width="283sp"
-        android:layout_height="44dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="20dp"
-        android:background="#B5ADAD"
-        android:shadowColor="#FFFFFF"
-        android:text="@string/store_name_update"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textColor="#424242"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.476"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/adminStoreNameTitle" />
-
-    <TextView
-        android:id="@+id/adminStoreAddress"
-        android:layout_width="283dp"
-        android:layout_height="47dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="44dp"
-        android:background="#B5ADAD"
-        android:text="@string/store_address_update"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textColor="#424242"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/saveChangesBtn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.476"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <Button
         android:id="@+id/saveChangesBtn"
         android:layout_width="258dp"
         android:layout_height="54dp"
         android:layout_marginStart="20dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginBottom="304dp"
         android:text="@string/save_store"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/adminStroreAddress" />
 
     <TextView
         android:id="@+id/adminStoreNameTitle"
@@ -97,5 +61,37 @@
         app:layout_constraintHorizontal_bias="0.851"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/storeInfoTitle" />
+
+    <EditText
+        android:id="@+id/adminStoreName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="24dp"
+        android:ems="10"
+        android:hint="@string/store_name_update"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.261"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/adminStoreNameTitle" />
+
+    <EditText
+        android:id="@+id/adminStroreAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="24dp"
+        android:ems="10"
+        android:hint="@string/store_address_update"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.261"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/adminStoreAddressTitle" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

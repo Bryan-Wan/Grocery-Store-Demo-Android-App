@@ -27,6 +27,10 @@ import com.example.grocerystoredemoapp.databinding.ActivityLoginBinding;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import com.example.grocerystoredemoapp.ui.Admin.AdminHome;
+import com.example.grocerystoredemoapp.ui.User.UserHome;
+import com.example.grocerystoredemoapp.ui.User.UserProductPage;
+
 public class LoginActivity extends AppCompatActivity {
 
     private LoginViewModel loginViewModel;
@@ -77,7 +81,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
 
                 if (loginResult.getError() != null) {
-                        showLoginFailed(loginResult.getError());
+                    showLoginFailed(loginResult.getError());
                 }
                 if (loginResult.getSuccess() != null) {
                     updateUiWithUser(loginResult.getSuccess());
@@ -131,11 +135,34 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        // Start registration activity button
-        Button registerButton = (Button) findViewById(R.id.noAccountRegisterBtn);
-        registerButton.setOnClickListener(new View.OnClickListener(){
+        Button registerBtn = (Button) findViewById(R.id.noAccountRegisterBtn);
+        registerBtn.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 startActivity(new Intent(LoginActivity.this, LoginRegister.class));
+            }
+        });
+
+
+        // Go to Admin Home Page with TEST Button
+        Button adminTestBtn = (Button) findViewById(R.id.testLoginAsAdmin);
+        adminTestBtn.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                startActivity(new Intent(LoginActivity.this, AdminHome.class));
+            }
+        });
+
+        // Go to User Home Page with TEST Button
+        Button userTestBtn = (Button) findViewById(R.id.testLoginAsUser);
+        userTestBtn.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                startActivity(new Intent(LoginActivity.this, UserHome.class));
+            }
+        });
+
+        Button productPageTestBtn = (Button) findViewById(R.id.testProductPage);
+        productPageTestBtn.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                startActivity(new Intent(LoginActivity.this, UserProductPage.class));
             }
         });
 

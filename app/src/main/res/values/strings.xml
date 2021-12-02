@@ -28,11 +28,13 @@
     Order History from User Welcome Page
     <string name="no_orders">No Orders Yet</string>
     ==========User Product Page=======
+    <string name="select_a_store">Select a store</string>
     <string name="item">Item</string>
     <string name="brand">Brand</string>
     <string name="cost">$</string>
     <string name="quantity">1</string>
     <string name="add_to_cart">Add to Cart</string>
+    <string name="store_name_test">Store name</string>
     ==========User Confirmation=======
     <string name="order_confirmation">Order Confirmation</string>
     <string name="item_1">Item</string>
@@ -68,4 +70,8 @@
     =========Cart=========
     <string name="cart">Cart</string>
     <string name="purchase">Purchase</string>
+    =========Test=========
+    <string name="test_admin">TEST LOGIN AS ADMIN</string>
+    <string name="test_user">TEST LOGIN AS USER</string>
+    <string name="test_product_page">TEST PRODUCT PAGE</string>
 </resources>

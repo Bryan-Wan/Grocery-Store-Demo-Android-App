@@ -8,7 +8,7 @@
 
     <TextView
         android:id="@+id/itemName"
-        android:layout_width="166dp"
+        android:layout_width="wrap_content"
         android:layout_height="32dp"
         android:layout_marginTop="124dp"
         android:text="@string/item"
@@ -21,7 +21,7 @@
 
     <TextView
         android:id="@+id/itemBrand"
-        android:layout_width="166dp"
+        android:layout_width="wrap_content"
         android:layout_height="21dp"
         android:text="@string/brand"
         android:textAlignment="center"
@@ -47,7 +47,7 @@
         android:id="@+id/subtractQuantityBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="96dp"
+        android:layout_marginStart="100dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
         android:clickable="true"
@@ -55,7 +55,7 @@
         app:layout_constraintBottom_toTopOf="@+id/addToCartBtn"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cost"
-        tools:ignore="ImageContrastCheck" />
+        tools:ignore="ImageContrastCheck,SpeakableTextPresentCheck" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/addQuantityBtn"
@@ -69,14 +69,14 @@
         app:layout_constraintBottom_toTopOf="@+id/addToCartBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cost"
-        tools:ignore="ImageContrastCheck" />
+        tools:ignore="ImageContrastCheck,SpeakableTextPresentCheck" />
 
     <TextView
         android:id="@+id/quantity"
-        android:layout_width="66dp"
-        android:layout_height="wrap_content"
+        android:layout_width="55dp"
+        android:layout_height="20dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="84dp"
+        android:layout_marginTop="68dp"
         android:layout_marginEnd="8dp"
         android:text="@string/quantity"
         android:textAlignment="center"
@@ -89,14 +89,11 @@
         android:id="@+id/addToCartBtn"
         android:layout_width="180dp"
         android:layout_height="49dp"
-        android:layout_marginTop="52dp"
-        android:layout_marginBottom="274dp"
+        android:layout_marginTop="76dp"
         android:text="@string/add_to_cart"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/quantity"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/quantity" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

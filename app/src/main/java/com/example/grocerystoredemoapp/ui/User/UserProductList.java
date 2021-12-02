@@ -6,11 +6,11 @@ import android.os.Bundle;
 
 import com.example.grocerystoredemoapp.R;
 
-public class userOrderThankYouPage extends AppCompatActivity {
+public class UserProductList extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_order_thank_you_page);
+        setContentView(R.layout.activity_user_product_list);
     }
 }
