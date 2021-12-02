@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.grocerystoredemoapp.R;
+import com.example.grocerystoredemoapp.data.model.UserData;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class UserProductPage extends AppCompatActivity {
