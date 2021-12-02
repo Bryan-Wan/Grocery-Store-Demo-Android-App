@@ -72,6 +72,7 @@ public class UserProductPage extends AppCompatActivity {
         addToCart.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
+                UserData userData = new UserData(itemName, itemQuantity);
                 startActivity(new Intent(UserProductPage.this, UserCart.class));
             }
         });

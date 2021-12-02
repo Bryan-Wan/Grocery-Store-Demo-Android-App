@@ -14,18 +14,7 @@ import java.util.ArrayList;
 public class UserCart extends AppCompatActivity {
     LinearLayout scrollingLayout;
     Button purchase;
-    static ArrayList<String> productList;
-    static ArrayList<Integer> quantityList;
 
-    protected UserCart(){
-        productList = new ArrayList<String>();
-        quantityList = new ArrayList<Integer>();
-    }
-
-    protected UserCart(String product, Integer quantity){
-        productList.add(product);
-        quantityList.add(quantity);
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +31,14 @@ public class UserCart extends AppCompatActivity {
 
 
 
+    }
+
+    private void addProduct(){
+        UserData userData = new UserData();
+        Integer i = 0
+        while(i < userData.productList.size()){
+
+        }
     }
 
 
