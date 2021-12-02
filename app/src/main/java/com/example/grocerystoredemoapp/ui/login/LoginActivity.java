@@ -160,13 +160,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        Button productPageTestBtn = (Button) findViewById(R.id.testProductPage);
-        productPageTestBtn.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
-                startActivity(new Intent(LoginActivity.this, UserProductPage.class));
-            }
-        });
-
     }
 
     @Override

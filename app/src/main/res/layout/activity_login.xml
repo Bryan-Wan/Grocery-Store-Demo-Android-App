@@ -96,15 +96,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/testLoginAsAdmin" />
 
-    <Button
-        android:id="@+id/testProductPage"
-        android:layout_width="250dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/test_product_page"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.459"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/testLoginAsUser" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
