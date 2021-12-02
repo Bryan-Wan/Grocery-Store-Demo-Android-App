@@ -1,5 +1,6 @@
 package com.example.grocerystoredemoapp.ui.login;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -18,7 +19,10 @@ import com.example.grocerystoredemoapp.data.Result;
 import com.example.grocerystoredemoapp.data.model.LoggedInUser;
 import com.example.grocerystoredemoapp.ui.Admin.AdminHome;
 import com.example.grocerystoredemoapp.ui.User.UserHome;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class LoginRegister extends AppCompatActivity {
 
@@ -65,6 +69,22 @@ public class LoginRegister extends AppCompatActivity {
                     if (result instanceof Result.Success) {
                         LoggedInUser data = ((Result.Success<LoggedInUser>) result).getData();
                         // Go to the appropriate home page
+
+                        LoggedInUser user = new LoggedInUser(username, username, isAdminRegistration);
+                        FirebaseDatabase.getInstance().getReference("Users")
+                                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (result instanceof Result.Success){
+                                    Toast.makeText(LoginRegister.this, "User registered", Toast.LENGTH_SHORT).show();
+                                }
+                                else{
+                                    Toast.makeText(LoginRegister.this, "User failed", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+
                         if (data.isAdmin()) {
                             startActivity(new Intent(LoginRegister.this, AdminHome.class));
                             finish();
