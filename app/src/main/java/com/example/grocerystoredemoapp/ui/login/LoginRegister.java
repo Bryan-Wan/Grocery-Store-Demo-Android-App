@@ -37,15 +37,16 @@ public class LoginRegister extends AppCompatActivity {
         final CheckBox adminCheckBox = findViewById(R.id.adminCheckBox);
         final Button registerBtn = findViewById(R.id.registerBtn);
 
-        String username = usernameEditText.getText().toString();
-        String password = passwordEditText.getText().toString();
-        String confirmPassword = confirmPasswordEditText.getText().toString();
-        boolean isAdminRegistration = adminCheckBox.isChecked();
-
         // Registration process
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Get input
+                String username = usernameEditText.getText().toString();
+                String password = passwordEditText.getText().toString();
+                String confirmPassword = confirmPasswordEditText.getText().toString();
+                boolean isAdminRegistration = adminCheckBox.isChecked();
+
                 // Validate username
                 if (!isUserNameValid(username)) {
                     String invalidUsernameMessage = getString(R.string.invalid_username);
