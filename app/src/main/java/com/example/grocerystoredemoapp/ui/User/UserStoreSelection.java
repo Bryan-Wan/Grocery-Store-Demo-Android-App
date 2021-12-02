@@ -32,8 +32,8 @@ public class UserStoreSelection extends AppCompatActivity {
     }
 
     private void addStore(){
-        String name = "stc";
-        String address = "whatever";
+        String name = "Tim's shop";
+        String address = "Timmy Ave 123";
 
         final View view = getLayoutInflater().inflate(R.layout.activity_user_store_selecting, null, false);
         TextView storeName = (TextView)findViewById(R.id.storeName);

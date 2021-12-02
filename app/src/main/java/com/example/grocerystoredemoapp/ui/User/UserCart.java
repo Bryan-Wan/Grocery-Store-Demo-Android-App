@@ -34,9 +34,17 @@ public class UserCart extends AppCompatActivity {
         Integer i = 0;
         while(i < userData.productList.size()){
             String name = userData.productList.get(i);
+            Integer quantity = userData.quantityList.get(i);
             final View view = getLayoutInflater().inflate(R.layout.activity_user_product_added_view, null, false);
-            TextView Name = (TextView)findViewById(R.id.item);
-            Name.setText(userData.productList.get(i));
+            TextView productName = (TextView)findViewById(R.id.item);
+            TextView productQuantity = (TextView)findViewById(R.id.productQuantity);
+            TextView productBrand = (TextView)findViewById(R.id.productBrand);
+            TextView productPrice = (TextView)findViewById(R.id.productPrice);
+            productName.setText(userData.productList.get(i));
+            productQuantity.setText(userData.quantityList.get(i).toString());
+            productBrand.setText(userData.brandList.get(i));
+            productPrice.setText(userData.priceList.get(i).toString());
+
             scrollingLayout.addView(view);
             i++;
         }
