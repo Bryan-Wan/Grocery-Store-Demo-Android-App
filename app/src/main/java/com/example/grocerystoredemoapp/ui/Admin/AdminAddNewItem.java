@@ -20,7 +20,7 @@ public class AdminAddNewItem extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_add_new_item);
 
-        final EditText product_name = findViewById(R.id.name);
+        final EditText name = findViewById(R.id.name);
         final EditText brand = findViewById(R.id.brand);
         final EditText price = findViewById(R.id.price);
 
