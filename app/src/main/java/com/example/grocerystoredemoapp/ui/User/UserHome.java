@@ -13,7 +13,7 @@ import com.example.grocerystoredemoapp.data.model.OrderData;
 import com.example.grocerystoredemoapp.ui.Admin.Settings;
 
 public class UserHome extends AppCompatActivity {
-
+    Button cartBtn_homePage;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,5 +41,13 @@ public class UserHome extends AppCompatActivity {
                 startActivity(new Intent(UserHome.this, Settings.class));
             }
         });
+        cartBtn_homePage = findViewById(R.id.cartBtn_homePage);
+        cartBtn_homePage.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                startActivity(new Intent(UserHome.this, UserCart.class));
+            }
+        });
+
     }
 }
