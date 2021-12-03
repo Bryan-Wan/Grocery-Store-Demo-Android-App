@@ -27,9 +27,7 @@ import java.util.List;
 
 public class AdminStoreInfo extends AppCompatActivity {
 
-    private FirebaseAuth mAuth;
     private String userID;
-    private String hasStore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
