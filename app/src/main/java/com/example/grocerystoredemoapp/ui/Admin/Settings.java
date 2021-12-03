@@ -3,13 +3,19 @@ package com.example.grocerystoredemoapp.ui.Admin;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.example.grocerystoredemoapp.R;
 import com.example.grocerystoredemoapp.data.model.User;
+import com.example.grocerystoredemoapp.ui.User.UserHome;
+import com.example.grocerystoredemoapp.ui.User.UserOrderThankYouPage;
+import com.example.grocerystoredemoapp.ui.login.LoginActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -58,5 +64,15 @@ public class Settings extends AppCompatActivity {
             }
         });
 
+        Button logOutBtn = findViewById(R.id.settingsLogOutBtn);
+
+        logOutBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                startActivity(new Intent(Settings.this, LoginActivity.class));
+            }
+
+            // TODO: implement logout
+        });
     }
 }
