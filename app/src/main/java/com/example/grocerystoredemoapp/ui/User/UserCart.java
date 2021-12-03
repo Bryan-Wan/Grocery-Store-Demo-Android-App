@@ -10,7 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.grocerystoredemoapp.R;
-import com.example.grocerystoredemoapp.data.model.UserData;
+import com.example.grocerystoredemoapp.data.model.OrderData;
 
 
 public class UserCart extends AppCompatActivity {
@@ -39,7 +39,7 @@ public class UserCart extends AppCompatActivity {
     }
 
     private void addProduct(){
-        UserData userData = new UserData();
+        OrderData userData = new OrderData();
         Integer i = 0;
         while(i < userData.productList.size()){
             String name = userData.productList.get(i);
