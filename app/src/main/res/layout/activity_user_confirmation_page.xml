@@ -9,16 +9,16 @@
     <TextView
         android:id="@+id/orderConfirmationTitle"
         android:layout_width="wrap_content"
-        android:layout_height="45dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
         android:layout_marginBottom="16dp"
         android:text="@string/order_confirmation"
+        android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="@android:color/black"
         android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/tempItem"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -36,8 +36,8 @@
 
     <Button
         android:id="@+id/placeOrderBtn"
-        android:layout_width="215dp"
-        android:layout_height="48dp"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="44dp"
         android:text="@string/place_order_confirm"
         app:layout_constraintEnd_toEndOf="parent"
