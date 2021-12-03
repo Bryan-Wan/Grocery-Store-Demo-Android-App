@@ -18,7 +18,7 @@ public class DAOStoreData {
 
         return databaseReference.child(id).setValue(info);
     }
-    
+
     public Task<Void> update(String key, HashMap<String, Object> hashMap){
         return databaseReference.child(key).updateChildren(hashMap);
     }
