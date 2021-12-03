@@ -17,6 +17,8 @@ import com.example.grocerystoredemoapp.R;
 import com.example.grocerystoredemoapp.data.LoginRepository;
 import com.example.grocerystoredemoapp.data.Result;
 import com.example.grocerystoredemoapp.data.model.LoggedInUser;
+import com.example.grocerystoredemoapp.data.model.Product;
+import com.example.grocerystoredemoapp.data.model.User;
 import com.example.grocerystoredemoapp.ui.Admin.AdminHome;
 import com.example.grocerystoredemoapp.ui.User.UserHome;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -70,7 +72,8 @@ public class LoginRegister extends AppCompatActivity {
                         LoggedInUser data = ((Result.Success<LoggedInUser>) result).getData();
                         // Go to the appropriate home page
 
-                        LoggedInUser user = new LoggedInUser(username, username, isAdminRegistration);
+                        String[] getName = username.split("@");
+                        User user = new User("", getName[0], isAdminRegistration, "");
                         FirebaseDatabase.getInstance().getReference("Users")
                                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                 .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {

@@ -5,14 +5,13 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
 
-public class DAOStoreData {
+public class DAOProduct {
     private DatabaseReference databaseReference;
-    public DAOStoreData(){
+    public DAOProduct(){
         FirebaseDatabase db =FirebaseDatabase.getInstance();
-        databaseReference = db.getReference(StoreData.class.getSimpleName());
+        databaseReference = db.getReference(Product.class.getSimpleName());
     }
-    public Task<Void> add(StoreData info){
-
+    public Task<Void> add(Product info){
         return databaseReference.push().setValue(info);
     }
 
