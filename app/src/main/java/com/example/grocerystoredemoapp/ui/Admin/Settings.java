@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import com.example.grocerystoredemoapp.R;
+import com.example.grocerystoredemoapp.data.model.StoreData;
 import com.example.grocerystoredemoapp.data.model.User;
 import com.example.grocerystoredemoapp.ui.User.UserHome;
 import com.example.grocerystoredemoapp.ui.User.UserOrderThankYouPage;
@@ -42,6 +43,8 @@ public class Settings extends AppCompatActivity {
         FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
         userID = currentFirebaseUser.getUid();
         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("Users");
+        DatabaseReference storeRef = FirebaseDatabase.getInstance().getReference("StoreData");
+
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -52,6 +55,27 @@ public class Settings extends AppCompatActivity {
                         ArrayList<String> array  = new ArrayList<>();
                         array.add("Username: " + user.getEmail());
                         array.add("Password: " + user.getPassword());
+                        if(user.isAdmin()){
+                            storeRef.addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                    for(DataSnapshot ds: snapshot.getChildren()){
+                                        StoreData store = ds.getValue(StoreData.class);
+                                        if(ds.getKey().equals(user.getStore())){
+                                            array.add("Store Name: " + store.getStoreName());
+                                            array.add("Store Address: " + store.getStoreAddress());
+                                            ArrayAdapter adapter = new ArrayAdapter(getApplicationContext(),android.R.layout.simple_list_item_1,array);
+                                            mListView.setAdapter(adapter);
+                                        }
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                }
+                            });
+                        }
                         ArrayAdapter adapter = new ArrayAdapter(getApplicationContext(),android.R.layout.simple_list_item_1,array);
                         mListView.setAdapter(adapter);
                     }
