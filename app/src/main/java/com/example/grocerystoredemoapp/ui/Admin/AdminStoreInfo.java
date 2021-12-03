@@ -22,6 +22,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class AdminStoreInfo extends AppCompatActivity {
@@ -57,7 +58,13 @@ public class AdminStoreInfo extends AppCompatActivity {
                         Log.d("test", ""+user.getEmail());
                         Log.d("test", ""+user.getPassword());
                         Log.d("test", "Empty: "+user.getStore());
-                        add();
+                        if(user.getStore().equals("")){
+                            add();
+                        }
+                        else{
+                            update(user.getStore());
+                        }
+
                     }
 
                     Log.d("admin check", "admin: " + user.isAdmin());
@@ -98,7 +105,7 @@ public class AdminStoreInfo extends AppCompatActivity {
 
 
 
-    public void update(){
+    public void update(String storeId){
         setContentView(R.layout.activity_admin_store_info);
         final EditText edit_store = findViewById(R.id.adminStoreName);
         final EditText edit_address = findViewById(R.id.adminStroreAddress);
@@ -106,16 +113,15 @@ public class AdminStoreInfo extends AppCompatActivity {
         DAOStoreData dao = new DAOStoreData();
         btn.setOnClickListener(v->{
 
-
-            /*HashMap<String, Object> hashMap = new HashMap<>();
+            HashMap<String, Object> hashMap = new HashMap<>();
             hashMap.put("storeName", edit_store.getText().toString());
             hashMap.put("storeAddress", edit_address.getText().toString());
 
-            dao.update(uid,hashMap).addOnSuccessListener(suc->{
+            dao.update(storeId,hashMap).addOnSuccessListener(suc->{
                 Toast.makeText(this, "store s", Toast.LENGTH_SHORT).show();
             }).addOnFailureListener(er->{
                 Toast.makeText(this, "no"+er.getMessage(), Toast.LENGTH_SHORT).show();
-            });*/
+            });
         });
     }
 }
