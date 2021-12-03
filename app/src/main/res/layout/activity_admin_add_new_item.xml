@@ -8,14 +8,14 @@
 
     <TextView
         android:id="@+id/addNewItemTitle"
-        android:layout_width="203dp"
-        android:layout_height="39dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
         android:text="@string/add_new_item"
+        android:textAlignment="center"
+        android:textColor="@android:color/black"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -30,7 +30,7 @@
         android:hint="@string/product_name"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/addNewItemTitle" />
 
@@ -67,11 +67,12 @@
     <Button
         android:id="@+id/addItemBtn"
         android:layout_width="wrap_content"
-        android:layout_height="51dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="32dp"
         android:text="@string/add_item"
+        android:textAllCaps="false"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.981"

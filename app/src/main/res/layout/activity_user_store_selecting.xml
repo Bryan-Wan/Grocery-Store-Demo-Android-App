@@ -13,16 +13,16 @@
         android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toStartOf="@+id/frameLayout2"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="2dp">
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/storeName"
             android:layout_width="0dp"
-            android:layout_height="51dp"
+            android:layout_height="48dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:text="store name"
+            android:text="@string/store_name"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -30,11 +30,11 @@
 
         <TextView
             android:id="@+id/storeAddress"
-            android:layout_width="58dp"
-            android:layout_height="wrap_content"
+            android:layout_width="222dp"
+            android:layout_height="32dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="4dp"
-            android:text="address"
+            android:text="@string/store_address"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/storeName" />
 
@@ -44,17 +44,17 @@
         android:id="@+id/frameLayout2"
         android:layout_width="0dp"
         android:layout_height="100dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/frameLayout"
-        tools:layout_editor_absoluteY="1dp">
+        app:layout_constraintTop_toTopOf="parent">
 
         <Button
             android:id="@+id/goToStore"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="Go to store" />
+            android:text="@string/go_to_store"
+            android:textAlignment="center" />
     </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
