@@ -11,46 +11,106 @@
         android:theme="@style/Theme.GroceryStoreDemoApp">
         <activity
             android:name=".ui.User.UserProductList"
-            android:exported="true" />
+            android:exported="true"
+            android:parentActivityName=".ui.User.UserStoreSelection">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.User.UserStoreSelection" />
+        </activity>
         <activity
             android:name=".ui.User.UserStoreSelection"
-            android:exported="true" />
+            android:exported="true"
+            android:parentActivityName=".ui.User.UserHome">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.User.UserHome" />
+        </activity>
         <activity
             android:name=".ui.Admin.Settings"
-            android:exported="true" />
+            android:exported="true"
+            android:parentActivityName=".ui.Admin.AdminHome">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.Admin.AdminHome" />
+        </activity>
         <activity
             android:name=".ui.User.UserProductPage"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".ui.User.UserProductList">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.User.UserProductList" />
+        </activity>
         <activity
             android:name=".ui.User.UserCart"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".ui.User.UserProductList">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.User.UserProductList" />
+        </activity>
         <activity
             android:name=".ui.User.UserOrderThankYouPage"
             android:exported="false" />
         <activity
             android:name=".ui.User.UserConfirmationPage"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".ui.User.UserCart">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.User.UserCart" />
+        </activity>
         <activity
             android:name=".ui.User.UserHistory"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".ui.User.UserHome">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.User.UserHome" />
+        </activity>
         <activity
             android:name=".ui.Admin.AdminOrdersPage"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".ui.Admin.AdminHome">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.Admin.AdminHome" />
+        </activity>
         <activity
             android:name=".ui.Admin.AdminStoreInfo"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".ui.Admin.AdminHome">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.Admin.AdminHome" />
+        </activity>
         <activity
             android:name=".ui.Admin.AdminHome"
             android:exported="false" />
         <activity
             android:name=".ui.Admin.AdminAddNewItem"
-            android:exported="true" />
+            android:exported="true"
+            android:parentActivityName=".ui.Admin.AdminMyProducts">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.Admin.AdminMyProducts" />
+        </activity>
         <activity
             android:name=".ui.Admin.AdminMyProducts"
-            android:exported="true" />
+            android:exported="true"
+            android:parentActivityName=".ui.Admin.AdminHome">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.Admin.AdminHome" />
+        </activity>
         <activity
             android:name=".ui.login.LoginRegister"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".ui.login.LoginActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.login.LoginActivity" />
+        </activity>
         <activity
             android:name=".ui.User.UserHome"
             android:exported="false" />
