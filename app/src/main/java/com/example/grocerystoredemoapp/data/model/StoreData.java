@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class StoreData {
     private String storeName;
     private String storeAddress;
+    public static ArrayList<String> products;
 
     public StoreData(){}
     public StoreData(String storeName, String storeAddress){
@@ -27,5 +28,9 @@ public class StoreData {
 
     public void setStoreAddress(String storeAddress) {
         this.storeAddress = storeAddress;
+    }
+
+    public ArrayList<String> getProducts() {
+        return products;
     }
 }

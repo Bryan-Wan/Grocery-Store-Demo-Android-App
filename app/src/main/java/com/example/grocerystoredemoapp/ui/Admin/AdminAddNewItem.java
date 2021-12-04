@@ -53,7 +53,7 @@ public class AdminAddNewItem extends AppCompatActivity {
             try {
                 double priceOfProduct = Double.valueOf(price.getText().toString());
                 if (name.length() > 0 && brand.length() > 0 && brand.length() > 0) {
-                    Product product = new Product(name.getText().toString(), brand.getText().toString(), priceOfProduct);
+                    Product product = new Product(name.getText().toString(), brand.getText().toString(), priceOfProduct, id);
                     dao.add(product, id).addOnSuccessListener(suc -> {
                         Toast.makeText(this, "product added", Toast.LENGTH_SHORT).show();
                     }).addOnFailureListener(er -> {
