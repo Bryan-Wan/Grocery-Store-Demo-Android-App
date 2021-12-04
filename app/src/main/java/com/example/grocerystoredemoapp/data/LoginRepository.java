@@ -48,7 +48,7 @@ public class LoginRepository {
         this.mAuth = mAuth;
         this.isAuthenticating = new AtomicBoolean(false);
         this.isRegistering = new AtomicBoolean(false);
-        this.isLoadingUserData = new AtomicBoolean(true);
+        this.isLoadingUserData = new AtomicBoolean(false);
     }
 
     public static LoginRepository getInstance(FirebaseAuth mAuth) {
