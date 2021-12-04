@@ -92,7 +92,9 @@ public class LoginRepository {
                                 FirebaseUser firebaseUser = mAuth.getCurrentUser();
 
                                 // Load data from Firebase synchronously
+                                Log.d(loginActivityTag, "Loading user data");
                                 getFirebaseUserData(firebaseUser);
+                                Log.d(loginActivityTag, "User data loaded");
                             } else {
                                 // On sign in failure, log it
                                 Log.w(loginActivityTag, "signInWithEmail:failure", task.getException());
@@ -155,34 +157,46 @@ public class LoginRepository {
 
     private void getFirebaseUserData(FirebaseUser firebaseUser) {
         final String userId = firebaseUser.getUid();
-        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("Users").child(userId);
+        // Keep the user data synced at least for login
+        userRef.keepSynced(true);
+        // Block the thread
         isLoadingUserData.set(true);
 
+        Log.d("getFirebaseUserData", "Setting up listener for user data");
         // TODO: Put constants all in one file for styling and in case we want to change the names in the database
         // TODO: Use class to model database to organize and reuse database access code
-        mDatabase.child("Users").child(userId).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+        userRef.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 if (!task.isSuccessful()) {
                     Log.e("firebase", "Error getting data", task.getException());
-                } else {
+                }
+                else {
                     // Successfully loaded user data
+                    //Log.d("firebase", String.valueOf(snapshot.getValue()));
                     Log.d("firebase", String.valueOf(task.getResult().getValue()));
+
+                    Log.d("getFirebaseUserData", "Getting user data from database");
+                    //User user = snapshot.getValue(User.class);
                     User user = task.getResult().getValue(User.class);
+                    Log.d("getFirebaseUserData", "Saving user data");
 
                     // Set user data
-                    // TODO: Save the loaded user and attach a listener after
+                    // TODO: Save the loaded user
                     setLoggedInUser(new LoggedInUser(
                             userId,
                             user.getDisplayName(),
                             user.isAdmin()
                     ));
+
+                    // Unblock
+                    isLoadingUserData.set(false);
                 }
-                // Unblock
-                isLoadingUserData.set(false);
             }
         });
 
+        Log.d("getFirebaseUserData", "Blocking until user data is loaded");
         while (isLoadingUserData.get()) {
             // TODO: Use either a new thread or thread that did authentication then signal when loading is done
         }
