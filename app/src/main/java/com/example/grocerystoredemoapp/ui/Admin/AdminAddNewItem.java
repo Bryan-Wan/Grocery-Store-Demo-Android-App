@@ -67,16 +67,7 @@ public class AdminAddNewItem extends AppCompatActivity {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             storeRef.removeEventListener(this);
-                            ArrayList<String> newId = new ArrayList<>();
-                            if (snapshot.getValue() == null) {
-                                newId.add(id);
-                            } else {
-                                if (snapshot.getValue() instanceof ArrayList && ((ArrayList) snapshot.getValue()).size() > 0 && ((ArrayList) snapshot.getValue()).get(0) instanceof String) {
-                                    newId = (ArrayList<String>) snapshot.getValue();
-                                    newId.add(id);
-                                }
-                            }
-                            storeRef.setValue(newId);
+                            storeRef.child(id).setValue(id);
                         }
 
                         @Override
