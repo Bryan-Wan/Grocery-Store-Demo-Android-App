@@ -112,7 +112,7 @@ public class LoginRegister extends AppCompatActivity {
         if (username.contains("@")) {
             return Patterns.EMAIL_ADDRESS.matcher(username).matches();
         } else {
-            return !username.trim().isEmpty();
+            return false;
         }
     }
 
