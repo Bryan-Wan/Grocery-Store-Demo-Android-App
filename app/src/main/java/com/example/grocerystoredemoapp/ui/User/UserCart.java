@@ -24,8 +24,6 @@ public class UserCart extends AppCompatActivity {
         setContentView(R.layout.activity_user_cart);
 
         scrollingLayout = findViewById(R.id.userCartScrollLayout);
-        View view = getLayoutInflater().inflate(R.layout.activity_user_product_added_view, null, false);
-        scrollingLayout.addView(view);
         purchase = findViewById(R.id.purchaseBtn);
         addProduct();
 
@@ -42,13 +40,11 @@ public class UserCart extends AppCompatActivity {
         OrderData userData = new OrderData();
         Integer i = 0;
         while(i < userData.productList.size()){
-            String name = userData.productList.get(i);
-            Integer quantity = userData.quantityList.get(i);
             final View view = getLayoutInflater().inflate(R.layout.activity_user_product_added_view, null, false);
-            TextView productName = (TextView)findViewById(R.id.item);
-            TextView productQuantity = (TextView)findViewById(R.id.productQuantity);
-            TextView productBrand = (TextView)findViewById(R.id.productBrand);
-            TextView productPrice = (TextView)findViewById(R.id.productPrice);
+            TextView productName = view.findViewById(R.id.item);
+            TextView productQuantity = view.findViewById(R.id.productQuantity);
+            TextView productBrand = view.findViewById(R.id.productBrand);
+            TextView productPrice = view.findViewById(R.id.productPrice);
             productName.setText(userData.productList.get(i));
             productQuantity.setText(userData.quantityList.get(i).toString());
             productBrand.setText(userData.brandList.get(i));
@@ -56,7 +52,6 @@ public class UserCart extends AppCompatActivity {
 
             scrollingLayout.addView(view);
             i++;
-            scrollingLayout.removeView(view);
         }
     }
 
