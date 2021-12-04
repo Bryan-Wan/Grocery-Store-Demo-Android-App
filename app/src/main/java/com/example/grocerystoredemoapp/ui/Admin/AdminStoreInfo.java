@@ -87,7 +87,7 @@ public class AdminStoreInfo extends AppCompatActivity {
         ArrayList<String> empty = new ArrayList<>();
         empty.add("");
         btn.setOnClickListener(v->{
-            StoreData store = new StoreData(edit_store.getText().toString(),edit_address.getText().toString(), null);
+            StoreData store = new StoreData(edit_store.getText().toString(),edit_address.getText().toString());
             myStore.child(currentFirebaseUser.getUid()).setValue(store);
 
             dao.add(store, currentFirebaseUser.getUid()).addOnSuccessListener(suc->{

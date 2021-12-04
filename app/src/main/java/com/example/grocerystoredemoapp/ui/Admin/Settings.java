@@ -56,13 +56,22 @@ public class Settings extends AppCompatActivity {
                         array.add("Username: " + user.getEmail());
                         if(user.isAdmin()){
                             storeRef.addValueEventListener(new ValueEventListener() {
+
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
+
                                     for(DataSnapshot ds: snapshot.getChildren()){
                                         StoreData store = ds.getValue(StoreData.class);
                                         if(ds.getKey().equals(user.getStore())){
-                                            array.add("Store Name: " + store.getStoreName());
-                                            array.add("Store Address: " + store.getStoreAddress());
+                                            if(array.size() > 1){
+                                                array.set(1,"Store Name: " + store.getStoreName());
+                                                array.set(2,"Store Address: " + store.getStoreAddress());
+                                            }
+                                            else{
+                                                array.add("Store Name: " + store.getStoreName());
+                                                array.add("Store Address: " + store.getStoreAddress());
+                                            }
+
                                             ArrayAdapter adapter = new ArrayAdapter(getApplicationContext(),android.R.layout.simple_list_item_1,array);
                                             mListView.setAdapter(adapter);
                                         }
