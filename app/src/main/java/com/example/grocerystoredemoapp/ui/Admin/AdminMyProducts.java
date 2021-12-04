@@ -7,9 +7,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.grocerystoredemoapp.R;
 
@@ -26,9 +28,11 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class AdminMyProducts extends AppCompatActivity {
+public class AdminMyProducts extends AppCompatActivity{
     private ListView mListView;
-
+    ArrayList<String> productInfo = new ArrayList<>();
+    ArrayList<String> idInfo = new ArrayList<>();
+    ArrayList<String> newId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,14 +48,14 @@ public class AdminMyProducts extends AppCompatActivity {
                 startActivity(new Intent(AdminMyProducts.this, AdminAddNewItem.class));
             }
         });
+
+
         DatabaseReference storeRef = FirebaseDatabase.getInstance().getReference("StoreData").child(currentFirebaseUser.getUid()).child("products");
         DatabaseReference productRef = FirebaseDatabase.getInstance().getReference("Product");
 
         storeRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                ArrayList<String> newId = new ArrayList<>();
-                ArrayList<String> productInfo = new ArrayList<>();
 
                 if (snapshot.getValue() instanceof ArrayList && ((ArrayList) snapshot.getValue()).size() > 0 && ((ArrayList) snapshot.getValue()).get(0) instanceof String) {
                         newId = (ArrayList<String>) snapshot.getValue();
@@ -63,12 +67,16 @@ public class AdminMyProducts extends AppCompatActivity {
                                 productRef.removeEventListener(this);
                                 for (DataSnapshot ds : snapshot.getChildren()) {
                                     Product product = ds.getValue(Product.class);
-                                    if(finalNewId.contains(ds.getKey())){
-                                        productInfo.add(product.getName() + " " + product.getBrand() + " $" + product.getPrice());
+                                    if(newId.contains(ds.getKey())){
+                                        if(!idInfo.contains(ds.getKey())){
+                                            idInfo.add(ds.getKey());
+                                            productInfo.add("Name: " +product.getName() + "        Brand:" + product.getBrand() + "         Price:$" + product.getPrice());
+                                        }
                                     }
                                 }
                                 ArrayAdapter adapter = new ArrayAdapter(getApplicationContext(),android.R.layout.simple_list_item_1,productInfo);
                                 mListView.setAdapter(adapter);
+
                             }
                             @Override
                             public void onCancelled(@NonNull DatabaseError error) {
@@ -86,4 +94,6 @@ public class AdminMyProducts extends AppCompatActivity {
             }
         });
     }
+
+
 }

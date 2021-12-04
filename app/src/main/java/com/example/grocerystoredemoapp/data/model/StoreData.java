@@ -7,10 +7,9 @@ public class StoreData {
     private String storeAddress;
     ArrayList<String> product;
     public StoreData(){}
-    public StoreData(String storeName, String storeAddress, ArrayList<String> product){
+    public StoreData(String storeName, String storeAddress){
         this.storeName = storeName;
         this.storeAddress = storeAddress;
-        this.product = product;
     }
 
     public ArrayList<String> getProduct() {

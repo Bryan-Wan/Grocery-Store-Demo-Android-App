@@ -46,39 +46,51 @@ public class AdminAddNewItem extends AppCompatActivity {
 
 
         btn.setOnClickListener(v->{
+
             DatabaseReference productRef = FirebaseDatabase.getInstance().getReference("Product");
             String id = productRef.push().getKey();
-            Product product = new Product(name.getText().toString(),brand.getText().toString(),Double.valueOf(price.getText().toString()));
-            dao.add(product, id).addOnSuccessListener(suc->{
-                Toast.makeText(this, "product added", Toast.LENGTH_SHORT).show();
-            }).addOnFailureListener(er->{
-                Toast.makeText(this, ""+er.getMessage(), Toast.LENGTH_SHORT).show();
-            });
-            name.getText().clear();
-            brand.getText().clear();
-            price.getText().clear();
-            storeRef.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    storeRef.removeEventListener(this);
-                    ArrayList<String> newId = new ArrayList<>();
-                    if(snapshot.getValue() == null){
-                        newId.add(id);
-                    }
-                    else{
-                        if (snapshot.getValue() instanceof ArrayList && ((ArrayList) snapshot.getValue()).size() > 0 && ((ArrayList) snapshot.getValue()).get(0) instanceof String) {
-                            newId = (ArrayList<String>) snapshot.getValue();
-                            newId.add(id);
+
+            try {
+                double priceOfProduct = Double.valueOf(price.getText().toString());
+                if (name.length() > 0 && brand.length() > 0 && brand.length() > 0) {
+                    Product product = new Product(name.getText().toString(), brand.getText().toString(), priceOfProduct);
+                    dao.add(product, id).addOnSuccessListener(suc -> {
+                        Toast.makeText(this, "product added", Toast.LENGTH_SHORT).show();
+                    }).addOnFailureListener(er -> {
+                        Toast.makeText(this, "" + er.getMessage(), Toast.LENGTH_SHORT).show();
+                    });
+                    name.getText().clear();
+                    brand.getText().clear();
+                    price.getText().clear();
+
+                    storeRef.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            storeRef.removeEventListener(this);
+                            ArrayList<String> newId = new ArrayList<>();
+                            if (snapshot.getValue() == null) {
+                                newId.add(id);
+                            } else {
+                                if (snapshot.getValue() instanceof ArrayList && ((ArrayList) snapshot.getValue()).size() > 0 && ((ArrayList) snapshot.getValue()).get(0) instanceof String) {
+                                    newId = (ArrayList<String>) snapshot.getValue();
+                                    newId.add(id);
+                                }
+                            }
+                            storeRef.setValue(newId);
                         }
-                    }
-                    storeRef.setValue(newId);
-                }
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
 
+                        }
+                    });
                 }
-            });
+                else{
+                    Toast.makeText(this, "Fields cannot be empty!", Toast.LENGTH_SHORT).show();
+                }
+            }catch(NumberFormatException ex) {
+                Toast.makeText(this, "Not a price value!", Toast.LENGTH_SHORT).show();
+            }
         });
     }
 }
