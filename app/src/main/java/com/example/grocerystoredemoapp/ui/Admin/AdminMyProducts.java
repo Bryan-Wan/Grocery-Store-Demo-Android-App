@@ -8,17 +8,12 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.example.grocerystoredemoapp.R;
 
-import com.example.grocerystoredemoapp.R;
 import com.example.grocerystoredemoapp.data.model.Product;
-import com.example.grocerystoredemoapp.data.model.StoreData;
-import com.example.grocerystoredemoapp.data.model.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -32,7 +27,8 @@ import java.util.ArrayList;
 public class AdminMyProducts extends AppCompatActivity implements AdapterView.OnItemClickListener{
     private ListView mListView;
     ArrayList<String> idInfo = new ArrayList<>();
-    ArrayList<String> productInfo;
+    ArrayList<String> stringContents = new ArrayList<>();
+    ArrayList<Product> productList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,26 +49,45 @@ public class AdminMyProducts extends AppCompatActivity implements AdapterView.On
         DatabaseReference storeRef = FirebaseDatabase.getInstance().getReference("StoreData").child(currentFirebaseUser.getUid()).child("products");
         DatabaseReference productRef = FirebaseDatabase.getInstance().getReference("Product");
 
+
+
+        /*productRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot ds : snapshot.getChildren()) {
+                    Product product = ds.getValue(Product.class);
+                    peopleList.add(product);
+                    PersonListAdapter adapter = new PersonListAdapter(getApplicationContext(), R.layout.adapter_view_layout, peopleList);
+                    mListView.setAdapter(adapter);
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });*/
+
         storeRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                productInfo = new ArrayList<>();
-
+                productList = new ArrayList<>();
                 for (DataSnapshot ds : snapshot.getChildren()) {
+
                     String key = ds.getKey();
                     productRef.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            productRef.removeEventListener(this);
                             for(DataSnapshot ds: snapshot.getChildren()) {
                                 if(ds.getKey().equals(key)){
                                     Product product = ds.getValue(Product.class);
-                                    productInfo.add("Name: " + product.getName() + "     Brand: " + product.getBrand() + "     Price: $" + product.getPrice());
+                                    productList.add(product);
                                     idInfo.add(key);
-                                    ArrayAdapter adapter = new ArrayAdapter(getApplicationContext(),android.R.layout.simple_list_item_1,productInfo);
+                                    stringContents.add(product.toString());
+                                    ProductListAdapter adapter = new ProductListAdapter(getApplicationContext(), R.layout.adapter_view_layout, productList);
                                     mListView.setAdapter(adapter);
                                 }
                             }
+
                         }
 
                         @Override
@@ -91,13 +106,15 @@ public class AdminMyProducts extends AppCompatActivity implements AdapterView.On
             }
         });
         mListView.setOnItemClickListener(this);
+
     }
 
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         String word = mListView.getItemAtPosition(position).toString();
-        int index = productInfo.indexOf(word);
+        Log.d("asd", "onItemClick: " + word);
+        int index = stringContents.indexOf(word);
         String idToBeRemoved = idInfo.get(index);
         Log.d("asd", "onItemClick: " + idToBeRemoved);
         FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();

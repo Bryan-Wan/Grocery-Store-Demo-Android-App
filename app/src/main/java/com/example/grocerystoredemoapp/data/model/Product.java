@@ -11,6 +11,11 @@ public class Product {
         this.brand = brand;
     }
 
+    @Override
+    public String toString() {
+        return name + brand + price;
+    }
+
     public String getName() {
         return name;
     }
