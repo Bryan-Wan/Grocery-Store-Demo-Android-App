@@ -32,9 +32,13 @@ public class UserProductList extends AppCompatActivity {
         View view = getLayoutInflater().inflate(R.layout.activity_user_product_list_product_added_view, null, false);
         scrollingLayout.addView(view);
 
+        Intent intent = getIntent();
+        String ref = intent.getStringExtra(UserStoreSelection.STORE_REF);
+
         // mock data
         itemName = "Amazon Gift Card";
-        itemBrand = "Amazon";
+        // for testing
+        itemBrand = ref;
         itemPrice = "$50";
 
         itemNameBtn = findViewById(R.id.productListProductName);
