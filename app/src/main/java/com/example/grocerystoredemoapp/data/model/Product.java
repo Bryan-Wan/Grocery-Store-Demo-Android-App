@@ -20,6 +20,11 @@ public class Product {
         this.id = id;
     }
 
+    @Override
+    public String toString() {
+        return name + brand + price;
+    }
+
     public String getName() {
         return name;
     }
