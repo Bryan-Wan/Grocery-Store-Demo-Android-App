@@ -5,11 +5,17 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.example.grocerystoredemoapp.data.model.LoggedInUser;
+import com.example.grocerystoredemoapp.data.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.io.IOException;
 import java.util.List;
@@ -28,8 +34,10 @@ public class LoginRepository {
 
     private FirebaseAuth mAuth;
 
+    // TODO: Maybe move these atomic flags to inside the methods they are used in
     private AtomicBoolean isAuthenticating;
     private AtomicBoolean isRegistering;
+    private AtomicBoolean isLoadingUserData;
 
     // If user credentials will be cached in local storage, it is recommended it be encrypted
     // @see https://developer.android.com/training/articles/keystore
@@ -40,6 +48,7 @@ public class LoginRepository {
         this.mAuth = mAuth;
         this.isAuthenticating = new AtomicBoolean(false);
         this.isRegistering = new AtomicBoolean(false);
+        this.isLoadingUserData = new AtomicBoolean(true);
     }
 
     public static LoginRepository getInstance(FirebaseAuth mAuth) {
@@ -81,12 +90,9 @@ public class LoginRepository {
                                 // Sign in success, set the user with the signed-in user's information
                                 Log.d(loginActivityTag, "signInWithEmail:success");
                                 FirebaseUser firebaseUser = mAuth.getCurrentUser();
-                                setLoggedInUser(new LoggedInUser(
-                                        firebaseUser.getUid(),
-                                        firebaseUser.getDisplayName(),
-                                        true // Testing, should check against database
-                                        // TODO: Get user tupe and display name from database
-                                ));
+
+                                // Load data from Firebase synchronously
+                                getFirebaseUserData(firebaseUser);
                             } else {
                                 // On sign in failure, log it
                                 Log.w(loginActivityTag, "signInWithEmail:failure", task.getException());
@@ -124,12 +130,9 @@ public class LoginRepository {
                                 // Registration success, set the user with the signed-in user's information
                                 Log.d(registrationContextTag, "registerWithEmail:success");
                                 FirebaseUser firebaseUser = mAuth.getCurrentUser();
-                                setLoggedInUser(new LoggedInUser(
-                                        firebaseUser.getUid(),
-                                        firebaseUser.getDisplayName(),
-                                        isAdmin // Testing, should check against database
-                                        // TODO: Get user type and display name from database
-                                ));
+
+                                // Load data from Firebase synchronously
+                                getFirebaseUserData(firebaseUser);
                             } else {
                                 // On registration failure, log it
                                 Log.w(registrationContextTag, "registerWithEmail:failure", task.getException());
@@ -148,5 +151,42 @@ public class LoginRepository {
         } catch (Exception e) {
             return new Result.Error(new IOException("Error signing up", e));
         }
+    }
+
+    private void getFirebaseUserData(FirebaseUser firebaseUser) {
+        final String userId = firebaseUser.getUid();
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+        isLoadingUserData.set(true);
+
+        // TODO: Put constants all in one file for styling and in case we want to change the names in the database
+        // TODO: Use class to model database to organize and reuse database access code
+        mDatabase.child("Users").child(userId).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (!task.isSuccessful()) {
+                    Log.e("firebase", "Error getting data", task.getException());
+                } else {
+                    // Successfully loaded user data
+                    Log.d("firebase", String.valueOf(task.getResult().getValue()));
+                    User user = task.getResult().getValue(User.class);
+
+                    // Set user data
+                    // TODO: Save the loaded user and attach a listener after
+                    setLoggedInUser(new LoggedInUser(
+                            userId,
+                            user.getDisplayName(),
+                            user.isAdmin()
+                    ));
+                }
+                // Unblock
+                isLoadingUserData.set(false);
+            }
+        });
+
+        while (isLoadingUserData.get()) {
+            // TODO: Use either a new thread or thread that did authentication then signal when loading is done
+        }
+
+        return;
     }
 }
