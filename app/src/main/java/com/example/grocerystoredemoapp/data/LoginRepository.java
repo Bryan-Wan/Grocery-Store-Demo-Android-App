@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import com.example.grocerystoredemoapp.data.model.LoggedInUser;
 import com.example.grocerystoredemoapp.data.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -133,8 +134,8 @@ public class LoginRepository {
                                 Log.d(registrationContextTag, "registerWithEmail:success");
                                 FirebaseUser firebaseUser = mAuth.getCurrentUser();
 
-                                // Load data from Firebase synchronously
-                                getFirebaseUserData(firebaseUser);
+                                // Write data from Firebase synchronously
+                                setFirebaseUserData(firebaseUser, username, isAdmin);
                             } else {
                                 // On registration failure, log it
                                 Log.w(registrationContextTag, "registerWithEmail:failure", task.getException());
@@ -202,5 +203,20 @@ public class LoginRepository {
         }
 
         return;
+    }
+
+    private void setFirebaseUserData(FirebaseUser firebaseUser, String email, boolean isAdmin) {
+        final String userId = firebaseUser.getUid();
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference userRef = mDatabase.child("Users").child(userId);
+        User user = new User("", email, isAdmin, "", email, "");
+
+        userRef.setValue(user)
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.e("Registration", "Failed to write user data to database", e);
+                    }
+                });
     }
 }
