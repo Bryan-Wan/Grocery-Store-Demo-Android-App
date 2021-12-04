@@ -9,10 +9,11 @@ public class DAOProduct {
     private DatabaseReference databaseReference;
     public DAOProduct(){
         FirebaseDatabase db =FirebaseDatabase.getInstance();
-        databaseReference = db.getReference(Product.class.getSimpleName());
+        databaseReference = FirebaseDatabase.getInstance().getReference("Product");
     }
-    public Task<Void> add(Product info){
-        return databaseReference.push().setValue(info);
+    public Task<Void> add(Product info, String id){
+
+        return databaseReference.child(id).setValue(info);
     }
 
     public Task<Void> update(String key, HashMap<String, Object> hashMap){

@@ -54,7 +54,6 @@ public class AdminStoreInfo extends AppCompatActivity {
                         Log.d("test", ""+user.isAdmin());
                         Log.d("test", ""+user.getDisplayName());
                         Log.d("test", ""+user.getEmail());
-                        Log.d("test", ""+user.getPassword());
                         Log.d("test", "Empty: "+user.getStore());
                         if(user.getStore().equals("")){
                             add();
@@ -85,12 +84,15 @@ public class AdminStoreInfo extends AppCompatActivity {
         DAOStoreData dao = new DAOStoreData();
         DatabaseReference myStore = FirebaseDatabase.getInstance().getReference("StoreData");
         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("Users");
-        String id = myStore.push().getKey();
+        ArrayList<String> empty = new ArrayList<>();
+        empty.add("");
         btn.setOnClickListener(v->{
-            StoreData store = new StoreData(edit_store.getText().toString(),edit_address.getText().toString());
-            dao.add(store, id).addOnSuccessListener(suc->{
+            StoreData store = new StoreData(edit_store.getText().toString(),edit_address.getText().toString(), null);
+            myStore.child(currentFirebaseUser.getUid()).setValue(store);
 
-                myRef.child(currentFirebaseUser.getUid()).child("store").setValue(id);
+            dao.add(store, currentFirebaseUser.getUid()).addOnSuccessListener(suc->{
+
+                myRef.child(currentFirebaseUser.getUid()).child("store").setValue(currentFirebaseUser.getUid());
                 Toast.makeText(this, "store added", Toast.LENGTH_SHORT).show();
             }).addOnFailureListener(er->{
                 Toast.makeText(this, ""+er.getMessage(), Toast.LENGTH_SHORT).show();

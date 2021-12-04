@@ -6,16 +6,14 @@ public class User {
     private boolean isAdmin;
     private String Store;
     private String email;
-    private String password;
 
-    public User(){};
-    public User(String cart, String displayName, boolean isAdmin, String Store, String email, String password) {
+    public User(){}
+    public User(String cart, String displayName, boolean isAdmin, String Store, String email) {
         this.cart = cart;
         this.displayName = displayName;
         this.isAdmin = isAdmin;
         this.Store = Store;
         this.email = email;
-        this.password = password;
 
     }
 
@@ -25,14 +23,6 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public boolean isAdmin() {
