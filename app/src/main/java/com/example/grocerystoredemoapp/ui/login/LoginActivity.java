@@ -23,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.grocerystoredemoapp.R;
+import com.example.grocerystoredemoapp.data.model.LoggedInUser;
 import com.example.grocerystoredemoapp.databinding.ActivityLoginBinding;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -87,10 +88,6 @@ public class LoginActivity extends AppCompatActivity {
                     updateUiWithUser(loginResult.getSuccess());
                 }
                 setResult(Activity.RESULT_OK);
-
-                //Complete and destroy login activity once successful
-                // TODO: Call function that checks user type and switches to appropriate page
-                finish();
             }
         });
 
@@ -148,7 +145,7 @@ public class LoginActivity extends AppCompatActivity {
         Button adminTestBtn = (Button) findViewById(R.id.testLoginAsAdmin);
         adminTestBtn.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-                startActivity(new Intent(LoginActivity.this, AdminHome.class));
+                startHomePage(true);
             }
         });
 
@@ -156,7 +153,7 @@ public class LoginActivity extends AppCompatActivity {
         Button userTestBtn = (Button) findViewById(R.id.testLoginAsUser);
         userTestBtn.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-                startActivity(new Intent(LoginActivity.this, UserHome.class));
+                startHomePage(false);
             }
         });
 
@@ -176,9 +173,21 @@ public class LoginActivity extends AppCompatActivity {
         String welcome = getString(R.string.welcome) + model.getDisplayName();
         // TODO : initiate successful logged in experience
         Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
+        startHomePage(model.isAdmin());
     }
 
     private void showLoginFailed(@StringRes Integer errorString) {
         Toast.makeText(getApplicationContext(), errorString, Toast.LENGTH_SHORT).show();
+    }
+
+    private void startHomePage(boolean isAdmin) {
+        if (isAdmin) {
+            // Admin/store owner log in
+            startActivity(new Intent(LoginActivity.this, UserHome.class));
+        } else {
+            // User/shopper log in
+            startActivity(new Intent(LoginActivity.this, AdminHome.class));
+        }
+        finish(); // Prevent going back to the login page when pressing back
     }
 }
