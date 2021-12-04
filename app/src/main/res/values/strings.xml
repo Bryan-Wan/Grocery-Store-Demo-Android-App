@@ -66,6 +66,9 @@
     <string name="store_new_orders">New Orders</string>
     <string name="store_fulfilled_orders">Fulfilled Orders</string>
     <string name="store_no_orders">No Orders</string>
+    <string name="current_orders">Current Orders</string>
+    <string name="fulfilled_orders">Fulfilled Orders</string>
+
     =========Info=========
     <string name="store_info">Store Info</string>
     <string name="store_name">Store Name</string>
