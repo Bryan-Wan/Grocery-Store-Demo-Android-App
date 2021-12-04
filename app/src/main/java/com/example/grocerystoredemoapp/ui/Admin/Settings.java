@@ -54,7 +54,6 @@ public class Settings extends AppCompatActivity {
                     if(ds.getKey().equals(currentFirebaseUser.getUid())){
                         ArrayList<String> array  = new ArrayList<>();
                         array.add("Username: " + user.getEmail());
-                        array.add("Password: " + user.getPassword());
                         if(user.isAdmin()){
                             storeRef.addValueEventListener(new ValueEventListener() {
                                 @Override
