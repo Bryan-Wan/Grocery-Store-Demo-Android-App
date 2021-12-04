@@ -30,6 +30,8 @@ public class UserStoreSelection extends AppCompatActivity {
     private ListView mListView;
     static int nameID = 0;
     static int addressID = 1000;
+    static int buttonID = 200;
+    public static final String STORE_REF = "com.example.grocerystoredemoapp.STORE_REF";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +55,8 @@ public class UserStoreSelection extends AppCompatActivity {
                     ArrayList<String> array = new ArrayList<>();
                     String storeName = store.getStoreName();
                     String storeAddress = store.getStoreAddress();
-                    addStore(storeName, storeAddress);
+                    DatabaseReference storeRef = ds.getRef();
+                    addStore(storeName, storeAddress, storeRef);
 
 //                    ArrayAdapter adapter = new ArrayAdapter(getApplicationContext(),android.R.layout.simple_list_item_1,array);
 //                    mListView.setAdapter(adapter);
@@ -66,34 +69,44 @@ public class UserStoreSelection extends AppCompatActivity {
         });
     }
 
-    private void addStore(String name, String address){
+    private void addStore(String name, String address, DatabaseReference ref){
         String storeName = name;
         String storeAddress = address;
+        DatabaseReference storeRef = ref;
 
         View view = getLayoutInflater().inflate(R.layout.activity_user_store_selecting, null, false);
         scrollView.addView(view);
 
         TextView storeAddressView = (TextView)findViewById(R.id.storeAddress);
         storeAddressView.setId(addressID);
-        addressID++;
 
         TextView storeNameView = (TextView)findViewById(R.id.storeName);
         storeNameView.setId(nameID);
-        nameID++;
 
         Button goToStore = (Button)findViewById(R.id.goToStore);
+        goToStore.setId(buttonID);
+
         storeAddressView.setText(address);
         storeNameView.setText(name);
+
+        Log.d("all refs", ref.toString());
+
+
 
         goToStore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(UserStoreSelection.this, UserProductList.class));
+                Intent i = new Intent(UserStoreSelection.this, UserProductList.class);
+                i.putExtra(STORE_REF, ref.toString());
+//                i.putExtra(STORE_REF, "hello world");
+                startActivity(i);
             }
 
             //TODO: implement an intent so product list will have the products from the selected store
         });
 
-
+        addressID++;
+        nameID++;
+        buttonID++;
     }
 }

@@ -101,10 +101,9 @@ public class Settings extends AppCompatActivity {
         logOutBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
+                FirebaseAuth.getInstance().signOut();
                 startActivity(new Intent(Settings.this, LoginActivity.class));
             }
-
-            // TODO: implement logout
         });
     }
 }
