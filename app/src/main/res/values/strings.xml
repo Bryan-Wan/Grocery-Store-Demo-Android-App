@@ -28,6 +28,8 @@
     ==========User Order History=======
     Order History from User Welcome Page
     <string name="no_orders">No Orders Yet</string>
+    <string name="fulfilled">Fulfilled</string>
+    <string name="in_progress">In Progress</string>
     ==========User Product Page=======
     <string name="select_a_store">Select a store</string>
     <string name="item">Item</string>
@@ -68,7 +70,8 @@
     <string name="store_no_orders">No Orders</string>
     <string name="current_orders">Current Orders</string>
     <string name="fulfilled_orders">Fulfilled Orders</string>
-
+    <string name="order_items">Items in the Order</string>
+    <string name="order_status">Status</string>
     =========Info=========
     <string name="store_info">Store Info</string>
     <string name="store_name">Store Name</string>
