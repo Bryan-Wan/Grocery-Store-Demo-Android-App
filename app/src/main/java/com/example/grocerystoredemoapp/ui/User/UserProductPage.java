@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -47,19 +48,9 @@ public class UserProductPage extends AppCompatActivity {
 
         // product.toString() returns
         // grocery-store-demo-app-default-rtdb.firebaseio.com/Product/-Mq6oxvWQWeZ9wEbmmC2
+        Log.d("asasdd", "onDataChange: ");
 
-        product.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                itemName = "PLEASE WORK";
-                String name = (String)dataSnapshot.child("name").getValue();
-                itemName = name;
-            }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-        });
 
 //        product.addValueEventListener(new ValueEventListener() {
 //            @Override
@@ -85,40 +76,44 @@ public class UserProductPage extends AppCompatActivity {
 ////        itemName = "Amazon Gift Card";
 //        brand = "Amazon";
 
-        addToCart = findViewById(R.id.addToCartBtn);
-        addQuantity = findViewById(R.id.addQuantityBtn);
-        subtractQuantity = findViewById(R.id.subtractQuantityBtn);
-        quantityView = (TextView) findViewById(R.id.quantity);
-        quantityView.setText(itemQuantity.toString());
-        brandView = findViewById(R.id.itemBrand);
-        brandView.setText(brand);
-        priceView = findViewById(R.id.cost);
-        priceView.setText(price.toString());
-        itemNameView = findViewById(R.id.itemName);
-        itemNameView.setText(itemName);
-
-
-        addQuantity.setOnClickListener(new View.OnClickListener() {
+        product.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onClick(View view) {
-                itemQuantity++;
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String itemName = (String)dataSnapshot.child("name").getValue();
+                addToCart = findViewById(R.id.addToCartBtn);
+                addQuantity = findViewById(R.id.addQuantityBtn);
+                subtractQuantity = findViewById(R.id.subtractQuantityBtn);
+                quantityView = (TextView) findViewById(R.id.quantity);
                 quantityView.setText(itemQuantity.toString());
-            }
-        });
+                brandView = findViewById(R.id.itemBrand);
+                brandView.setText(brand);
+                priceView = findViewById(R.id.cost);
+                priceView.setText(price.toString());
+                itemNameView = findViewById(R.id.itemName);
+                itemNameView.setText(itemName);
 
-        subtractQuantity.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(itemQuantity > 0){
-                    itemQuantity--;
-                    quantityView.setText(itemQuantity.toString());
-                }
-            }
-        });
 
-        addToCart.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view){
+                addQuantity.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        itemQuantity++;
+                        quantityView.setText(itemQuantity.toString());
+                    }
+                });
+
+                subtractQuantity.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if(itemQuantity > 0){
+                            itemQuantity--;
+                            quantityView.setText(itemQuantity.toString());
+                        }
+                    }
+                });
+
+                addToCart.setOnClickListener(new View.OnClickListener(){
+                    @Override
+                    public void onClick(View view){
 //                OrderData userData = new OrderData();
 //                userData.productList.add(itemName);
 //                userData.quantityList.add(itemQuantity);
@@ -129,8 +124,17 @@ public class UserProductPage extends AppCompatActivity {
 //                itemAdded.show();
 //                startActivity(new Intent(UserProductPage.this, UserCart.class));
 
+                    }
+                });
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
             }
         });
+
+
 
     }
 }
