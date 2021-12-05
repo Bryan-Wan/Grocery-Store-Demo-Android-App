@@ -1,15 +1,13 @@
 package com.example.grocerystoredemoapp.data.model;
 
 public class User {
-    private String cart;
     private String displayName;
     private boolean isAdmin;
     private String Store;
     private String email;
 
     public User(){}
-    public User(String cart, String displayName, boolean isAdmin, String Store, String email) {
-        this.cart = cart;
+    public User(String displayName, boolean isAdmin, String Store, String email) {
         this.displayName = displayName;
         this.isAdmin = isAdmin;
         this.Store = Store;
@@ -39,14 +37,6 @@ public class User {
 
     public void setStore(String store) {
         Store = store;
-    }
-
-    public String getCart() {
-        return cart;
-    }
-
-    public void setCart(String cart) {
-        this.cart = cart;
     }
 
     public String getDisplayName() {
