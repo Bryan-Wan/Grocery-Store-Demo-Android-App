@@ -45,6 +45,7 @@ import com.google.firebase.database.ValueEventListener;
 public class LoginActivity extends AppCompatActivity {
 
     private LoginViewModel loginViewModel;
+    private ActivityLoginBinding binding;
 
     private FirebaseAuth mAuth;
 
@@ -54,14 +55,16 @@ public class LoginActivity extends AppCompatActivity {
 
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
-        setContentView(R.layout.activity_login);
+
+        binding = ActivityLoginBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         loginViewModel = new ViewModelProvider(this, new LoginViewModelFactory())
                 .get(LoginViewModel.class);
 
-        final EditText usernameEditText = findViewById(R.id.username);
-        final EditText passwordEditText = findViewById(R.id.password);
-        final Button loginButton = findViewById(R.id.loginBtn);
+        final EditText usernameEditText = binding.username;
+        final EditText passwordEditText = binding.password;
+        final Button loginButton = binding.loginBtn;
 
         // Handle login input errors
         loginViewModel.getLoginFormState().observe(this, new Observer<LoginFormState>() {
@@ -164,7 +167,6 @@ public class LoginActivity extends AppCompatActivity {
                     for(DataSnapshot ds: snapshot.getChildren()){
                         User user = ds.getValue(User.class);
                         if(ds.getKey().equals(currentUser.getUid())){
-
                             startHomePage(user.isAdmin());
                         }
                     }
