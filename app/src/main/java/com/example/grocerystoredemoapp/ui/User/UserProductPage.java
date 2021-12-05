@@ -34,7 +34,6 @@ public class UserProductPage extends AppCompatActivity {
     TextView priceView;
     TextView itemNameView;
     static Integer orderNum = 1;
-    boolean newOrder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -132,22 +131,7 @@ public class UserProductPage extends AppCompatActivity {
                             public void onCancelled(@NonNull DatabaseError error) {
                             }
                         });
-
-//                        if (newOrder) {
-//                            orderNum++;
-//                        }
-//
-//                        orderId = "order" + Integer.toString(orderNum);
-//                        Log.d("NEW ORDER ID", orderId);
-//                        main = cart.child(orderId);
-//
-//                        main.child("confirmOrder").setValue("false");
-//                        main.child("orderIsReady").setValue("false");
-//                        main.child("byUser").setValue(currentFirebaseUser.getUid());
-//                        main.child("forStore").setValue(storeReference.getKey());
-//                        main.child("cart").child(product.getKey().toString()).setValue(itemQuantity);
-//                        startActivity(new Intent(UserProductPage.this, UserCart.class));
-                            startActivity(new Intent(UserProductPage.this, UserCart.class));
+                        startActivity(new Intent(UserProductPage.this, UserCart.class));
                     }
                 });
             }
@@ -156,7 +140,5 @@ public class UserProductPage extends AppCompatActivity {
             public void onCancelled(DatabaseError databaseError) {
             }
         });
-
-//        orderNum++;
     }
 }
