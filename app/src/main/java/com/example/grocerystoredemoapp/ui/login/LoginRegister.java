@@ -73,7 +73,7 @@ public class LoginRegister extends AppCompatActivity {
                         // Go to the appropriate home page
 
                         String[] getName = username.split("@");
-                        User user = new User("", getName[0], isAdminRegistration, null, username);
+                        User user = new User(null, getName[0], isAdminRegistration, null, username);
                         FirebaseDatabase.getInstance().getReference("Users")
                                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                 .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {

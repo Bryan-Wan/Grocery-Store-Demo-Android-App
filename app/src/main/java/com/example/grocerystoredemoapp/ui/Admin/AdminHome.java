@@ -87,4 +87,10 @@ public class AdminHome extends AppCompatActivity {
             }
         });
     }
+    @Override
+    public void onBackPressed()
+    {
+        Intent intent = new Intent(this,Settings.class);
+        startActivity(intent);
+    }
 }
