@@ -50,6 +50,7 @@ public class UserStoreSelection extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot ds: snapshot.getChildren()) {
+                    storeRef.removeEventListener(this);
 //                    Log.d("testing---------", "testing----------------------------------");
                     StoreData store = ds.getValue(StoreData.class);
                     ArrayList<String> array = new ArrayList<>();
