@@ -49,9 +49,10 @@ public class UserStoreSelection extends AppCompatActivity {
         storeRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                storeRef.removeEventListener(this);
                 for(DataSnapshot ds: snapshot.getChildren()) {
-                    storeRef.removeEventListener(this);
 //                    Log.d("testing---------", "testing----------------------------------");
+
                     StoreData store = ds.getValue(StoreData.class);
                     ArrayList<String> array = new ArrayList<>();
                     String storeName = store.getStoreName();
