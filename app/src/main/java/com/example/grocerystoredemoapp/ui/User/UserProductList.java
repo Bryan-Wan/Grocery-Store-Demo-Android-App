@@ -33,6 +33,7 @@ public class UserProductList extends AppCompatActivity {
     static int productBrandID;
     static int productPriceID;
     public static final String PRODUCT_REF = "com.example.grocerystoredemoapp.PRODUCT_REF";
+    public static final String STORE_REF2 = "com.example.grocerystoredemoapp.STORE_REF2";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +81,7 @@ public class UserProductList extends AppCompatActivity {
                                     itemName = product.getName();
                                     itemBrand = product.getBrand();
                                     itemPrice = product.getPrice();
-                                    addProduct(itemName, itemBrand, itemPrice, dsb.getRef());
+                                    addProduct(itemName, itemBrand, itemPrice, dsb.getRef(), store);
                                 }
                             }
                         }
@@ -98,7 +99,7 @@ public class UserProductList extends AppCompatActivity {
         });
     }
 
-    private void addProduct(String name, String brand, Double price, DatabaseReference ref){
+    private void addProduct(String name, String brand, Double price, DatabaseReference productRef, DatabaseReference storeRef){
         View view = getLayoutInflater().inflate(R.layout.activity_user_product_list_product_added_view, null, false);
         scrollingLayout.addView(view);
 
@@ -119,7 +120,8 @@ public class UserProductList extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(UserProductList.this, UserProductPage.class);
-                i.putExtra(PRODUCT_REF, ref.toString());
+                i.putExtra(PRODUCT_REF, productRef.toString());
+                i.putExtra(STORE_REF2, storeRef.toString());
                 startActivity(i);
             }
         });
