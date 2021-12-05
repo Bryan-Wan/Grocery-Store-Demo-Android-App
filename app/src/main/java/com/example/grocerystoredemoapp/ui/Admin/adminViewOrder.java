@@ -3,10 +3,13 @@ package com.example.grocerystoredemoapp.ui.Admin;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.grocerystoredemoapp.R;
 import com.example.grocerystoredemoapp.data.model.Product;
@@ -28,6 +31,8 @@ public class adminViewOrder extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_view_order);
+
+        Button btn = findViewById(R.id.switchState);
 
 
         Bundle extras = getIntent().getExtras();
@@ -66,8 +71,6 @@ public class adminViewOrder extends AppCompatActivity {
                             }
                         });
 
-
-
                     }
                 }
 
@@ -76,6 +79,54 @@ public class adminViewOrder extends AppCompatActivity {
 
                 }
             });
+            DatabaseReference userOrderRef = FirebaseDatabase.getInstance().getReference("Order").child(value).child("orderIsReady");
+
+            userOrderRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    userOrderRef.removeEventListener(this);
+
+                    String ready = (String)snapshot.getValue();
+                    if (ready.equals("true")){
+                        btn.setText("Move to Current Orders");
+                    }
+                    else{
+                        btn.setText("Move to Fulfilled Orders");
+                    }
+                    btn.setOnClickListener(v->{
+                        if (ready.equals("true")){
+                            userOrderRef.setValue("false");
+
+                        }
+                        else{
+                            userOrderRef.setValue("true");
+
+                        }
+                        if(btn.getText().equals("Move to Current Orders")){
+                            Intent intent = new Intent(adminViewOrder.this,adminFulfilledOrders.class);
+                            startActivity(intent);
+                        }
+                        else{
+                            Intent intent = new Intent(adminViewOrder.this,adminCurrentOrders.class);
+                            startActivity(intent);
+                        }
+                    });
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+
+
+
         }
+
+    }
+    @Override
+    public void onBackPressed()
+    {
+        Intent intent = new Intent(this,AdminOrdersPage.class);
+        startActivity(intent);
     }
 }

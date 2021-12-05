@@ -71,7 +71,7 @@ public class adminFulfilledOrders extends AppCompatActivity implements AdapterVi
                     String userReady = (String) ds.child("confirmOrder").getValue();
                     String adminReady = (String) ds.child("orderIsReady").getValue();
 
-                    if(userReady.equals("false") && adminReady.equals("true")){
+                    if(userReady.equals("true") && adminReady.equals("true")){
                         array.add(ds.getKey());
                     }
                 }
