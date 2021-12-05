@@ -8,7 +8,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.grocerystoredemoapp.R;
@@ -40,6 +42,8 @@ public class AdminHome extends AppCompatActivity {
         });
         FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
 
+        TextView name = findViewById(R.id.welcomeAdminTitle);
+
         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("Users");
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -49,7 +53,7 @@ public class AdminHome extends AppCompatActivity {
                     User user = ds.getValue(User.class);
                     if(ds.getKey().equals(currentFirebaseUser.getUid())){
                         store = user.getStore();
-                        Log.d("asd", "onDataChange: " + user.getStore());
+                        name.setText("Welcome " + user.getDisplayName());
                     }
                 }
                 Button editProductsBtn = (Button) findViewById(R.id.editProductsBtn);

@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -31,6 +32,11 @@ import com.google.firebase.auth.FirebaseUser;
 import com.example.grocerystoredemoapp.ui.Admin.AdminHome;
 import com.example.grocerystoredemoapp.ui.User.UserHome;
 import com.example.grocerystoredemoapp.ui.User.UserProductPage;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -170,10 +176,25 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void updateUiWithUser(LoggedInUserView model) {
-        String welcome = getString(R.string.welcome) + model.getDisplayName();
-        // TODO : initiate successful logged in experience
-        Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
-        startHomePage(model.isAdmin());
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+
+        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("Users").child(currentUser.getUid());
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                boolean isUserAdmin = (boolean) dataSnapshot.child("admin").getValue();
+                String name = (String) dataSnapshot.child("displayName").getValue();
+                Toast.makeText(getApplicationContext(), "Welcome "+ name, Toast.LENGTH_SHORT).show();
+                startHomePage(isUserAdmin);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+
+
+
     }
 
     private void showLoginFailed(@StringRes Integer errorString) {
@@ -181,13 +202,24 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void startHomePage(boolean isAdmin) {
-        if (isAdmin) {
+
+        if (isAdmin == true){
+            startActivity(new Intent(LoginActivity.this, AdminHome.class));
+        }
+        else if(!isAdmin){
+            startActivity(new Intent(LoginActivity.this, UserHome.class));
+        }
+        else{
+            Toast.makeText(getApplicationContext(), "unknown error", Toast.LENGTH_SHORT).show();
+        }
+
+        /*if (!isAdmin) {
             // Admin/store owner log in
             startActivity(new Intent(LoginActivity.this, UserHome.class));
         } else {
             // User/shopper log in
             startActivity(new Intent(LoginActivity.this, AdminHome.class));
-        }
+        }*/
         finish(); // Prevent going back to the login page when pressing back
     }
 }
