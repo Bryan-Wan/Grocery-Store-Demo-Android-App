@@ -113,7 +113,6 @@ public class UserProductPage extends AppCompatActivity {
                                 if (snapshot.exists()) {
                                     if (!snapshot.child("byUser").getValue().toString().equals(currentFirebaseUser.getUid()) ||
                                         !snapshot.child("forStore").getValue().toString().equals(storeReference.getKey())) {
-                                        Log.d("abbb changed", "changed");
                                         int randomNum = (int)(Math.random() * 10000 + 1);
                                         orderNum += randomNum;
                                     }

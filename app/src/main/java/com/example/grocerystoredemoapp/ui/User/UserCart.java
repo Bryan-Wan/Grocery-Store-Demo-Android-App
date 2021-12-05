@@ -65,28 +65,32 @@ public class UserCart extends AppCompatActivity {
 
                                     @Override
                                     public void onCancelled(@NonNull DatabaseError error) {
-
                                     }
                                 });
                             }
+                            purchase = findViewById(R.id.purchaseBtn);
+                            purchase.setOnClickListener(new View.OnClickListener(){
+                                @Override
+                                public void onClick(View view){
+                                    if (sp.child("byUser").exists() && sp.child("confirmOrder").getValue().toString().equals("false")) {
+                                        for (DataSnapshot s: snapshot.getChildren()) {
+                                            if (s.child("byUser").exists()) {
+                                                if (currentUser.getUid().toString().equals(s.child("byUser").getValue().toString())) {
+                                                    s.child("confirmOrder").getRef().setValue("true");
+                                                }
+                                            }
+                                        }
+                                    }
+                                    startActivity(new Intent(UserCart.this, UserOrderThankYouPage.class));
+                                }
+                            });
                         }
                     }
-
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-            }
-        });
-
-
-
-        purchase = findViewById(R.id.purchaseBtn);
-        purchase.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view){
-                startActivity(new Intent(UserCart.this, UserConfirmationPage.class));
             }
         });
     }
