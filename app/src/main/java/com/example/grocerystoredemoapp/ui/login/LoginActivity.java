@@ -150,23 +150,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-
-        // Go to Admin Home Page with TEST Button
-        Button adminTestBtn = (Button) findViewById(R.id.testLoginAsAdmin);
-        adminTestBtn.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
-                startHomePage(true);
-            }
-        });
-
-        // Go to User Home Page with TEST Button
-        Button userTestBtn = (Button) findViewById(R.id.testLoginAsUser);
-        userTestBtn.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
-                startHomePage(false);
-            }
-        });
-
     }
 
     @Override

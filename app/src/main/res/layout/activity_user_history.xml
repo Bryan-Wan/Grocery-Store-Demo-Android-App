@@ -22,18 +22,48 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/noOrdersYet"
-        android:layout_width="318dp"
-        android:layout_height="67dp"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="48dp"
-        android:background="#E7DA66"
-        android:text="@string/no_orders"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.666"
-        app:layout_constraintStart_toStartOf="parent"
+        android:id="@+id/fulfilledText"
+        android:layout_width="85dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:background="#4CAF50"
+        android:backgroundTint="#4CAF50"
+        android:text="@string/fulfilled"
+        android:textAlignment="center"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@+id/orderHistoryTitle"
         app:layout_constraintTop_toBottomOf="@+id/orderHistoryTitle" />
+
+    <TextView
+        android:id="@+id/InProgress"
+        android:layout_width="85dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:background="#FFEB3B"
+        android:backgroundTint="#FFEB3B"
+        android:text="@string/in_progress"
+        android:textAlignment="center"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/orderHistoryTitle"
+        app:layout_constraintTop_toBottomOf="@+id/orderHistoryTitle" />
+
+    <ScrollView
+        android:id="@+id/orderHistoryScrollView"
+        android:layout_width="0dp"
+        android:layout_height="538dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/InProgress">
+
+        <LinearLayout
+            android:id="@+id/PastOrders"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
