@@ -8,8 +8,8 @@
 
     <TextView
         android:id="@+id/welcomeAdminTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="252dp"
+        android:layout_height="108dp"
         android:layout_marginStart="84dp"
         android:layout_marginTop="24dp"
         android:text="@string/welcome_admin"
