@@ -100,7 +100,6 @@ public class UserStoreSelection extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent(UserStoreSelection.this, UserProductList.class);
                 i.putExtra(STORE_REF, ref.toString());
-//                i.putExtra(STORE_REF, "hello world");
                 startActivity(i);
             }
 

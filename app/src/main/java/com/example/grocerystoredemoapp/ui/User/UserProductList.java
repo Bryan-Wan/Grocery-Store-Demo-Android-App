@@ -32,7 +32,7 @@ public class UserProductList extends AppCompatActivity {
     static int productNameID;
     static int productBrandID;
     static int productPriceID;
-
+    public static final String PRODUCT_REF = "com.example.grocerystoredemoapp.PRODUCT_REF";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +80,7 @@ public class UserProductList extends AppCompatActivity {
                                     itemName = product.getName();
                                     itemBrand = product.getBrand();
                                     itemPrice = product.getPrice();
-                                    addProduct(itemName, itemBrand, itemPrice);
+                                    addProduct(itemName, itemBrand, itemPrice, dsb.getRef());
                                 }
                             }
                         }
@@ -98,11 +98,11 @@ public class UserProductList extends AppCompatActivity {
         });
     }
 
-    private void addProduct(String name, String brand, Double price){
+    private void addProduct(String name, String brand, Double price, DatabaseReference ref){
         View view = getLayoutInflater().inflate(R.layout.activity_user_product_list_product_added_view, null, false);
         scrollingLayout.addView(view);
 
-        TextView productName = (TextView)findViewById(R.id.productListProductName);
+        Button productName = (Button)findViewById(R.id.productListProductName);
         productName.setId(productNameID);
 
         TextView productBrand = (TextView)findViewById(R.id.productListProductBrand);
@@ -114,6 +114,15 @@ public class UserProductList extends AppCompatActivity {
         productName.setText(name);
         productBrand.setText(brand);
         productPrice.setText(price.toString());
+
+        productName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(UserProductList.this, UserProductPage.class);
+                i.putExtra(PRODUCT_REF, ref.toString());
+                startActivity(i);
+            }
+        });
 
 //        goToStore.setOnClickListener(new View.OnClickListener() {
 //            @Override
