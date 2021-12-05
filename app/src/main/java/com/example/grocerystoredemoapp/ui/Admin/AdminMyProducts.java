@@ -35,9 +35,9 @@ public class AdminMyProducts extends AppCompatActivity implements AdapterView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_my_products);
         FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-
         mListView = (ListView) findViewById(R.id.listViewProducts);
-
+        DatabaseReference storeRef = FirebaseDatabase.getInstance().getReference("StoreData").child(currentFirebaseUser.getUid()).child("products");
+        DatabaseReference productRef = FirebaseDatabase.getInstance().getReference("Product");
 
         Button addItemBtn = (Button) findViewById(R.id.addNewItemBtn);
         addItemBtn.setOnClickListener(new View.OnClickListener() {
@@ -45,10 +45,6 @@ public class AdminMyProducts extends AppCompatActivity implements AdapterView.On
                 startActivity(new Intent(AdminMyProducts.this, AdminAddNewItem.class));
             }
         });
-
-        DatabaseReference storeRef = FirebaseDatabase.getInstance().getReference("StoreData").child(currentFirebaseUser.getUid()).child("products");
-        DatabaseReference productRef = FirebaseDatabase.getInstance().getReference("Product");
-
 
 
         /*productRef.addValueEventListener(new ValueEventListener() {
@@ -77,16 +73,14 @@ public class AdminMyProducts extends AppCompatActivity implements AdapterView.On
                     productRef.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            for(DataSnapshot ds: snapshot.getChildren()) {
-                                if(ds.getKey().equals(key)){
-                                    Product product = ds.getValue(Product.class);
-                                    productList.add(product);
-                                    idInfo.add(key);
-                                    stringContents.add(product.toString());
-                                    ProductListAdapter adapter = new ProductListAdapter(getApplicationContext(), R.layout.adapter_view_layout, productList);
-                                    mListView.setAdapter(adapter);
-                                }
-                            }
+                            productRef.removeEventListener(this);
+                            boolean exist = snapshot.hasChild(key);
+                            Product product = snapshot.child(key).getValue(Product.class);
+                            productList.add(product);
+                            idInfo.add(key);
+                            stringContents.add(product.toString());
+                            ProductListAdapter adapter = new ProductListAdapter(getApplicationContext(), R.layout.adapter_view_layout, productList);
+                            mListView.setAdapter(adapter);
 
                         }
 
@@ -113,15 +107,19 @@ public class AdminMyProducts extends AppCompatActivity implements AdapterView.On
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         String word = mListView.getItemAtPosition(position).toString();
-        Log.d("asd", "onItemClick: " + word);
+        Log.d("asd", "what: " + word);
         int index = stringContents.indexOf(word);
         String idToBeRemoved = idInfo.get(index);
         Log.d("asd", "onItemClick: " + idToBeRemoved);
+
         FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         DatabaseReference storeRef = FirebaseDatabase.getInstance().getReference("StoreData").child(currentFirebaseUser.getUid()).child("products").child(idToBeRemoved);
         storeRef.removeValue();
+
         DatabaseReference productRef = FirebaseDatabase.getInstance().getReference("Product").child(idToBeRemoved);
+
         productRef.removeValue();
+
         finish();
         overridePendingTransition(0, 0);
         startActivity(getIntent());
