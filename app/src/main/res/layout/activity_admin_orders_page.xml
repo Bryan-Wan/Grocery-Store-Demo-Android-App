@@ -16,6 +16,7 @@
         android:textColor="@android:color/black"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -26,6 +27,7 @@
         android:layout_marginTop="34dp"
         android:text="Current Orders"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/currentOrdersTitle" />
 
@@ -33,7 +35,7 @@
         android:id="@+id/goFulfilledOrders"
         android:layout_width="264dp"
         android:layout_height="54dp"
-        android:layout_marginTop="27dp"
+        android:layout_marginTop="16dp"
         android:text="Fulfilled Orders"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"

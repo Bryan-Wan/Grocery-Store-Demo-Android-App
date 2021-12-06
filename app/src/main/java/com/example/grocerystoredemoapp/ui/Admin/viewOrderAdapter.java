@@ -1,5 +1,4 @@
 package com.example.grocerystoredemoapp.ui.Admin;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,9 +43,9 @@ public class viewOrderAdapter extends ArrayAdapter<Product> {
 
         LayoutInflater inflater = LayoutInflater.from(mContext);
         convertView = inflater.inflate(mResource, parent, false);
-        TextView tvName = (TextView) convertView.findViewById(R.id.textView2);
-        TextView tvBirthday = (TextView) convertView.findViewById(R.id.textView3);
-        TextView  tvSex = (TextView) convertView.findViewById(R.id.textView1);
+        TextView tvName = (TextView) convertView.findViewById(R.id.adapterName);
+        TextView tvBirthday = (TextView) convertView.findViewById(R.id.adapterBrand);
+        TextView  tvSex = (TextView) convertView.findViewById(R.id.adapterPrice);
 
         tvName.setText(name);
         tvBirthday.setText(brand);

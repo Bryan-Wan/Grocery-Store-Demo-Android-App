@@ -43,28 +43,32 @@ public class AdminAddNewItem extends AppCompatActivity {
             try {
                 double priceOfProduct = Double.valueOf(price.getText().toString());
                 if (name.length() > 0 && brand.length() > 0 && brand.length() > 0) {
-                    Product product = new Product(name.getText().toString(), brand.getText().toString(), priceOfProduct);
-                    dao.add(product, id).addOnSuccessListener(suc -> {
-                        Toast.makeText(this, "product added", Toast.LENGTH_SHORT).show();
-                    }).addOnFailureListener(er -> {
-                        Toast.makeText(this, "" + er.getMessage(), Toast.LENGTH_SHORT).show();
-                    });
-                    name.getText().clear();
-                    brand.getText().clear();
-                    price.getText().clear();
+                    if (priceOfProduct <= 0) {
+                        Toast.makeText(this, "Price has to be a positive number!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Product product = new Product(name.getText().toString(), brand.getText().toString(), priceOfProduct);
+                        dao.add(product, id).addOnSuccessListener(suc -> {
+                            Toast.makeText(this, "product added", Toast.LENGTH_SHORT).show();
+                        }).addOnFailureListener(er -> {
+                            Toast.makeText(this, "" + er.getMessage(), Toast.LENGTH_SHORT).show();
+                        });
+                        name.getText().clear();
+                        brand.getText().clear();
+                        price.getText().clear();
 
-                    storeRef.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            storeRef.removeEventListener(this);
-                            storeRef.child(id).setValue(id);
-                        }
+                        storeRef.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                storeRef.removeEventListener(this);
+                                storeRef.child(id).setValue(id);
+                            }
 
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
 
-                        }
-                    });
+                            }
+                        });
+                    }
                 }
                 else{
                     Toast.makeText(this, "Fields cannot be empty!", Toast.LENGTH_SHORT).show();

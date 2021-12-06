@@ -12,7 +12,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.grocerystoredemoapp.R;
-import com.example.grocerystoredemoapp.data.model.OrderData;
 import com.example.grocerystoredemoapp.data.model.Product;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -38,6 +37,7 @@ public class UserProductPage extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_product_page);
 
@@ -45,7 +45,7 @@ public class UserProductPage extends AppCompatActivity {
         String ref = intent.getStringExtra(UserProductList.PRODUCT_REF);
         DatabaseReference product = FirebaseDatabase.getInstance().getReferenceFromUrl(ref);
 
-        itemQuantity = 0;
+        itemQuantity = 1;
 
         product.addValueEventListener(new ValueEventListener() {
             @Override
@@ -69,7 +69,6 @@ public class UserProductPage extends AppCompatActivity {
                 itemNameView = findViewById(R.id.itemName);
                 itemNameView.setText(itemName);
 
-
                 addQuantity.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -81,7 +80,7 @@ public class UserProductPage extends AppCompatActivity {
                 subtractQuantity.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if(itemQuantity > 0){
+                        if(itemQuantity > 1){
                             itemQuantity--;
                             quantityView.setText(itemQuantity.toString());
                         }
@@ -125,28 +124,36 @@ public class UserProductPage extends AppCompatActivity {
                         itemAdded.show();
 
 
+
+
                         Intent intent = getIntent();
                         DatabaseReference storeReference = FirebaseDatabase.getInstance().getReferenceFromUrl(storeFromIntent);
+                        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("Users");
+                        String d = storeReference.getKey();
+                        DatabaseReference newStore = FirebaseDatabase.getInstance().getReference("StoreOrders");
+
 
                         cart.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snp) {
-                                String orderId = "order" + Integer.toString(orderNum);
+
                                 DataSnapshot snapshot = snp.child(orderId);
 
                                 if (snapshot.exists()) {
                                     if (!snapshot.child("byUser").getValue().toString().equals(currentFirebaseUser.getUid()) ||
                                             !snapshot.child("forStore").getValue().toString().equals(storeReference.getKey())) {
-                                        int randomNum = (int)(Math.random() * 1000 + 1);
-                                        orderNum += randomNum;
+                                        Log.d("abbb changed", "changed");
+                                        orderId = "order" + cart.push().getKey();
                                     }
                                 }
-                                orderId = "order" + Integer.toString(orderNum);
+
                                 cart.child(orderId).child("confirmOrder").setValue("false");
                                 cart.child(orderId).child("orderIsReady").setValue("false");
                                 cart.child(orderId).child("byUser").setValue(currentFirebaseUser.getUid());
                                 cart.child(orderId).child("forStore").setValue(storeReference.getKey());
                                 cart.child(orderId).child("cart").child(product.getKey().toString()).setValue(itemQuantity);
+
+                                startActivity(new Intent(UserProductPage.this, UserCart.class));
 
                             }
 
@@ -154,22 +161,6 @@ public class UserProductPage extends AppCompatActivity {
                             public void onCancelled(@NonNull DatabaseError error) {
                             }
                         });
-
-//                        if (newOrder) {
-//                            orderNum++;
-//                        }
-//
-//                        orderId = "order" + Integer.toString(orderNum);
-//                        Log.d("NEW ORDER ID", orderId);
-//                        main = cart.child(orderId);
-//
-//                        main.child("confirmOrder").setValue("false");
-//                        main.child("orderIsReady").setValue("false");
-//                        main.child("byUser").setValue(currentFirebaseUser.getUid());
-//                        main.child("forStore").setValue(storeReference.getKey());
-//                        main.child("cart").child(product.getKey().toString()).setValue(itemQuantity);
-//                        startActivity(new Intent(UserProductPage.this, UserCart.class));
-                        startActivity(new Intent(UserProductPage.this, UserCart.class));
                     }
                 });
             }
@@ -178,7 +169,5 @@ public class UserProductPage extends AppCompatActivity {
             public void onCancelled(DatabaseError databaseError) {
             }
         });
-
-//        orderNum++;
     }
 }
