@@ -7,6 +7,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -26,7 +27,7 @@ public class UserHistory extends AppCompatActivity {
     static Integer qtyID = 7000;
     static Integer bgID = 9999;
     LinearLayout scrollingLayout;
-
+    String Storename = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +35,7 @@ public class UserHistory extends AppCompatActivity {
 
         DatabaseReference orders = FirebaseDatabase.getInstance().getReference().child("Order");
         DatabaseReference products = FirebaseDatabase.getInstance().getReference().child("Product");
+        DatabaseReference userREF = FirebaseDatabase.getInstance().getReference().child("StoreData");
 
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -44,19 +46,33 @@ public class UserHistory extends AppCompatActivity {
                 for (DataSnapshot sp : snapshot.getChildren()) {
                     if (sp.child("byUser").exists() && sp.child("confirmOrder").getValue().toString().equals("true")) {
                         if (currentUser.getUid().toString().equals(sp.child("byUser").getValue().toString())) {
+                            String storeId = (String) sp.child("forStore").getValue();
                             for (DataSnapshot pr : sp.child("cart").getChildren()) {
                                 String productKey = pr.getKey();
                                 String qty = "Quantity: "+ pr.getValue().toString();
                                 products.addValueEventListener(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                        String name = "";
-                                        Boolean isReady = false;
+                                        final String[] name = {""};
+                                        final Boolean[] isReady = {false};
                                         for (DataSnapshot p : snapshot.getChildren()) {
                                             if (p.getKey().equals(productKey)) {
-                                                name = p.child("name").getValue().toString();
-                                                isReady = sp.child("orderIsReady").getValue().toString().equals("true");
-                                                addHistory(name, qty, isReady);
+                                                userREF.addListenerForSingleValueEvent(new ValueEventListener() {
+                                                    @Override
+                                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                        Storename = (String) snapshot.child(storeId).child("storeName").getValue();
+                                                        Log.d("asd", "onDataChange: " + Storename);
+                                                        name[0] = Storename + ": " + p.child("name").getValue().toString() ;
+                                                        isReady[0] = sp.child("orderIsReady").getValue().toString().equals("true");
+                                                        addHistory(name[0], qty, isReady[0]);
+                                                    }
+
+                                                    @Override
+                                                    public void onCancelled(@NonNull DatabaseError error) {
+
+                                                    }
+                                                });
+
                                             }
                                         }
                                     }

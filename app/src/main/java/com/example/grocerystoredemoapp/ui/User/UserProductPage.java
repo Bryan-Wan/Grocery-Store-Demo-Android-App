@@ -33,7 +33,8 @@ public class UserProductPage extends AppCompatActivity {
     TextView brandView;
     TextView priceView;
     TextView itemNameView;
-    static Integer orderNum = (int)(Math.random() * 1000 + 1);
+    static String orderId;
+    int a = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +55,7 @@ public class UserProductPage extends AppCompatActivity {
                 String itemName = p.getName();
                 String itemBrand = p.getBrand();
                 Double itemPrice = p.getPrice();
+                FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
                 addToCart = findViewById(R.id.addToCartBtn);
                 addQuantity = findViewById(R.id.addQuantityBtn);
@@ -85,6 +87,36 @@ public class UserProductPage extends AppCompatActivity {
                         }
                     }
                 });
+                DatabaseReference cart = FirebaseDatabase.getInstance().getReference().child("Order");
+                String storeFromIntent = intent.getStringExtra(UserProductList.STORE_REF2);
+                DatabaseReference store = FirebaseDatabase.getInstance().getReferenceFromUrl(storeFromIntent);
+                cart.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for(DataSnapshot ds: snapshot.getChildren()){
+                            String storeID = (String) ds.child("forStore").getValue();
+                            String orderDone = (String) ds.child("confirmOrder").getValue();
+                            String userRn = (String) ds.child("byUser").getValue();
+
+                            if(storeID.equals(store.getKey()) && (orderDone.equals("true")) && (userRn.equals(currentFirebaseUser.getUid()))){
+                                a = 1;
+                            }
+                            else if(storeID.equals(store.getKey()) && (orderDone.equals("false")) && (userRn.equals(currentFirebaseUser.getUid()))){
+                                orderId = ds.getKey();
+                                a = 0;
+                            }
+                        }
+                        if(a==1){
+                            orderId = "order" + cart.push().getKey();
+                        }
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
 
                 addToCart.setOnClickListener(new View.OnClickListener(){
                     @Override
@@ -92,11 +124,8 @@ public class UserProductPage extends AppCompatActivity {
                         Toast itemAdded = Toast.makeText(getApplicationContext(), p.getName() + " added", Toast.LENGTH_SHORT);
                         itemAdded.show();
 
-                        DatabaseReference cart = FirebaseDatabase.getInstance().getReference().child("Order");
-                        FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
                         Intent intent = getIntent();
-                        String storeFromIntent = intent.getStringExtra(UserProductList.STORE_REF2);
                         DatabaseReference storeReference = FirebaseDatabase.getInstance().getReferenceFromUrl(storeFromIntent);
 
                         cart.addListenerForSingleValueEvent(new ValueEventListener() {
