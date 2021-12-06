@@ -42,7 +42,7 @@ public class LoginRepository {
 
     // If user credentials will be cached in local storage, it is recommended it be encrypted
     // @see https://developer.android.com/training/articles/keystore
-    private LoggedInUser user = null;
+    static LoggedInUser user = null;
 
     // private constructor : singleton access
     private LoginRepository(FirebaseAuth mAuth) {
@@ -68,53 +68,12 @@ public class LoginRepository {
         FirebaseAuth.getInstance().signOut();
     }
 
-    private void setLoggedInUser(LoggedInUser user) {
-        this.user = user;
+    public static void setLoggedInUser(LoggedInUser user) {
+        instance.user = user;
         // If user credentials will be cached in local storage, it is recommended it be encrypted
         // @see https://developer.android.com/training/articles/keystore
     }
 
-    public Result<LoggedInUser> login(String username, String password) {
-        // handle login
-        ExecutorService executorService = Executors.newSingleThreadExecutor();
-
-        // Authenticate using Firebase Auth
-        try {
-            // Sign in using email and password
-            isAuthenticating.set(true);
-            Task<AuthResult> authResultTask = mAuth.signInWithEmailAndPassword(username, password)
-                    .addOnCompleteListener(executorService, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            final String loginActivityTag = "Login";
-                            if (task.isSuccessful()) {
-                                // Sign in success, set the user with the signed-in user's information
-                                Log.d(loginActivityTag, "signInWithEmail:success");
-                                FirebaseUser firebaseUser = mAuth.getCurrentUser();
-
-                                // Load data from Firebase synchronously
-                                Log.d(loginActivityTag, "Loading user data");
-                                getFirebaseUserData(firebaseUser);
-                                Log.d(loginActivityTag, "User data loaded");
-                            } else {
-                                // On sign in failure, log it
-                                Log.w(loginActivityTag, "signInWithEmail:failure", task.getException());
-                                //Toast.makeText(LoginActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
-                            }
-                            isAuthenticating.set(false);
-                        }
-                    });
-
-            // Wait until authentication is finished before returning
-            while (isAuthenticating.get()) {
-                // TODO: Put this in a separate thread and use waits. This infinite while loop is a kludge
-            }
-
-            return new Result.Success<LoggedInUser>(user);
-        } catch (Exception e) {
-            return new Result.Error(new IOException("Error logging in", e));
-        }
-    }
 
     public Result<LoggedInUser> register(String username, String password, boolean isAdmin) {
         // handle login
@@ -156,60 +115,13 @@ public class LoginRepository {
         }
     }
 
-    private void getFirebaseUserData(FirebaseUser firebaseUser) {
-        final String userId = firebaseUser.getUid();
-        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("Users").child(userId);
-        // Keep the user data synced at least for login
-        userRef.keepSynced(true);
-        // Block the thread
-        isLoadingUserData.set(true);
-
-        Log.d("getFirebaseUserData", "Setting up listener for user data");
-        // TODO: Put constants all in one file for styling and in case we want to change the names in the database
-        // TODO: Use class to model database to organize and reuse database access code
-        userRef.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DataSnapshot> task) {
-                if (!task.isSuccessful()) {
-                    Log.e("firebase", "Error getting data", task.getException());
-                }
-                else {
-                    // Successfully loaded user data
-                    //Log.d("firebase", String.valueOf(snapshot.getValue()));
-                    Log.d("firebase", String.valueOf(task.getResult().getValue()));
-
-                    Log.d("getFirebaseUserData", "Getting user data from database");
-                    //User user = snapshot.getValue(User.class);
-                    User user = task.getResult().getValue(User.class);
-                    Log.d("getFirebaseUserData", "Saving user data");
-
-                    // Set user data
-                    // TODO: Save the loaded user
-                    setLoggedInUser(new LoggedInUser(
-                            userId,
-                            user.getDisplayName(),
-                            user.isAdmin()
-                    ));
-
-                    // Unblock
-                    isLoadingUserData.set(false);
-                }
-            }
-        });
-
-        Log.d("getFirebaseUserData", "Blocking until user data is loaded");
-        while (isLoadingUserData.get()) {
-            // TODO: Use either a new thread or thread that did authentication then signal when loading is done
-        }
-
-        return;
-    }
-
     private void setFirebaseUserData(FirebaseUser firebaseUser, String email, boolean isAdmin) {
         final String userId = firebaseUser.getUid();
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
         DatabaseReference userRef = mDatabase.child("Users").child(userId);
-        User user = new User("", email, isAdmin, "", email, "");
+        // TODO: Fix saving of displayName
+        /*
+        User user = new User(email, isAdmin, "", email);
 
         userRef.setValue(user)
                 .addOnFailureListener(new OnFailureListener() {
@@ -218,5 +130,7 @@ public class LoginRepository {
                         Log.e("Registration", "Failed to write user data to database", e);
                     }
                 });
+
+         */
     }
 }
