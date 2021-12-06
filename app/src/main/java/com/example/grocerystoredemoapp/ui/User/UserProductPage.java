@@ -33,10 +33,11 @@ public class UserProductPage extends AppCompatActivity {
     TextView brandView;
     TextView priceView;
     TextView itemNameView;
-    static Integer orderNum = 1;
+    static String orderId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_product_page);
 
@@ -85,6 +86,8 @@ public class UserProductPage extends AppCompatActivity {
                         }
                     }
                 });
+                DatabaseReference cart = FirebaseDatabase.getInstance().getReference().child("Order");
+                orderId = "order" + cart.push().getKey();
 
                 addToCart.setOnClickListener(new View.OnClickListener(){
                     @Override
@@ -92,7 +95,7 @@ public class UserProductPage extends AppCompatActivity {
                         Toast itemAdded = Toast.makeText(getApplicationContext(), p.getName() + " added", Toast.LENGTH_SHORT);
                         itemAdded.show();
 
-                        DatabaseReference cart = FirebaseDatabase.getInstance().getReference().child("Order");
+
                         FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
 
@@ -108,29 +111,24 @@ public class UserProductPage extends AppCompatActivity {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snp) {
 
-                                userRef.addValueEventListener(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                        String orderId = (String) snapshot.child(currentFirebaseUser.getUid()).child("carts").child(storeReference.getKey()).getValue();
-                                        if(orderId == null){
-                                            orderId = "order" + cart.push().getKey();
-                                            userRef.child(currentFirebaseUser.getUid()).child("carts").child(storeReference.getKey()).setValue(orderId);
-                                        }
-                                        newStore.child("asd").setValue("orderId");
-                                        cart.child(orderId).child("confirmOrder").setValue("false");
-                                        cart.child(orderId).child("orderIsReady").setValue("false");
-                                        cart.child(orderId).child("byUser").setValue(currentFirebaseUser.getUid());
-                                        cart.child(orderId).child("forStore").setValue(storeReference.getKey());
-                                        cart.child(orderId).child("cart").child(product.getKey().toString()).setValue(itemQuantity);
-                                        startActivity(new Intent(UserProductPage.this, UserCart.class));
+                                DataSnapshot snapshot = snp.child(orderId);
 
+                                if (snapshot.exists()) {
+                                    if (!snapshot.child("byUser").getValue().toString().equals(currentFirebaseUser.getUid()) ||
+                                            !snapshot.child("forStore").getValue().toString().equals(storeReference.getKey())) {
+                                        Log.d("abbb changed", "changed");
+                                        orderId = "order" + cart.push().getKey();
                                     }
+                                }
 
-                                    @Override
-                                    public void onCancelled(@NonNull DatabaseError error) {
+                                cart.child(orderId).child("confirmOrder").setValue("false");
+                                cart.child(orderId).child("orderIsReady").setValue("false");
+                                cart.child(orderId).child("byUser").setValue(currentFirebaseUser.getUid());
+                                cart.child(orderId).child("forStore").setValue(storeReference.getKey());
+                                cart.child(orderId).child("cart").child(product.getKey().toString()).setValue(itemQuantity);
 
-                                    }
-                                });
+                                startActivity(new Intent(UserProductPage.this, UserCart.class));
+
                             }
 
                             @Override
