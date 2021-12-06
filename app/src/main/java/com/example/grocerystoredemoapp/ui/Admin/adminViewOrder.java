@@ -31,11 +31,9 @@ public class adminViewOrder extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_view_order);
-
         Button btn = findViewById(R.id.switchState);
-
-
         Bundle extras = getIntent().getExtras();
+
         if (extras != null) {
             String value = extras.getString("key");
             TextView orderId = findViewById(R.id.orderId);
@@ -53,8 +51,8 @@ public class adminViewOrder extends AppCompatActivity {
                         int amount = ds.getValue(Integer.class);
                         Log.d("please", "onDataChange: " + amount);
                         String id = ds.getKey();
-
                         DatabaseReference productRef = FirebaseDatabase.getInstance().getReference("Product").child(id);
+
                         productRef.addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -70,14 +68,12 @@ public class adminViewOrder extends AppCompatActivity {
 
                             }
                         });
-
                     }
                 }
 
                 @Override
-                public void onCancelled(@NonNull DatabaseError error) {
+                public void onCancelled(@NonNull DatabaseError error) {}
 
-                }
             });
             DatabaseReference userOrderRef = FirebaseDatabase.getInstance().getReference("Order").child(value).child("orderIsReady");
 
@@ -113,15 +109,9 @@ public class adminViewOrder extends AppCompatActivity {
                     });
                 }
                 @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
-                }
+                public void onCancelled(@NonNull DatabaseError error) {}
             });
-
-
-
         }
-
     }
     @Override
     public void onBackPressed()

@@ -33,14 +33,6 @@ public class adminFulfilledOrders extends AppCompatActivity implements AdapterVi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_fulfilled_orders);
 
-        /*Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            String value = extras.getString("key");
-            Log.d("senddata", "onCreate: " + value);
-        }
-        Log.d("senddata", "onCreate: ");*/
-
-
         Button currentOrdersBtn = (Button) findViewById(R.id.goToCurrent);
         currentOrdersBtn.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
@@ -53,13 +45,6 @@ public class adminFulfilledOrders extends AppCompatActivity implements AdapterVi
         DatabaseReference orderRef = FirebaseDatabase.getInstance().getReference("Order");
 
         ArrayList<String> array  = new ArrayList<>();
-/*
-        orderRef.child("key3").child("confirmOrder").setValue("false");
-        orderRef.child("key3").child("orderIsReady").setValue("true");
-        orderRef.child("key3").child("cart").child("-Mq6ZP6TjLN-M8fEo_aH").setValue(3);
-        orderRef.child("key3").child("cart").child("-Mq6ZQ-Y_R0fDwh6k928").setValue(33);
-        orderRef.child("key3").child("cart").child("-Mq6oxvWQWeZ9wEbmmC2").setValue(323);
-*/
 
         orderRef.addValueEventListener(new ValueEventListener() {
 
@@ -83,9 +68,8 @@ public class adminFulfilledOrders extends AppCompatActivity implements AdapterVi
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+            public void onCancelled(@NonNull DatabaseError error) {}
 
-            }
         });
         mListView.setOnItemClickListener(this);
 
@@ -97,7 +81,6 @@ public class adminFulfilledOrders extends AppCompatActivity implements AdapterVi
         i.putExtra("key", word);
         startActivity(i);
     }
-
 
     @Override
     public void onBackPressed()

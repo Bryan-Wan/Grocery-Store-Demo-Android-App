@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -14,8 +13,6 @@ import android.widget.ListView;
 import com.example.grocerystoredemoapp.R;
 import com.example.grocerystoredemoapp.data.model.StoreData;
 import com.example.grocerystoredemoapp.data.model.User;
-import com.example.grocerystoredemoapp.ui.User.UserHome;
-import com.example.grocerystoredemoapp.ui.User.UserOrderThankYouPage;
 import com.example.grocerystoredemoapp.ui.login.LoginActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -37,10 +34,9 @@ public class Settings extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-
         mListView = (ListView) findViewById(R.id.listView);
-
         FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
+
         userID = currentFirebaseUser.getUid();
         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("Users");
         DatabaseReference storeRef = FirebaseDatabase.getInstance().getReference("StoreData");
@@ -79,21 +75,19 @@ public class Settings extends AppCompatActivity {
                                 }
 
                                 @Override
-                                public void onCancelled(@NonNull DatabaseError error) {
+                                public void onCancelled(@NonNull DatabaseError error) {}
 
-                                }
                             });
                         }
                         ArrayAdapter adapter = new ArrayAdapter(getApplicationContext(),android.R.layout.simple_list_item_1,array);
                         mListView.setAdapter(adapter);
                     }
-
                 }
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-            }
+            public void onCancelled(@NonNull DatabaseError error) {}
+
         });
 
         Button logOutBtn = findViewById(R.id.settingsLogOutBtn);
@@ -104,8 +98,6 @@ public class Settings extends AppCompatActivity {
                 FirebaseAuth.getInstance().signOut();
                 startActivity(new Intent(Settings.this, LoginActivity.class));
             }
-
-            // TODO: implement logout
         });
     }
 }

@@ -2,28 +2,21 @@ package com.example.grocerystoredemoapp.ui.User;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-
 import com.example.grocerystoredemoapp.R;
 import com.example.grocerystoredemoapp.data.model.StoreData;
-import com.example.grocerystoredemoapp.ui.Admin.Settings;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
 import java.util.ArrayList;
-import java.util.List;
 
 public class UserStoreSelection extends AppCompatActivity {
     LinearLayout scrollView;
@@ -57,8 +50,8 @@ public class UserStoreSelection extends AppCompatActivity {
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-            }
+            public void onCancelled(@NonNull DatabaseError error) {}
+            
         });
     }
 

@@ -69,13 +69,9 @@ public class AdminHome extends AppCompatActivity {
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-            }
+            public void onCancelled(@NonNull DatabaseError error) {}
 
         });
-
-
-
 
         Button editStoreBtn = (Button) findViewById(R.id.editStoreBtn);
         editStoreBtn.setOnClickListener(new View.OnClickListener(){

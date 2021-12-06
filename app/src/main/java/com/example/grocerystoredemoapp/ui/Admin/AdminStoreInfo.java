@@ -69,8 +69,8 @@ public class AdminStoreInfo extends AppCompatActivity {
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-            }
+            public void onCancelled(@NonNull DatabaseError error) {}
+
         });
 
     }
@@ -102,14 +102,8 @@ public class AdminStoreInfo extends AppCompatActivity {
             else{
                 Toast.makeText(this, "Fields Cannot be empty", Toast.LENGTH_SHORT).show();
             }
-
-
         });
-
-
     }
-
-
 
     public void update(String storeId){
         setContentView(R.layout.activity_admin_store_info);
@@ -132,8 +126,6 @@ public class AdminStoreInfo extends AppCompatActivity {
             else{
                 Toast.makeText(this, "Fields Cannot be empty", Toast.LENGTH_SHORT).show();
             }
-
-
         });
     }
 }

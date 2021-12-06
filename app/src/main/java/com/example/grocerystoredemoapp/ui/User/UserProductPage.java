@@ -12,7 +12,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.grocerystoredemoapp.R;
-import com.example.grocerystoredemoapp.data.model.OrderData;
 import com.example.grocerystoredemoapp.data.model.Product;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -68,7 +67,6 @@ public class UserProductPage extends AppCompatActivity {
                 itemNameView = findViewById(R.id.itemName);
                 itemNameView.setText(itemName);
 
-
                 addQuantity.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -106,7 +104,7 @@ public class UserProductPage extends AppCompatActivity {
                         String d = storeReference.getKey();
                         DatabaseReference newStore = FirebaseDatabase.getInstance().getReference("StoreOrders");
 
-                        //DatabaseReference main = cart.child(orderId);
+
                         cart.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snp) {

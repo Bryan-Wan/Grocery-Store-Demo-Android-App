@@ -46,23 +46,6 @@ public class AdminMyProducts extends AppCompatActivity implements AdapterView.On
             }
         });
 
-
-        /*productRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot ds : snapshot.getChildren()) {
-                    Product product = ds.getValue(Product.class);
-                    peopleList.add(product);
-                    PersonListAdapter adapter = new PersonListAdapter(getApplicationContext(), R.layout.adapter_view_layout, peopleList);
-                    mListView.setAdapter(adapter);
-                }
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });*/
-
         storeRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -89,20 +72,16 @@ public class AdminMyProducts extends AppCompatActivity implements AdapterView.On
 
                         }
                     });
-
                 }
-
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+            public void onCancelled(@NonNull DatabaseError error) {}
 
-            }
         });
         mListView.setOnItemClickListener(this);
 
     }
-
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

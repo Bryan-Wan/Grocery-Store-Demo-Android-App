@@ -2,27 +2,20 @@ package com.example.grocerystoredemoapp.ui.User;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import com.example.grocerystoredemoapp.R;
 import com.example.grocerystoredemoapp.data.model.Product;
-import com.example.grocerystoredemoapp.data.model.StoreData;
-import com.example.grocerystoredemoapp.data.model.User;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 
 public class UserProductList extends AppCompatActivity {
     LinearLayout scrollingLayout;
@@ -30,9 +23,11 @@ public class UserProductList extends AppCompatActivity {
     String itemBrand;
     Double itemPrice;
     Button cartBtn;
+
     static int productNameID;
     static int productBrandID;
     static int productPriceID;
+
     public static final String PRODUCT_REF = "com.example.grocerystoredemoapp.PRODUCT_REF";
     public static final String STORE_REF2 = "com.example.grocerystoredemoapp.STORE_REF2";
 
@@ -60,8 +55,8 @@ public class UserProductList extends AppCompatActivity {
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
+            public void onCancelled(DatabaseError databaseError) {}
+
         });
 
 
@@ -88,15 +83,15 @@ public class UserProductList extends AppCompatActivity {
                         }
 
                         @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-                        }
+                        public void onCancelled(@NonNull DatabaseError error) {}
+
                     });
                 }
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-            }
+            public void onCancelled(@NonNull DatabaseError error) {}
+
         });
     }
 
@@ -138,6 +133,4 @@ public class UserProductList extends AppCompatActivity {
         productPriceID++;
         productBrandID++;
     }
-
-
 }

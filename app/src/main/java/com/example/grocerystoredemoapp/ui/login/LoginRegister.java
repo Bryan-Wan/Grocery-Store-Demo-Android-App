@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -17,7 +16,6 @@ import com.example.grocerystoredemoapp.R;
 import com.example.grocerystoredemoapp.data.LoginRepository;
 import com.example.grocerystoredemoapp.data.Result;
 import com.example.grocerystoredemoapp.data.model.LoggedInUser;
-import com.example.grocerystoredemoapp.data.model.Product;
 import com.example.grocerystoredemoapp.data.model.User;
 import com.example.grocerystoredemoapp.ui.Admin.AdminHome;
 import com.example.grocerystoredemoapp.ui.User.UserHome;
@@ -99,9 +97,6 @@ public class LoginRegister extends AppCompatActivity {
             }
         });
     }
-
-    // TODO: Switch to appropriate home page
-
     // TODO: Refactor to use same validation as LoginViewModel
     // A placeholder username validation check
     private boolean isUserNameValid(String username) {
@@ -114,7 +109,6 @@ public class LoginRegister extends AppCompatActivity {
             return false;
         }
     }
-
     // A placeholder password validation check
     private boolean isPasswordValid(String password) {
         return password != null && password.trim().length() > 5;
