@@ -13,8 +13,6 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import com.example.grocerystoredemoapp.R;
-import com.example.grocerystoredemoapp.data.model.Product;
-import com.example.grocerystoredemoapp.data.model.StoreData;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -43,20 +41,11 @@ public class adminCurrentOrders extends AppCompatActivity implements AdapterView
             }
         });
 
-
-
         FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         mListView = (ListView) findViewById(R.id.currentListView);
         DatabaseReference orderRef = FirebaseDatabase.getInstance().getReference("Order");
 
         ArrayList<String> array  = new ArrayList<>();
-/*
-        orderRef.child("key5").child("confirmOrder").setValue("true");
-        orderRef.child("key5").child("orderIsReady").setValue("false");
-        orderRef.child("key5").child("cart").child("productKey").setValue(3);
-        orderRef.child("key5").child("cart").child("productKey2").setValue(33);
-        orderRef.child("key5").child("cart").child("productKey32").setValue(323);
-*/
 
         orderRef.addValueEventListener(new ValueEventListener() {
 
@@ -79,14 +68,12 @@ public class adminCurrentOrders extends AppCompatActivity implements AdapterView
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+            public void onCancelled(@NonNull DatabaseError error) {}
 
-            }
         });
         mListView.setOnItemClickListener(this);
 
     }
-
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -95,7 +82,6 @@ public class adminCurrentOrders extends AppCompatActivity implements AdapterView
         i.putExtra("key", word);
         startActivity(i);
     }
-
 
     @Override
     public void onBackPressed()

@@ -29,7 +29,6 @@ public class UserHome extends AppCompatActivity {
         setContentView(R.layout.activity_user_home);
         OrderData userData = new OrderData();
 
-
         Button newOrderBtn = (Button) findViewById(R.id.userNewOrderBtn);
         newOrderBtn.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
@@ -69,9 +68,8 @@ public class UserHome extends AppCompatActivity {
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+            public void onCancelled(@NonNull DatabaseError error) {}
 
-            }
         });
     }
     @Override

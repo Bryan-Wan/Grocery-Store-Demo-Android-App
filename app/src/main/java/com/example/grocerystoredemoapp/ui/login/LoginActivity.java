@@ -15,19 +15,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.grocerystoredemoapp.R;
-import com.example.grocerystoredemoapp.data.model.LoggedInUser;
-import com.example.grocerystoredemoapp.data.model.StoreData;
 import com.example.grocerystoredemoapp.data.model.User;
 import com.example.grocerystoredemoapp.databinding.ActivityLoginBinding;
 import com.google.firebase.auth.FirebaseAuth;
@@ -35,7 +31,6 @@ import com.google.firebase.auth.FirebaseUser;
 
 import com.example.grocerystoredemoapp.ui.Admin.AdminHome;
 import com.example.grocerystoredemoapp.ui.User.UserHome;
-import com.example.grocerystoredemoapp.ui.User.UserProductPage;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -173,8 +168,8 @@ public class LoginActivity extends AppCompatActivity {
                 }
 
                 @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-                }
+                public void onCancelled(@NonNull DatabaseError error) {}
+
             });
         }
     }
@@ -193,12 +188,9 @@ public class LoginActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
+            public void onCancelled(DatabaseError databaseError) {}
+
         });
-
-
-
     }
 
     private void showLoginFailed(@StringRes Integer errorString) {
@@ -217,13 +209,6 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "unknown error", Toast.LENGTH_SHORT).show();
         }
 
-        /*if (!isAdmin) {
-            // Admin/store owner log in
-            startActivity(new Intent(LoginActivity.this, AdminHome.class));
-        } else {
-            // User/shopper log in
-            startActivity(new Intent(LoginActivity.this, AdminHome.class));
-        }*/
         finish(); // Prevent going back to the login page when pressing back
     }
 }

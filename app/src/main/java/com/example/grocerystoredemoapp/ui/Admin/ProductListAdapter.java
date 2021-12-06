@@ -3,8 +3,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
@@ -12,7 +10,7 @@ import com.example.grocerystoredemoapp.R;
 import com.example.grocerystoredemoapp.data.model.Product;
 
 import java.util.ArrayList;
-import java.util.List;
+
 public class ProductListAdapter extends ArrayAdapter<Product> {
 
 
@@ -51,11 +49,9 @@ public class ProductListAdapter extends ArrayAdapter<Product> {
         TextView tvBirthday = (TextView) convertView.findViewById(R.id.textView3);
         TextView  tvSex = (TextView) convertView.findViewById(R.id.textView1);
 
-
         tvName.setText(name);
         tvBirthday.setText(brand);
         tvSex.setText("$" + price);
-
 
         return convertView;
     }

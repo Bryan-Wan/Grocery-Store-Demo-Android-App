@@ -7,18 +7,11 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.grocerystoredemoapp.R;
-import com.example.grocerystoredemoapp.data.model.Product;
-import com.example.grocerystoredemoapp.data.model.StoreData;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -27,7 +20,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
 
 public class UserHistory extends AppCompatActivity {
     static Integer nameID = 2000;
@@ -70,8 +62,8 @@ public class UserHistory extends AppCompatActivity {
                                     }
 
                                     @Override
-                                    public void onCancelled(@NonNull DatabaseError error) {
-                                    }
+                                    public void onCancelled(@NonNull DatabaseError error) {}
+
                                 });
                             }
                         }
@@ -80,10 +72,9 @@ public class UserHistory extends AppCompatActivity {
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-            }
-        });
+            public void onCancelled(@NonNull DatabaseError error) {}
 
+        });
 
     }
 

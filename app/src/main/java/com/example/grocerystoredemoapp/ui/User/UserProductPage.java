@@ -1,18 +1,16 @@
 package com.example.grocerystoredemoapp.ui.User;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.grocerystoredemoapp.R;
-import com.example.grocerystoredemoapp.data.model.OrderData;
 import com.example.grocerystoredemoapp.data.model.Product;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -67,7 +65,6 @@ public class UserProductPage extends AppCompatActivity {
                 itemNameView = findViewById(R.id.itemName);
                 itemNameView.setText(itemName);
 
-
                 addQuantity.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -95,15 +92,12 @@ public class UserProductPage extends AppCompatActivity {
                         DatabaseReference cart = FirebaseDatabase.getInstance().getReference().child("Order");
                         FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
-
                         Intent intent = getIntent();
                         String storeFromIntent = intent.getStringExtra(UserProductList.STORE_REF2);
                         DatabaseReference storeReference = FirebaseDatabase.getInstance().getReferenceFromUrl(storeFromIntent);
                         DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("Users");
-                        String d = storeReference.getKey();
                         DatabaseReference newStore = FirebaseDatabase.getInstance().getReference("StoreOrders");
 
-                        //DatabaseReference main = cart.child(orderId);
                         cart.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snp) {
@@ -127,23 +121,22 @@ public class UserProductPage extends AppCompatActivity {
                                     }
 
                                     @Override
-                                    public void onCancelled(@NonNull DatabaseError error) {
+                                    public void onCancelled(@NonNull DatabaseError error) {}
 
-                                    }
                                 });
                             }
 
                             @Override
-                            public void onCancelled(@NonNull DatabaseError error) {
-                            }
+                            public void onCancelled(@NonNull DatabaseError error) {}
+
                         });
                     }
                 });
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
+            public void onCancelled(DatabaseError databaseError) {}
+
         });
     }
 }
