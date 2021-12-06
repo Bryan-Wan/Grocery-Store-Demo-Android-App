@@ -63,13 +63,16 @@ public class adminCurrentOrders extends AppCompatActivity implements AdapterView
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot ds: snapshot.getChildren()){
-                    Log.d("baa", "onDataChange: " + (String) ds.child("confirmOrder").getValue());
-                    String userReady = (String) ds.child("confirmOrder").getValue();
-                    String adminReady = (String) ds.child("orderIsReady").getValue();
+                    if(currentFirebaseUser.getUid().equals((String)ds.child("forStore").getValue())){
+                        Log.d("baa", "onDataChange: " + (String) ds.child("confirmOrder").getValue());
+                        String userReady = (String) ds.child("confirmOrder").getValue();
+                        String adminReady = (String) ds.child("orderIsReady").getValue();
 
-                    if(userReady.equals("true") && adminReady.equals("false")){
-                        array.add(ds.getKey());
+                        if(userReady.equals("true") && adminReady.equals("false")){
+                            array.add(ds.getKey());
+                        }
                     }
+
                 }
                 ArrayAdapter adapter = new ArrayAdapter(getApplicationContext(),android.R.layout.simple_list_item_1,array);
                 mListView.setAdapter(adapter);

@@ -99,39 +99,44 @@ public class UserProductPage extends AppCompatActivity {
                         Intent intent = getIntent();
                         String storeFromIntent = intent.getStringExtra(UserProductList.STORE_REF2);
                         DatabaseReference storeReference = FirebaseDatabase.getInstance().getReferenceFromUrl(storeFromIntent);
+                        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("Users");
+                        String d = storeReference.getKey();
+                        DatabaseReference newStore = FirebaseDatabase.getInstance().getReference("StoreOrders");
 
-                        String orderId = "order" + Integer.toString(orderNum);
-                        DatabaseReference main = cart.child(orderId);
-
-
+                        //DatabaseReference main = cart.child(orderId);
                         cart.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snp) {
-                                String orderId = "order" + Integer.toString(orderNum);
-                                DataSnapshot snapshot = snp.child(orderId);
 
-                                if (snapshot.exists()) {
-                                    if (!snapshot.child("byUser").getValue().toString().equals(currentFirebaseUser.getUid()) ||
-                                        !snapshot.child("forStore").getValue().toString().equals(storeReference.getKey())) {
-                                        Log.d("abbb changed", "changed");
-                                        int randomNum = (int)(Math.random() * 10000 + 1);
-                                        orderNum += randomNum;
+                                userRef.addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        String orderId = (String) snapshot.child(currentFirebaseUser.getUid()).child("carts").child(storeReference.getKey()).getValue();
+                                        if(orderId == null){
+                                            orderId = "order" + cart.push().getKey();
+                                            userRef.child(currentFirebaseUser.getUid()).child("carts").child(storeReference.getKey()).setValue(orderId);
+                                        }
+                                        newStore.child("asd").setValue("orderId");
+                                        cart.child(orderId).child("confirmOrder").setValue("false");
+                                        cart.child(orderId).child("orderIsReady").setValue("false");
+                                        cart.child(orderId).child("byUser").setValue(currentFirebaseUser.getUid());
+                                        cart.child(orderId).child("forStore").setValue(storeReference.getKey());
+                                        cart.child(orderId).child("cart").child(product.getKey().toString()).setValue(itemQuantity);
+                                        startActivity(new Intent(UserProductPage.this, UserCart.class));
+
                                     }
-                                }
-                                orderId = "order" + Integer.toString(orderNum);
-                                cart.child(orderId).child("confirmOrder").setValue("false");
-                                cart.child(orderId).child("orderIsReady").setValue("false");
-                                cart.child(orderId).child("byUser").setValue(currentFirebaseUser.getUid());
-                                cart.child(orderId).child("forStore").setValue(storeReference.getKey());
-                                cart.child(orderId).child("cart").child(product.getKey().toString()).setValue(itemQuantity);
 
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+
+                                    }
+                                });
                             }
 
                             @Override
                             public void onCancelled(@NonNull DatabaseError error) {
                             }
                         });
-                        startActivity(new Intent(UserProductPage.this, UserCart.class));
                     }
                 });
             }
