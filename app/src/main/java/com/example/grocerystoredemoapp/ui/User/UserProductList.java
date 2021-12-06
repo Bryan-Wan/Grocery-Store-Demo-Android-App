@@ -2,6 +2,8 @@ package com.example.grocerystoredemoapp.ui.User;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -24,9 +26,10 @@ public class UserProductList extends AppCompatActivity {
     Double itemPrice;
     Button cartBtn;
 
-    static int productNameID;
-    static int productBrandID;
-    static int productPriceID;
+    static int productNameID = 2000;
+    static int productBrandID = 3000;
+    static int productPriceID = 4000;
+    static int layoutID = 5000;
 
     public static final String PRODUCT_REF = "com.example.grocerystoredemoapp.PRODUCT_REF";
     public static final String STORE_REF2 = "com.example.grocerystoredemoapp.STORE_REF2";
@@ -36,7 +39,7 @@ public class UserProductList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_product_list);
 
-        scrollingLayout = findViewById(R.id.productListLayout);
+        scrollingLayout = (LinearLayout) findViewById(R.id.productListLayout);
 
         Intent intent = getIntent();
         String ref = intent.getStringExtra(UserStoreSelection.STORE_REF);
@@ -46,12 +49,15 @@ public class UserProductList extends AppCompatActivity {
         DatabaseReference productsFromStore = store.child("products");
 
         TextView storeNameTitle = findViewById(R.id.productListStoreName);
+        TextView storeAddressTitle = findViewById(R.id.productListStoreAddress);
 
         store.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                String title = dataSnapshot.child("storeName").getValue().toString();
-                storeNameTitle.setText(title);
+                String name = dataSnapshot.child("storeName").getValue().toString();
+                String address = dataSnapshot.child("storeAddress").getValue().toString();
+                storeNameTitle.setText(name);
+                storeAddressTitle.setText(address);
             }
 
             @Override
@@ -99,7 +105,7 @@ public class UserProductList extends AppCompatActivity {
         View view = getLayoutInflater().inflate(R.layout.activity_user_product_list_product_added_view, null, false);
         scrollingLayout.addView(view);
 
-        Button productName = (Button)findViewById(R.id.productListProductName);
+        TextView productName = (TextView)findViewById(R.id.productListProductName);
         productName.setId(productNameID);
 
         TextView productBrand = (TextView)findViewById(R.id.productListProductBrand);
@@ -108,11 +114,14 @@ public class UserProductList extends AppCompatActivity {
         TextView productPrice = (TextView)findViewById(R.id.productListProductPrice);
         productPrice.setId(productPriceID);
 
-        productName.setText(name);
-        productBrand.setText(brand);
-        productPrice.setText(price.toString());
+        ConstraintLayout layout = findViewById(R.id.productListConstraint);
+        layout.setId(layoutID);
 
-        productName.setOnClickListener(new View.OnClickListener() {
+        productBrand.setText(brand);
+        productName.setText(name);
+        productPrice.setText("$" + price.toString());
+
+        layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(UserProductList.this, UserProductPage.class);
@@ -132,5 +141,6 @@ public class UserProductList extends AppCompatActivity {
         productNameID++;
         productPriceID++;
         productBrandID++;
+        layoutID++;
     }
 }

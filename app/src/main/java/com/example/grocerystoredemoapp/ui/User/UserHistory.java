@@ -23,9 +23,9 @@ import com.google.firebase.database.ValueEventListener;
 
 
 public class UserHistory extends AppCompatActivity {
-    static Integer nameID = 2000;
+    static Integer nameID = 6000;
     static Integer qtyID = 7000;
-    static Integer bgID = 9999;
+    static Integer bgID = 8000;
     LinearLayout scrollingLayout;
     String Storename = "";
     @Override

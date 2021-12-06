@@ -22,8 +22,8 @@ public class UserStoreSelection extends AppCompatActivity {
     LinearLayout scrollView;
     private ListView mListView;
     static int nameID = 0;
-    static int addressID = 1000;
-    static int buttonID = 200;
+    static int addressID = 500;
+    static int buttonID = 1000;
     public static final String STORE_REF = "com.example.grocerystoredemoapp.STORE_REF";
 
     @Override
@@ -34,18 +34,19 @@ public class UserStoreSelection extends AppCompatActivity {
         scrollView = (LinearLayout)findViewById(R.id.storeLayout);
         DatabaseReference storeRef = FirebaseDatabase.getInstance().getReference().child("StoreData");
 
+
         storeRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 storeRef.removeEventListener(this);
                 for(DataSnapshot ds: snapshot.getChildren()) {
-
+//                    if (ds.hasChild("products")) {
                     StoreData store = ds.getValue(StoreData.class);
-                    ArrayList<String> array = new ArrayList<>();
                     String storeName = store.getStoreName();
                     String storeAddress = store.getStoreAddress();
                     DatabaseReference storeRef = ds.getRef();
                     addStore(storeName, storeAddress, storeRef);
+//                    }
                 }
             }
 

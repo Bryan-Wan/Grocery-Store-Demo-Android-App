@@ -45,7 +45,7 @@ public class UserProductPage extends AppCompatActivity {
         String ref = intent.getStringExtra(UserProductList.PRODUCT_REF);
         DatabaseReference product = FirebaseDatabase.getInstance().getReferenceFromUrl(ref);
 
-        itemQuantity = 0;
+        itemQuantity = 1;
 
         product.addValueEventListener(new ValueEventListener() {
             @Override
@@ -80,7 +80,7 @@ public class UserProductPage extends AppCompatActivity {
                 subtractQuantity.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if(itemQuantity > 0){
+                        if(itemQuantity > 1){
                             itemQuantity--;
                             quantityView.setText(itemQuantity.toString());
                         }

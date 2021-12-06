@@ -23,10 +23,10 @@ import com.google.firebase.database.ValueEventListener;
 public class UserCart extends AppCompatActivity {
     LinearLayout scrollingLayout;
     Button purchase;
-    static Integer nameID = 1111;
-    static Integer brandID = 2222;
-    static Integer priceID = 3333;
-    static Integer quantityID = 4444;
+    static Integer nameID = 9000;
+    static Integer brandID = 10000;
+    static Integer priceID = 11000;
+    static Integer quantityID = 12000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
