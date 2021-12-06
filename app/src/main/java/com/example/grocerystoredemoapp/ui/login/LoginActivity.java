@@ -229,9 +229,6 @@ public class LoginActivity extends AppCompatActivity {
     private void login(String username, String password) {
         // handle login
         ExecutorService executorService = Executors.newSingleThreadExecutor();
-        final LoggedInUser[] loggedInUser = {null};
-        // Block until login is complete
-        final AtomicBoolean[] isLoggingIn = {new AtomicBoolean(true)};
 
         // Sign in using email and password with Firebase Auth
         mAuth.signInWithEmailAndPassword(username, password)
@@ -255,15 +252,13 @@ public class LoginActivity extends AppCompatActivity {
                             Log.w(loginActivityTag, "signInWithEmail:failure", task.getException());
                             Toast.makeText(getApplicationContext(), "Login failed.", Toast.LENGTH_SHORT).show();
                         }
-                        isLoggingIn[0].set(false);
                     }
                 });
     }
 
-    private LoggedInUser getFirebaseUserData(FirebaseUser firebaseUser) {
+    private void getFirebaseUserData(FirebaseUser firebaseUser) {
         final String userId = firebaseUser.getUid();
         DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("Users").child(userId);
-        final LoggedInUser[] loggedInUser = {null}; // Needs to be effectively final
 
         Log.d("getFirebaseUserData", "Setting up listener for user data");
         // TODO: Put constants all in one file for styling and in case we want to change the names in the database
@@ -282,15 +277,14 @@ public class LoginActivity extends AppCompatActivity {
 
                 // Set user data
                 // TODO: Save the loaded user
-                // TODO: Update ui with logged in user
-                loggedInUser[0] = new LoggedInUser(
+                LoggedInUser loggedInUser = new LoggedInUser(
                         userId,
                         user.getDisplayName(),
                         user.isAdmin()
                 );
 
                 // Use loginViewModel to set loginResult
-                loginViewModel.setLoggedInUser(loggedInUser[0]);
+                loginViewModel.setLoggedInUser(loggedInUser);
 
                 Log.d("getFirebaseUserData", "User object saved");
             }
@@ -300,7 +294,5 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         });
-
-        return loggedInUser[0];
     }
 }
