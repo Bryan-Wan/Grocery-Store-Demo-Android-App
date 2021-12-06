@@ -93,6 +93,7 @@ public class UserProductPage extends AppCompatActivity {
                         Toast itemAdded = Toast.makeText(getApplicationContext(), p.getName() + " added", Toast.LENGTH_SHORT);
                         itemAdded.show();
 
+
                         FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
                         Intent intent = getIntent();
