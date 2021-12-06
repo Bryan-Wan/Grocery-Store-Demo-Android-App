@@ -65,14 +65,6 @@
             android:name=".ui.User.UserOrderThankYouPage"
             android:exported="false" />
         <activity
-            android:name=".ui.User.UserConfirmationPage"
-            android:exported="false"
-            android:parentActivityName=".ui.User.UserCart">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.User.UserCart" />
-        </activity>
-        <activity
             android:name=".ui.User.UserHistory"
             android:exported="false"
             android:parentActivityName=".ui.User.UserHome">
