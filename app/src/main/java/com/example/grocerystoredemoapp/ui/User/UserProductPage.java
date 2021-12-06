@@ -122,6 +122,8 @@ public class UserProductPage extends AppCompatActivity {
                                         cart.child(orderId).child("byUser").setValue(currentFirebaseUser.getUid());
                                         cart.child(orderId).child("forStore").setValue(storeReference.getKey());
                                         cart.child(orderId).child("cart").child(product.getKey().toString()).setValue(itemQuantity);
+                                        startActivity(new Intent(UserProductPage.this, UserCart.class));
+
                                     }
 
                                     @Override
@@ -129,14 +131,12 @@ public class UserProductPage extends AppCompatActivity {
 
                                     }
                                 });
-
                             }
 
                             @Override
                             public void onCancelled(@NonNull DatabaseError error) {
                             }
                         });
-                        startActivity(new Intent(UserProductPage.this, UserCart.class));
                     }
                 });
             }
