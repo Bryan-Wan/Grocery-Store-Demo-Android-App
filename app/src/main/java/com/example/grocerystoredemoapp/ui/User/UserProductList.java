@@ -29,6 +29,7 @@ public class UserProductList extends AppCompatActivity {
     String itemName;
     String itemBrand;
     Double itemPrice;
+    Button cartBtn;
     static int productNameID;
     static int productBrandID;
     static int productPriceID;
@@ -125,18 +126,13 @@ public class UserProductList extends AppCompatActivity {
                 startActivity(i);
             }
         });
-
-//        goToStore.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent i = new Intent(UserStoreSelection.this, UserProductList.class);
-//                i.putExtra(STORE_REF, ref.toString());
-////                i.putExtra(STORE_REF, "hello world");
-//                startActivity(i);
-//            }
-//
-//            //TODO: implement an intent so product list will have the products from the selected store
-//        });
+        cartBtn = findViewById(R.id.cartBtn);
+        cartBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                startActivity(new Intent(UserProductList.this, UserCart.class));
+            }
+        });
 
         productNameID++;
         productPriceID++;
