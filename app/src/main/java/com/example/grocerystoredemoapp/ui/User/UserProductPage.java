@@ -96,6 +96,7 @@ public class UserProductPage extends AppCompatActivity {
 
                         FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
+
                         Intent intent = getIntent();
                         String storeFromIntent = intent.getStringExtra(UserProductList.STORE_REF2);
                         DatabaseReference storeReference = FirebaseDatabase.getInstance().getReferenceFromUrl(storeFromIntent);
