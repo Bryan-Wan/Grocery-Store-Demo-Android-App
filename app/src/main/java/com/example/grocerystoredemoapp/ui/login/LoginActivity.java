@@ -244,9 +244,7 @@ public class LoginActivity extends AppCompatActivity {
                             FirebaseUser firebaseUser = mAuth.getCurrentUser();
 
                             // Load data from Firebase synchronously
-                            Log.d(loginActivityTag, "Loading user data");
                             getFirebaseUserData(firebaseUser);
-                            Log.d(loginActivityTag, "User data loaded");
                         } else {
                             // On sign in failure, log it
                             Log.w(loginActivityTag, "signInWithEmail:failure", task.getException());
@@ -260,20 +258,16 @@ public class LoginActivity extends AppCompatActivity {
         final String userId = firebaseUser.getUid();
         DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("Users").child(userId);
 
-        Log.d("getFirebaseUserData", "Setting up listener for user data");
         // TODO: Put constants all in one file for styling and in case we want to change the names in the database
         // TODO: Use class to model database to organize and reuse database access code
         userRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // Successfully loaded user data
-                //Log.d("firebase", String.valueOf(snapshot.getValue()));
                 Log.d("firebase", String.valueOf(dataSnapshot.getValue()));
 
-                Log.d("getFirebaseUserData", "Getting user data from database");
                 //User user = snapshot.getValue(User.class);
                 User user = dataSnapshot.getValue(User.class);
-                Log.d("getFirebaseUserData", "Storing user data in memory");
 
                 // Set user data
                 // TODO: Save the loaded user
@@ -285,14 +279,10 @@ public class LoginActivity extends AppCompatActivity {
 
                 // Use loginViewModel to set loginResult
                 loginViewModel.setLoggedInUser(loggedInUser);
-
-                Log.d("getFirebaseUserData", "User object saved");
             }
 
             @Override
-            public void onCancelled(DatabaseError error) {
-
-            }
+            public void onCancelled(DatabaseError error) { }
         });
     }
 }
