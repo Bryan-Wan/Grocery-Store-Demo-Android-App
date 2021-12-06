@@ -58,7 +58,7 @@ public class adminCurrentOrders extends AppCompatActivity implements AdapterView
         orderRef.child("key5").child("cart").child("productKey32").setValue(323);
 */
 
-        orderRef.addListenerForSingleValueEvent(new ValueEventListener() {
+        orderRef.addValueEventListener(new ValueEventListener() {
 
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
