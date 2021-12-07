@@ -27,11 +27,11 @@ public class LoginModel implements Contract.Model {
     private LoginViewModel loginViewModel;
     private FirebaseAuth mAuth; // TODO: Clean up LoginRepository and LoginModel
 
-    public LoginModel(LoginPresenter presenter) {
+    public LoginModel(LoginPresenter presenter, LoginViewModel loginViewModel) {
         mAuth = FirebaseAuth.getInstance();
         loginRepository = LoginRepository.getInstance(mAuth);
         // TODO: Clean up LoginViewModel and LoginModel
-        loginViewModel = new LoginViewModel(loginRepository);
+        this.loginViewModel = loginViewModel;
         this.presenter = presenter;
     }
 

@@ -24,8 +24,8 @@ public class LoginPresenter implements Contract.Presenter {
     private Contract.Model model;
     private Contract.View view;
 
-    public LoginPresenter(Contract.View view) {
-        this.model = new LoginModel(this);
+    public LoginPresenter(Contract.View view, LoginViewModel loginViewModel) {
+        this.model = new LoginModel(this, loginViewModel);
         this.view = view;
     }
 
