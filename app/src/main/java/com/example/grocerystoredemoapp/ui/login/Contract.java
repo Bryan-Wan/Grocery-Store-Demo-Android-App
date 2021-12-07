@@ -3,6 +3,7 @@ package com.example.grocerystoredemoapp.ui.login;
 import androidx.annotation.StringRes;
 
 import com.example.grocerystoredemoapp.data.model.LoggedInUser;
+import com.example.grocerystoredemoapp.data.model.User;
 
 public interface Contract {
     public interface Model{
@@ -16,7 +17,7 @@ public interface Contract {
     }
 
     public interface Presenter{
-        public void onUserChange(LoggedInUser user);
+        public void onUserChange(User user, String userId);
         public void showLoginFailed();
     }
 }

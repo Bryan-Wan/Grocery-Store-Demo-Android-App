@@ -20,13 +20,11 @@ import com.google.firebase.database.ValueEventListener;
 public class LoginModel implements Contract.Model {
     private Contract.Presenter presenter;
 
-    private LoginViewModel loginViewModel;
     private FirebaseAuth mAuth; // TODO: Clean up LoginRepository and LoginModel
 
-    public LoginModel(LoginPresenter presenter, LoginViewModel loginViewModel) {
+    public LoginModel(LoginPresenter presenter) {
         mAuth = FirebaseAuth.getInstance();
         // TODO: Clean up LoginViewModel and LoginModel
-        this.loginViewModel = loginViewModel;
         this.presenter = presenter;
     }
 
@@ -55,7 +53,7 @@ public class LoginModel implements Contract.Model {
                 });
     }
 
-    public void getFirebaseUserData(FirebaseUser firebaseUser) {
+    private void getFirebaseUserData(FirebaseUser firebaseUser) {
         final String userId = firebaseUser.getUid();
         DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("Users").child(userId);
 
@@ -69,20 +67,8 @@ public class LoginModel implements Contract.Model {
 
                 //User user = snapshot.getValue(User.class);
                 User user = dataSnapshot.getValue(User.class);
-
-                // Set user data
-                // TODO: Save the loaded user
-                LoggedInUser loggedInUser = new LoggedInUser(
-                        userId,
-                        user.getDisplayName(),
-                        user.isAdmin()
-                );
-
-                // Use loginViewModel to set loginResult
-                loginViewModel.setLoggedInUser(loggedInUser);
-
-                // Notify presenter on data change
-                presenter.onUserChange(loggedInUser);
+                // Notify presenter on user change
+                presenter.onUserChange(user, userId);
             }
 
             @Override
@@ -105,20 +91,8 @@ public class LoginModel implements Contract.Model {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     User user = snapshot.getValue(User.class);
-
-                    // Set user data
-                    // TODO: Save the loaded user
-                    LoggedInUser loggedInUser = new LoggedInUser(
-                            userId,
-                            user.getDisplayName(),
-                            user.isAdmin()
-                    );
-
-                    // Use loginViewModel to set loginResult
-                    loginViewModel.setLoggedInUser(loggedInUser);
-
-                    // Notify presenter on data change
-                    presenter.onUserChange(loggedInUser);
+                    // Notify presenter on user change
+                    presenter.onUserChange(user, userId);
                 }
 
                 @Override
