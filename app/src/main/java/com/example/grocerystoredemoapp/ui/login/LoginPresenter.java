@@ -13,6 +13,8 @@ public class LoginPresenter implements Contract.Presenter {
     }
 
     public void login(String username, String email) {
+        Integer messageString = R.string.logging_in;
+        view.showToastMessage(messageString);
         model.login(username, email);
     }
 

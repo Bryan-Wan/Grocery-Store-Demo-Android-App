@@ -17,6 +17,7 @@
     <string name="register">"Don't have an account? Register now"</string>
     <string name="register_as_admin">Register as Admin</string>
     <string name="welcome_admin">Welcome Admin</string>
+    <string name="logging_in">Logging in...</string>
     ==========User Welcome=======
     <string name="welcome_user">Welcome User</string>
     <string name="place_order">Place New Order</string>
