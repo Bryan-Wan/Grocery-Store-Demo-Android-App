@@ -36,9 +36,7 @@ public class AdminStoreInfo extends AppCompatActivity {
 
         Button btn = findViewById(R.id.saveChangesBtn);
         DAOStoreData dao = new DAOStoreData();
-        Log.d("test", "1");
         FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
-        Log.d("test", "" + currentFirebaseUser.getUid());
         userID = currentFirebaseUser.getUid();
 
 
@@ -50,11 +48,7 @@ public class AdminStoreInfo extends AppCompatActivity {
                 for(DataSnapshot ds: snapshot.getChildren()){
                     User user = ds.getValue(User.class);
                     if(ds.getKey().equals(currentFirebaseUser.getUid())){
-                        Log.d("test", ""+user.isAdmin());
-                        Log.d("test", ""+user.getDisplayName());
-                        Log.d("test", ""+user.getEmail());
-                        Log.d("test", "Empty: "+user.getStore());
-                        Log.d("store", "onDataChange: " + user.getStore());
+
                         if(user.getStore() == null){
                             add();
                         }
@@ -64,7 +58,6 @@ public class AdminStoreInfo extends AppCompatActivity {
 
                     }
 
-                    Log.d("admin check", "admin: " + user.isAdmin());
                 }
             }
 

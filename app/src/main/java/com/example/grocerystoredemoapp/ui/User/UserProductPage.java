@@ -142,7 +142,6 @@ public class UserProductPage extends AppCompatActivity {
                                 if (snapshot.exists()) {
                                     if (!snapshot.child("byUser").getValue().toString().equals(currentFirebaseUser.getUid()) ||
                                             !snapshot.child("forStore").getValue().toString().equals(storeReference.getKey())) {
-                                        Log.d("abbb changed", "changed");
                                         orderId = "order" + cart.push().getKey();
                                     }
                                 }

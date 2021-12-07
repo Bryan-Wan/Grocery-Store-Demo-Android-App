@@ -51,7 +51,6 @@ public class adminFulfilledOrders extends AppCompatActivity implements AdapterVi
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot ds: snapshot.getChildren()){
-                    Log.d("baa", "onDataChange: " + (String) ds.child("orderIsReady").getValue());
                     if(currentFirebaseUser.getUid().equals((String)ds.child("forStore").getValue())){
 
                         String userReady = (String) ds.child("confirmOrder").getValue();

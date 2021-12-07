@@ -5,11 +5,18 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.example.grocerystoredemoapp.data.model.LoggedInUser;
+import com.example.grocerystoredemoapp.data.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.io.IOException;
 import java.util.List;
@@ -28,18 +35,21 @@ public class LoginRepository {
 
     private FirebaseAuth mAuth;
 
+    // TODO: Maybe move these atomic flags to inside the methods they are used in
     private AtomicBoolean isAuthenticating;
     private AtomicBoolean isRegistering;
+    private AtomicBoolean isLoadingUserData;
 
     // If user credentials will be cached in local storage, it is recommended it be encrypted
     // @see https://developer.android.com/training/articles/keystore
-    private LoggedInUser user = null;
+    private static LoggedInUser user = null;
 
     // private constructor : singleton access
     private LoginRepository(FirebaseAuth mAuth) {
         this.mAuth = mAuth;
         this.isAuthenticating = new AtomicBoolean(false);
         this.isRegistering = new AtomicBoolean(false);
+        this.isLoadingUserData = new AtomicBoolean(false);
     }
 
     public static LoginRepository getInstance(FirebaseAuth mAuth) {
@@ -58,95 +68,9 @@ public class LoginRepository {
         FirebaseAuth.getInstance().signOut();
     }
 
-    private void setLoggedInUser(LoggedInUser user) {
-        this.user = user;
+    public static void setLoggedInUser(LoggedInUser user) {
+        instance.user = user;
         // If user credentials will be cached in local storage, it is recommended it be encrypted
         // @see https://developer.android.com/training/articles/keystore
-    }
-
-    public Result<LoggedInUser> login(String username, String password) {
-        // handle login
-        ExecutorService executorService = Executors.newSingleThreadExecutor();
-
-        // Authenticate using Firebase Auth
-        try {
-            // Sign in using email and password
-            isAuthenticating.set(true);
-            Task<AuthResult> authResultTask = mAuth.signInWithEmailAndPassword(username, password)
-                    .addOnCompleteListener(executorService, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            final String loginActivityTag = "Login";
-                            if (task.isSuccessful()) {
-                                // Sign in success, set the user with the signed-in user's information
-                                Log.d(loginActivityTag, "signInWithEmail:success");
-                                FirebaseUser firebaseUser = mAuth.getCurrentUser();
-                                setLoggedInUser(new LoggedInUser(
-                                        firebaseUser.getUid(),
-                                        firebaseUser.getDisplayName(),
-                                        true // Testing, should check against database
-                                        // TODO: Get user tupe and display name from database
-                                ));
-                            } else {
-                                // On sign in failure, log it
-                                Log.w(loginActivityTag, "signInWithEmail:failure", task.getException());
-                                //Toast.makeText(LoginActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
-                            }
-                            isAuthenticating.set(false);
-                        }
-                    });
-
-            // Wait until authentication is finished before returning
-            while (isAuthenticating.get()) {
-                // TODO: Put this in a separate thread and use waits. This infinite while loop is a kludge
-            }
-
-            return new Result.Success<LoggedInUser>(user);
-        } catch (Exception e) {
-            return new Result.Error(new IOException("Error logging in", e));
-        }
-    }
-
-    public Result<LoggedInUser> register(String username, String password, boolean isAdmin) {
-        // handle login
-        ExecutorService executorService = Executors.newSingleThreadExecutor();
-
-        // Register using Firebase Auth
-        try {
-            // Register using email and password
-            isRegistering.set(true);
-            Task<AuthResult> authResultTask = mAuth.createUserWithEmailAndPassword(username, password)
-                    .addOnCompleteListener(executorService, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            final String registrationContextTag = "Register";
-                            if (task.isSuccessful()) {
-                                // Registration success, set the user with the signed-in user's information
-                                Log.d(registrationContextTag, "registerWithEmail:success");
-                                FirebaseUser firebaseUser = mAuth.getCurrentUser();
-                                setLoggedInUser(new LoggedInUser(
-                                        firebaseUser.getUid(),
-                                        firebaseUser.getDisplayName(),
-                                        isAdmin // Testing, should check against database
-                                        // TODO: Get user type and display name from database
-                                ));
-                            } else {
-                                // On registration failure, log it
-                                Log.w(registrationContextTag, "registerWithEmail:failure", task.getException());
-                                //Toast.makeText(LoginActivity.this, "Registration failed.", Toast.LENGTH_SHORT).show();
-                            }
-                            isRegistering.set(false);
-                        }
-                    });
-
-            // Wait until authentication is finished before returning
-            while (isRegistering.get()) {
-                // TODO: Put this in a separate thread and use waits. This infinite while loop is a kludge
-            }
-
-            return new Result.Success<LoggedInUser>(user);
-        } catch (Exception e) {
-            return new Result.Error(new IOException("Error signing up", e));
-        }
     }
 }

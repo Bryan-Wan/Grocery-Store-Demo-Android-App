@@ -86,10 +86,8 @@ public class AdminMyProducts extends AppCompatActivity implements AdapterView.On
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         String word = mListView.getItemAtPosition(position).toString();
-        Log.d("asd", "what: " + word);
         int index = stringContents.indexOf(word);
         String idToBeRemoved = idInfo.get(index);
-        Log.d("asd", "onItemClick: " + idToBeRemoved);
 
         FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         DatabaseReference storeRef = FirebaseDatabase.getInstance().getReference("StoreData").child(currentFirebaseUser.getUid()).child("products").child(idToBeRemoved);

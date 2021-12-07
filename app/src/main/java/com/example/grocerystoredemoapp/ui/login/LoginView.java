@@ -2,7 +2,6 @@ package com.example.grocerystoredemoapp.ui.login;
 
 import android.app.Activity;
 
-import androidx.annotation.NonNull;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -24,38 +23,28 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.grocerystoredemoapp.R;
-import com.example.grocerystoredemoapp.data.model.User;
+
 import com.example.grocerystoredemoapp.databinding.ActivityLoginBinding;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 import com.example.grocerystoredemoapp.ui.Admin.AdminHome;
 import com.example.grocerystoredemoapp.ui.User.UserHome;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginView extends AppCompatActivity implements Contract.View {
 
     private LoginViewModel loginViewModel;
     private ActivityLoginBinding binding;
-
-    private FirebaseAuth mAuth;
+    private LoginPresenter presenter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Initialize Firebase Auth
-        mAuth = FirebaseAuth.getInstance();
+        loginViewModel = new ViewModelProvider(this, new LoginViewModelFactory())
+                .get(LoginViewModel.class);
+        presenter = new LoginPresenter(this, loginViewModel);
 
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
-        loginViewModel = new ViewModelProvider(this, new LoginViewModelFactory())
-                .get(LoginViewModel.class);
 
         final EditText usernameEditText = binding.username;
         final EditText passwordEditText = binding.password;
@@ -87,10 +76,10 @@ public class LoginActivity extends AppCompatActivity {
                 }
 
                 if (loginResult.getError() != null) {
-                    showLoginFailed(loginResult.getError());
+                    showToastMessage(loginResult.getError());
                 }
                 if (loginResult.getSuccess() != null) {
-                    updateUiWithUser(loginResult.getSuccess());
+                    //presenter.checkUserIsLoggedIn(); // TODO: Use separate function to prevent repeatedly loading user data and home pages
                 }
                 setResult(Activity.RESULT_OK);
             }
@@ -122,7 +111,7 @@ public class LoginActivity extends AppCompatActivity {
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 // Login when user presses "done" or "enter"
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
-                    loginViewModel.login(usernameEditText.getText().toString(),
+                    presenter.login(usernameEditText.getText().toString(),
                             passwordEditText.getText().toString());
                 }
                 return false;
@@ -133,7 +122,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Login when user presses login button
-                loginViewModel.login(usernameEditText.getText().toString(),
+                presenter.login(usernameEditText.getText().toString(),
                         passwordEditText.getText().toString());
             }
         });
@@ -141,7 +130,7 @@ public class LoginActivity extends AppCompatActivity {
         Button registerBtn = (Button) findViewById(R.id.noAccountRegisterBtn);
         registerBtn.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-                startActivity(new Intent(LoginActivity.this, LoginRegister.class));
+                startActivity(new Intent(LoginView.this, LoginRegister.class));
             }
         });
 
@@ -149,66 +138,32 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     public void onStart() {
-        String userID;
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser != null){
-            DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("Users");
-
-            myRef.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    for(DataSnapshot ds: snapshot.getChildren()){
-                        User user = ds.getValue(User.class);
-                        if(ds.getKey().equals(currentUser.getUid())){
-                            startHomePage(user.isAdmin());
-                        }
-                    }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {}
-
-            });
-        }
+        presenter.checkUserIsLoggedIn();
     }
 
-    private void updateUiWithUser(LoggedInUserView model) {
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-
-        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference("Users").child(currentUser.getUid());
-        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                boolean isUserAdmin = (boolean) dataSnapshot.child("admin").getValue();
-                String name = (String) dataSnapshot.child("displayName").getValue();
-                Toast.makeText(getApplicationContext(), "Welcome "+ name, Toast.LENGTH_SHORT).show();
-                startHomePage(isUserAdmin);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {}
-
-        });
+    public void showToastMessage(@StringRes Integer messageString) {
+        Toast.makeText(getApplicationContext(), messageString, Toast.LENGTH_SHORT).show();
     }
 
-    private void showLoginFailed(@StringRes Integer errorString) {
-        Toast.makeText(getApplicationContext(), errorString, Toast.LENGTH_SHORT).show();
-    }
-
-    private void startHomePage(boolean isAdmin) {
-
+    public void startHomePage(boolean isAdmin) {
         if (isAdmin == true){
-            startActivity(new Intent(LoginActivity.this, AdminHome.class));
+            startActivity(new Intent(LoginView.this, AdminHome.class));
         }
         else if(!isAdmin){
-            startActivity(new Intent(LoginActivity.this, UserHome.class));
+            startActivity(new Intent(LoginView.this, UserHome.class));
         }
         else{
             Toast.makeText(getApplicationContext(), "unknown error", Toast.LENGTH_SHORT).show();
         }
 
         finish(); // Prevent going back to the login page when pressing back
+    }
+    
+    @Override
+    public void onBackPressed() {
+        // Prevent going back to previous activity when on login page
+        moveTaskToBack(true);
     }
 }
