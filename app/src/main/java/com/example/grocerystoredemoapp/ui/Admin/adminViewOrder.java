@@ -49,7 +49,6 @@ public class adminViewOrder extends AppCompatActivity {
                     productList = new ArrayList<>();
                     for(DataSnapshot ds: snapshot.getChildren()){
                         int amount = ds.getValue(Integer.class);
-                        Log.d("please", "onDataChange: " + amount);
                         String id = ds.getKey();
                         DatabaseReference productRef = FirebaseDatabase.getInstance().getReference("Product").child(id);
 
@@ -57,7 +56,6 @@ public class adminViewOrder extends AppCompatActivity {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
                                 Product product = snapshot.getValue(Product.class);
-                                Log.d("please", "onDataChange: " + product.toString());
                                 productList.add(new Product(product.getName(), product.getBrand(), amount));
                                 viewOrderAdapter adapter = new viewOrderAdapter(getApplicationContext(), R.layout.adapter_view_layout, productList);
                                 mListView.setAdapter(adapter);

@@ -53,7 +53,6 @@ public class adminCurrentOrders extends AppCompatActivity implements AdapterView
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot ds: snapshot.getChildren()){
                     if(currentFirebaseUser.getUid().equals((String)ds.child("forStore").getValue())){
-                        Log.d("baa", "onDataChange: " + (String) ds.child("confirmOrder").getValue());
                         String userReady = (String) ds.child("confirmOrder").getValue();
                         String adminReady = (String) ds.child("orderIsReady").getValue();
 

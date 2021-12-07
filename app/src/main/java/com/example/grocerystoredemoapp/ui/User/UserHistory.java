@@ -61,7 +61,6 @@ public class UserHistory extends AppCompatActivity {
                                                     @Override
                                                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                                                         Storename = (String) snapshot.child(storeId).child("storeName").getValue();
-                                                        Log.d("asd", "onDataChange: " + Storename);
                                                         name[0] = Storename + ": " + p.child("name").getValue().toString() ;
                                                         isReady[0] = sp.child("orderIsReady").getValue().toString().equals("true");
                                                         addHistory(name[0], qty, isReady[0]);

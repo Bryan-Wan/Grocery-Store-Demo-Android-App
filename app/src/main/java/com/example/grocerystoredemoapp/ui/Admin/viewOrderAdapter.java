@@ -38,18 +38,17 @@ public class viewOrderAdapter extends ArrayAdapter<Product> {
         String brand = getItem(position).getBrand();
         Double price = getItem(position).getPrice();
 
-        //Create the person object with the information
         Product product = new Product(name,brand,price);
 
         LayoutInflater inflater = LayoutInflater.from(mContext);
         convertView = inflater.inflate(mResource, parent, false);
-        TextView tvName = (TextView) convertView.findViewById(R.id.adapterName);
-        TextView tvBirthday = (TextView) convertView.findViewById(R.id.adapterBrand);
-        TextView  tvSex = (TextView) convertView.findViewById(R.id.adapterPrice);
+        TextView productName = (TextView) convertView.findViewById(R.id.adapterName);
+        TextView productBrand = (TextView) convertView.findViewById(R.id.adapterBrand);
+        TextView  productQuantity = (TextView) convertView.findViewById(R.id.adapterPrice);
 
-        tvName.setText(name);
-        tvBirthday.setText(brand);
-        tvSex.setText("Quantity: " + price.intValue());
+        productName.setText(name);
+        productBrand.setText(brand);
+        productQuantity.setText("Quantity: " + price.intValue());
 
         return convertView;
     }
