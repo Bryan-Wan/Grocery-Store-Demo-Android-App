@@ -10,7 +10,7 @@ package com.example.grocerystoredemoapp.test;
 public class UnitTest {
 
     @Mock
-    LoginActivity view;
+    LoginView view;
 
 }
 
