@@ -160,4 +160,10 @@ public class LoginView extends AppCompatActivity implements Contract.View {
 
         finish(); // Prevent going back to the login page when pressing back
     }
+    
+    @Override
+    public void onBackPressed() {
+        // Prevent going back to previous activity when on login page
+        moveTaskToBack(true);
+    }
 }
