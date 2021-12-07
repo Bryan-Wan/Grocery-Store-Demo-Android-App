@@ -1,12 +1,9 @@
 package com.example.grocerystoredemoapp.ui.login;
 
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.ViewModelProvider;
 
-import com.example.grocerystoredemoapp.data.LoginRepository;
 import com.example.grocerystoredemoapp.data.model.LoggedInUser;
 import com.example.grocerystoredemoapp.data.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;

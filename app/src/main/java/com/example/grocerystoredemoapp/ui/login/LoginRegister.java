@@ -14,8 +14,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.grocerystoredemoapp.R;
-import com.example.grocerystoredemoapp.data.LoginRepository;
-import com.example.grocerystoredemoapp.data.Result;
 import com.example.grocerystoredemoapp.data.model.LoggedInUser;
 import com.example.grocerystoredemoapp.data.model.User;
 import com.example.grocerystoredemoapp.ui.Admin.AdminHome;
@@ -29,10 +27,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import java.io.IOException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 public class LoginRegister extends AppCompatActivity {
 
@@ -152,8 +146,6 @@ public class LoginRegister extends AppCompatActivity {
                     @Override
                     public void onSuccess(Void aVoid) {
                         Toast.makeText(getApplicationContext(), "User registered", Toast.LENGTH_SHORT).show();
-                        // Save user in memory then go to homepage
-                        LoginRepository.getInstance().setLoggedInUser(loggedInUser);
                         updateUIOnRegister(user);
                     }
                 });

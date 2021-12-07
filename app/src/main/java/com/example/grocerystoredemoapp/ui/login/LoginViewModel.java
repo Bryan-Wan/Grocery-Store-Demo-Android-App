@@ -6,11 +6,8 @@ import androidx.lifecycle.ViewModel;
 
 import android.util.Patterns;
 
-import com.example.grocerystoredemoapp.data.LoginRepository;
-import com.example.grocerystoredemoapp.data.Result;
 import com.example.grocerystoredemoapp.data.model.LoggedInUser;
 import com.example.grocerystoredemoapp.R;
-import com.google.firebase.auth.FirebaseAuth;
 
 /**
  * Class handling the login model ie view data - form validation, displaying log in status
@@ -19,11 +16,6 @@ public class LoginViewModel extends ViewModel {
 
     private MutableLiveData<LoginFormState> loginFormState = new MutableLiveData<>();
     private MutableLiveData<LoginResult> loginResult = new MutableLiveData<>();
-    private LoginRepository loginRepository;
-
-    LoginViewModel(LoginRepository loginRepository) {
-        this.loginRepository = loginRepository;
-    }
 
     LiveData<LoginFormState> getLoginFormState() {
         return loginFormState;
@@ -36,7 +28,6 @@ public class LoginViewModel extends ViewModel {
     public void setLoggedInUser(LoggedInUser user) {
         if (user != null) {
             loginResult.setValue(new LoginResult(new LoggedInUserView(user.getDisplayName(), user.isAdmin())));
-            loginRepository.setLoggedInUser(user);
         } else {
             loginResult.setValue(new LoginResult(R.string.login_failed));
         }
