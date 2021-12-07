@@ -79,7 +79,7 @@ public class LoginView extends AppCompatActivity implements Contract.View {
                     showToastMessage(loginResult.getError());
                 }
                 if (loginResult.getSuccess() != null) {
-                    presenter.checkUserIsLoggedIn();
+                    //presenter.checkUserIsLoggedIn(); // TODO: Use separate function to prevent repeatedly loading user data and home pages
                 }
                 setResult(Activity.RESULT_OK);
             }
