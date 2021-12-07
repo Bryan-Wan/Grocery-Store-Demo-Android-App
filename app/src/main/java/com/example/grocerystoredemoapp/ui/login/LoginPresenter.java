@@ -27,6 +27,8 @@ public class LoginPresenter implements Contract.Presenter {
     }
 
     public void checkUserIsLoggedIn() {
+        Integer messageString = R.string.checking_login_status;
+        view.showToastMessage(messageString);
         model.checkUserIsLoggedIn();
     }
 
