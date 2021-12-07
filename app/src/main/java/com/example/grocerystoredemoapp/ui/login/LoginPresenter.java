@@ -1,24 +1,7 @@
 package com.example.grocerystoredemoapp.ui.login;
 
-import android.util.Log;
-import android.widget.Toast;
-
-import androidx.annotation.NonNull;
-
+import com.example.grocerystoredemoapp.R;
 import com.example.grocerystoredemoapp.data.model.LoggedInUser;
-import com.example.grocerystoredemoapp.data.model.User;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 public class LoginPresenter implements Contract.Presenter {
     private Contract.Model model;
@@ -45,4 +28,8 @@ public class LoginPresenter implements Contract.Presenter {
         model.checkUserIsLoggedIn();
     }
 
+    public void showLoginFailed() {
+        Integer errorString = R.string.login_failed;
+        view.showToastMessage(errorString);
+    }
 }

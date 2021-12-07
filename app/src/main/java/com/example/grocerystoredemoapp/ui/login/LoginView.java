@@ -2,7 +2,6 @@ package com.example.grocerystoredemoapp.ui.login;
 
 import android.app.Activity;
 
-import androidx.annotation.NonNull;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -25,19 +24,10 @@ import android.widget.Toast;
 
 import com.example.grocerystoredemoapp.R;
 
-import com.example.grocerystoredemoapp.data.model.User;
 import com.example.grocerystoredemoapp.databinding.ActivityLoginBinding;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 import com.example.grocerystoredemoapp.ui.Admin.AdminHome;
 import com.example.grocerystoredemoapp.ui.User.UserHome;
-
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 public class LoginView extends AppCompatActivity implements Contract.View {
 
@@ -86,7 +76,7 @@ public class LoginView extends AppCompatActivity implements Contract.View {
                 }
 
                 if (loginResult.getError() != null) {
-                    showLoginFailed(loginResult.getError());
+                    showToastMessage(loginResult.getError());
                 }
                 if (loginResult.getSuccess() != null) {
                     presenter.checkUserIsLoggedIn();
@@ -154,8 +144,8 @@ public class LoginView extends AppCompatActivity implements Contract.View {
         presenter.checkUserIsLoggedIn();
     }
 
-    private void showLoginFailed(@StringRes Integer errorString) {
-        Toast.makeText(getApplicationContext(), errorString, Toast.LENGTH_SHORT).show();
+    public void showToastMessage(@StringRes Integer messageString) {
+        Toast.makeText(getApplicationContext(), messageString, Toast.LENGTH_SHORT).show();
     }
 
     public void startHomePage(boolean isAdmin) {

@@ -54,8 +54,7 @@ public class LoginModel implements Contract.Model {
                         } else {
                             // On sign in failure, log it
                             Log.w(loginActivityTag, "signInWithEmail:failure", task.getException());
-                            // TODO: Add Toast messages
-                            //Toast.makeText(getApplicationContext(), "Login failed.", Toast.LENGTH_SHORT).show();
+                            presenter.showLoginFailed();
                         }
                     }
                 });
