@@ -45,16 +45,11 @@ public class LoginView extends AppCompatActivity implements Contract.View {
     private ActivityLoginBinding binding;
     private LoginPresenter presenter;
 
-    private FirebaseAuth mAuth;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         presenter = new LoginPresenter(this);
-
-        // Initialize Firebase Auth
-        mAuth = FirebaseAuth.getInstance();
 
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
