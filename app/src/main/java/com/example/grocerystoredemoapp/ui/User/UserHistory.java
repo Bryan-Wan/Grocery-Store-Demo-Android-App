@@ -26,6 +26,7 @@ public class UserHistory extends AppCompatActivity {
     static Integer nameID = 6000;
     static Integer qtyID = 7000;
     static Integer bgID = 8000;
+    static Integer storeID = 20000;
     LinearLayout scrollingLayout;
     String Storename = "";
     @Override
@@ -54,6 +55,7 @@ public class UserHistory extends AppCompatActivity {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                                         final String[] name = {""};
+                                        final String[] store = {""};
                                         final Boolean[] isReady = {false};
                                         for (DataSnapshot p : snapshot.getChildren()) {
                                             if (p.getKey().equals(productKey)) {
@@ -62,9 +64,10 @@ public class UserHistory extends AppCompatActivity {
                                                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                                                         Storename = (String) snapshot.child(storeId).child("storeName").getValue();
                                                         Log.d("asd", "onDataChange: " + Storename);
-                                                        name[0] = Storename + ": " + p.child("name").getValue().toString() ;
+                                                        store[0] = Storename + ":";
+                                                        name[0] = p.child("name").getValue().toString() ;
                                                         isReady[0] = sp.child("orderIsReady").getValue().toString().equals("true");
-                                                        addHistory(name[0], qty, isReady[0]);
+                                                        addHistory(store[0], name[0], qty, isReady[0]);
                                                     }
 
                                                     @Override
@@ -94,7 +97,7 @@ public class UserHistory extends AppCompatActivity {
 
     }
 
-    private void addHistory(String name, String qty, Boolean isReady) {
+    private void addHistory(String store, String name, String qty, Boolean isReady) {
         scrollingLayout = (LinearLayout)findViewById(R.id.PastOrders);
         View view = getLayoutInflater().inflate(R.layout.activity_user_history_add_order, null, false);
         scrollingLayout.addView(view);
@@ -105,11 +108,16 @@ public class UserHistory extends AppCompatActivity {
         TextView hQty = findViewById(R.id.historyQty);
         hQty.setId(qtyID);
 
+        TextView hStore = findViewById(R.id.historyStore);
+        hStore.setId(storeID);
+
         ConstraintLayout background = findViewById(R.id.historyBG);
         background.setId(bgID);
 
         hName.setText(name);
         hQty.setText(qty);
+        hStore.setText(store);
+
         if (isReady) {
             background.setBackgroundResource(R.drawable.border);
             background.setBackgroundColor(Color.GREEN);
@@ -122,6 +130,7 @@ public class UserHistory extends AppCompatActivity {
         nameID++;
         qtyID++;
         bgID++;
+        storeID++;
     }
 
     @Override
