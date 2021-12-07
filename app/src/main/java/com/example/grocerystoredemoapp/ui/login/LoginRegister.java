@@ -153,7 +153,7 @@ public class LoginRegister extends AppCompatActivity {
                     public void onSuccess(Void aVoid) {
                         Toast.makeText(getApplicationContext(), "User registered", Toast.LENGTH_SHORT).show();
                         // Save user in memory then go to homepage
-                        LoginRepository.setLoggedInUser(loggedInUser);
+                        LoginRepository.getInstance().setLoggedInUser(loggedInUser);
                         updateUIOnRegister(user);
                     }
                 });

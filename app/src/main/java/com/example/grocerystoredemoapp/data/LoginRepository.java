@@ -33,34 +33,17 @@ public class LoginRepository {
 
     private static volatile LoginRepository instance;
 
-    private FirebaseAuth mAuth;
-
-    // TODO: Maybe move these atomic flags to inside the methods they are used in
-    private AtomicBoolean isAuthenticating;
-    private AtomicBoolean isRegistering;
-    private AtomicBoolean isLoadingUserData;
-
-    // If user credentials will be cached in local storage, it is recommended it be encrypted
-    // @see https://developer.android.com/training/articles/keystore
-    private static LoggedInUser user = null;
+    // The UID is stored to access the database for later
+    private LoggedInUser user = null;
 
     // private constructor : singleton access
-    private LoginRepository(FirebaseAuth mAuth) {
-        this.mAuth = mAuth;
-        this.isAuthenticating = new AtomicBoolean(false);
-        this.isRegistering = new AtomicBoolean(false);
-        this.isLoadingUserData = new AtomicBoolean(false);
-    }
+    private LoginRepository() { }
 
-    public static LoginRepository getInstance(FirebaseAuth mAuth) {
+    public static LoginRepository getInstance() {
         if (instance == null) {
-            instance = new LoginRepository(mAuth);
+            instance = new LoginRepository();
         }
         return instance;
-    }
-
-    public boolean isLoggedIn() {
-        return user != null;
     }
 
     public void logout() {
@@ -68,8 +51,8 @@ public class LoginRepository {
         FirebaseAuth.getInstance().signOut();
     }
 
-    public static void setLoggedInUser(LoggedInUser user) {
-        instance.user = user;
+    public void setLoggedInUser(LoggedInUser user) {
+        this.user = user;
         // If user credentials will be cached in local storage, it is recommended it be encrypted
         // @see https://developer.android.com/training/articles/keystore
     }

@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import com.example.grocerystoredemoapp.R;
+import com.example.grocerystoredemoapp.data.LoginRepository;
 import com.example.grocerystoredemoapp.data.model.StoreData;
 import com.example.grocerystoredemoapp.data.model.User;
 import com.example.grocerystoredemoapp.ui.login.LoginView;
@@ -95,7 +96,7 @@ public class Settings extends AppCompatActivity {
         logOutBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                FirebaseAuth.getInstance().signOut();
+                LoginRepository.getInstance().logout();
                 startActivity(new Intent(Settings.this, LoginView.class));
             }
         });
