@@ -13,7 +13,7 @@ import android.widget.ListView;
 import com.example.grocerystoredemoapp.R;
 import com.example.grocerystoredemoapp.data.model.StoreData;
 import com.example.grocerystoredemoapp.data.model.User;
-import com.example.grocerystoredemoapp.ui.login.LoginActivity;
+import com.example.grocerystoredemoapp.ui.login.LoginView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -96,7 +96,7 @@ public class Settings extends AppCompatActivity {
             @Override
             public void onClick(View view){
                 FirebaseAuth.getInstance().signOut();
-                startActivity(new Intent(Settings.this, LoginActivity.class));
+                startActivity(new Intent(Settings.this, LoginView.class));
             }
         });
     }
