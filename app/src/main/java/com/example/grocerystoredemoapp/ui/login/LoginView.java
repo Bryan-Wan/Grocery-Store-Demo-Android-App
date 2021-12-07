@@ -138,7 +138,6 @@ public class LoginView extends AppCompatActivity implements Contract.View {
 
     @Override
     public void onStart() {
-        String userID;
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         presenter.checkUserIsLoggedIn();
